@@ -1,0 +1,10 @@
+data
+*.pyc
+*.zip
+out*
+*.out
+#*
+.#*
+*.log
+*.pot
+local_settings.py
