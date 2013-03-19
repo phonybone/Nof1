@@ -1,0 +1,13 @@
+Drug Bank fields
+1) Drug type (e.g. approved)
+2) Generic name
+3) Primary_Accession_No:
+4) Synonyms
+5) Drug_Target_1_Drug_References
+6) Drug_Target_1_Name
+7) Drug_Target_1_Pathway
+8) Drug_Target_1_Synonyms
+9) Drug_Target_1_Reaction
+
+
+There could be similar fields for Drug_Target_2 and we need all those too.

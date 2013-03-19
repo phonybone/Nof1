@@ -1,0 +1,8 @@
+1) Type of target
+2) Name
+3) Synonyms
+4) Pathway
+5) Drug(s)
+
+
+

@@ -1,0 +1,290 @@
+
+TTD - Therapeutic Targets Database Full Data Download File
+Version 4.3.02 (2011.08.25)
+Provided by BIDD - BioInformatic and Drug Design Group
+                   Department of Pharmacy
+                   National Unviersity of Singapore
+                   http://bidd.nus.edu.sg/group/bidd.htm
+Any question about data provided here, please contact with: Prof. Chen (csccyz@nus.edu.sg)
+
+
+TTDS00001	Name	Muscarinic acetylcholine receptor
+TTDS00001	Type of target	Successful target
+TTDS00001	Synonyms	(m)AChR
+TTDS00001	Synonyms	MAChR
+TTDS00001	Disease	Alzheimer's disease
+TTDS00001	Disease	Bronchospasm (histamine induced)
+TTDS00001	Disease	Glaucoma
+TTDS00001	Disease	Motion sickness
+TTDS00001	Disease	Obstructive airway disease
+TTDS00001	Disease	Organophosphate poisoning
+TTDS00001	Disease	Schizophrenia
+TTDS00001	Disease	Urinary incontinence
+TTDS00001	Disease	Xerostomia
+TTDS00001	BioChemical Class	G-protein coupled receptor (rhodopsin family)
+TTDS00001	Pathway	Calcium signaling pathway
+TTDS00001	Pathway	Neuroactive ligand-receptor interaction
+TTDS00001	Pathway	Regulation of actin cytoskeleton
+TTDS00001	Related US Patent	6,211,204
+TTDS00001	Related US Patent	6,323,194
+TTDS00001	Related US Patent	6,369,081
+TTDS00001	Related US Patent	6,376,675
+TTDS00001	Related US Patent	6,423,842
+TTDS00001	Related US Patent	6,451,797
+TTDS00001	Related US Patent	6,455,552
+TTDS00001	Related US Patent	6,458,812
+TTDS00001	Related US Patent	6,555,550
+TTDS00001	Related US Patent	6,602,891
+TTDS00001	Drug(s)	Bethanechol	DAP000263	Urinary retention	Approved
+TTDS00001	Drug(s)	Trospium	DAP000342	Spasm	Approved
+TTDS00001	Drug(s)	Oxyphencyclimine	DAP000835	Gastrointestinal disorders	Approved
+TTDS00001	Drug(s)	Tridihexethyl	DAP000836	Acquired nystagmus	Approved
+TTDS00001	Drug(s)	Anisotropine Methylbromide	DAP000837	Peptic ulcer disease	Approved
+TTDS00001	Drug(s)	Hyoscyamine	DAP001108	Gastrointestinal disorders	Approved
+TTDS00001	Drug(s)	Methantheline	DAP001109	Irritable bowel syndrome	Approved
+TTDS00001	Drug(s)	Procyclidine	DAP001110	Parkinson's disease	Approved
+TTDS00001	Drug(s)	Cyclopentolate	DAP001111	Pediatric eye examinations	Approved
+TTDS00001	Drug(s)	Ipratropium	DAP001112	Obstructive lung diseases	Approved
+TTDS00001	Drug(s)	Pilocarpine	DAP001113	Glaucoma	Approved
+TTDS00001	Drug(s)	Flavoxate	DAP001114	Muscle Relaxant	Approved
+TTDS00001	Drug(s)	Mepenzolate	DAP001115	Peptic ulcer disease	Approved
+TTDS00001	Drug(s)	Ispaghula	DAP001486	Irritable bowel syndrome	Approved
+TTDS00001	Drug(s)	Mebeverine	DAP001494	Irritable bowel syndrome	Approved
+TTDS00001	Drug(s)	Trihexyphenidyl HCl	DAP001532	Parkinson's Disease	Approved
+TTDS00001	Antagonist	Trospium	DAP000342
+TTDS00001	Antagonist	Hyoscyamine	DAP001108
+TTDS00001	Antagonist	Methantheline	DAP001109
+TTDS00001	Antagonist	Procyclidine	DAP001110
+TTDS00001	Antagonist	Cyclopentolate	DAP001111
+TTDS00001	Antagonist	Ipratropium	DAP001112
+TTDS00001	Antagonist	Flavoxate	DAP001114
+TTDS00001	Antagonist	Mepenzolate	DAP001115
+TTDS00001	Antagonist	Ispaghula	DAP001486
+TTDS00001	Antagonist	Mebeverine	DAP001494
+TTDS00001	Antagonist	Trihexyphenidyl HCl	DAP001532
+TTDS00001	Agonist	Bethanechol	DAP000263
+TTDS00001	Agonist	Pilocarpine	DAP001113
+TTDS00001	Binder	Oxyphencyclimine	DAP000835
+TTDS00001	Binder	Tridihexethyl	DAP000836
+TTDS00001	Binder	Anisotropine Methylbromide	DAP000837
+TTDS00001	Drug(s)	Aclidinium bromide	DCL000677	Chronic obstructive pulmonary disease	Phase III
+TTDS00001	Drug(s)	CHF 5407	DCL000750	Chronic obstructive pulmonary disease	Phase I
+TTDS00001	Drug(s)	GSK233705	DCL000823	Chronic obstructive pulmonary disease	Phase II completed
+TTDS00001	Drug(s)	NVA237	DCL000901	Chronic obstructive pulmonary disease	Phase III
+TTDS00001	Drug(s)	Org-23366	DCL000911	Schizophrenia	No development reported
+TTDS00001	Drug(s)	OrM3	DCL000913	Chronic obstructive pulmonary disease	Phase IIb
+TTDS00001	Antagonist	Aclidinium bromide	DCL000677
+TTDS00001	Antagonist	CHF 5407	DCL000750
+TTDS00001	Antagonist	GSK233705	DCL000823
+TTDS00001	Antagonist	NVA237	DCL000901
+TTDS00001	Antagonist	Org-23366	DCL000911
+TTDS00001	Antagonist	OrM3	DCL000913
+TTDS00001	Multitarget	Org-23366	DCL000911
+TTDS00001	Antagonist	Aprophen	DNC000245
+TTDS00001	Antagonist	Benactyzine	DNC000293
+TTDS00001	Antagonist	Hyoscine	DNC000757
+TTDS00001	Antagonist	Hyoscyamine sulfate	DNC000758
+TTDS00001	Antagonist	Ipratropium bromide	DNC000806
+TTDS00001	Agonist	Muscarine	DNC000970
+TTDS00001	Agonist	RS 86	DNC001236
+TTDS00001	Target Validation	TTDS00001
+TTDS00002	UniProt ID	P11229
+TTDS00002	Name	Muscarinic acetylcholine receptor M1
+TTDS00002	Type of target	Successful target
+TTDS00002	Synonyms	M1 receptor
+TTDS00002	Disease	Alzheimer's disease
+TTDS00002	Disease	Bronchospasm (histamine induced)
+TTDS00002	Disease	Cognitive deficits
+TTDS00002	Disease	Schizophrenia
+TTDS00002	Function	The muscarinic acetylcholine receptor mediates various cellular responses, including inhibition of adenylate cyclase, breakdown of phosphoinositides and modulation of potassium channels through the action of G proteins.
+TTDS00002	Sequence	MNTSAPPAVSPNITVLAPGKGPWQVAFIGITTGLLSLATVTGNLLVLISFKVNTELKTVNNYFLLSLACADLIIGTFSMNLYTTYLLMGHWALGTLACDLWLALDYVASNASVMNLLLISFDRYFSVTRPLSYRAKRTPRRAALMIGLAWLVSFVLWAPAILFWQYLVGERTVLAGQCYIQFLSQPIITFGTAMAAFYLPVTVMCTLYWRIYRETENRARELAALQGSETPGKGGGSSSSSERSQPGAEGSPETPPGRCCRCCRAPRLLQAYSWKEEEEEDEGSMESLTSSEGEEPGSEVVIKMPMVDPEAQAPTKQPPRSSPNTVKRPTKKGRDRAGKGQKPRGKEQLAKRKTFSLVKEKKAARTLSAILLAFILTWTPYNIMVLVSTFCKDCVPETLWELGYWLCYVNSTINPMCYALCNKAFRDTFRLLLLCRWDKRRWRKIPKRPGSVHRTPSRQC
+TTDS00002	BioChemical Class	G-protein coupled receptor (rhodopsin family)
+TTDS00002	Pathway	Calcium signaling pathway
+TTDS00002	Pathway	Neuroactive ligand-receptor interaction
+TTDS00002	Pathway	Regulation of actin cytoskeleton
+TTDS00002	Related US Patent	6,288,068
+TTDS00002	Related US Patent	6,294,554
+TTDS00002	Related US Patent	6,627,645
+TTDS00002	Drug(s)	Pirenzepine	DAP000492	Peptic ulcer disease	Approved
+TTDS00002	Drug(s)	Glycopyrrolate	DAP001116	Anesthetic	Approved
+TTDS00002	Drug(s)	Clidinium	DAP001117	Abdominal/stomach pain	Approved
+TTDS00002	Drug(s)	Dicyclomine	DAP001118	Irritable bowel syndrome	Approved
+TTDS00002	Drug(s)	Ethopropazine	DAP001119	Parkinson's disease	Approved
+TTDS00002	Drug(s)	Cycrimine	DAP001120	Parkinson's disease	Approved
+TTDS00002	Drug(s)	Benztropine	DAP001121	Parkinson's disease	Approved
+TTDS00002	Drug(s)	Trihexyphenidyl	DAP001122	Parkinson's disease	Approved
+TTDS00002	Drug(s)	Propantheline	DAP001123	Excessive sweating (hyperhidrosis)	Approved
+TTDS00002	Drug(s)	Oxyphenonium	DAP001124	Spasm	Approved
+TTDS00002	Drug(s)	Biperiden	DAP001125	Parkinson's disease	Approved
+TTDS00002	Antagonist	Pirenzepine	DAP000492
+TTDS00002	Antagonist	Glycopyrrolate	DAP001116
+TTDS00002	Antagonist	Clidinium	DAP001117
+TTDS00002	Antagonist	Dicyclomine	DAP001118
+TTDS00002	Antagonist	Ethopropazine	DAP001119
+TTDS00002	Antagonist	Benztropine	DAP001121
+TTDS00002	Antagonist	Trihexyphenidyl	DAP001122
+TTDS00002	Antagonist	Propantheline	DAP001123
+TTDS00002	Antagonist	Oxyphenonium	DAP001124
+TTDS00002	Antagonist	Biperiden	DAP001125
+TTDS00002	Binder	Cycrimine	DAP001120
+TTDS00002	Drug(s)	Talsaclidine isomer	DCL000268	Alzheimer's disease	Discontinued
+TTDS00002	Drug(s)	Sabcomeline hydrochloride	DCL000279	Cardiovascular diseases	Phase IIa
+TTDS00002	Drug(s)	Talsaclidine fumarate	DCL000303	Alzheimer's disease	Discontinued
+TTDS00002	Drug(s)	Xanomeline tartrate	DCL000328	Alzheimer's disease	Phase II
+TTDS00002	Drug(s)	GSK573719	DCL000381	Chronic Obstructive Pulmonary Disease (COPD)	Phase II
+TTDS00002	Drug(s)	GSK961081	DCL000397	Chronic Obstructive Pulmonary Disease (COPD)	Phase II completed
+TTDS00002	Drug(s)	GSK1034702	DCL000402	Schizophrenia, Dementia	Phase I completed
+TTDS00002	Drug(s)	Darotropium	DCL000514	COPD	Suspended in Phase II in GSK 2009 Report
+TTDS00002	Drug(s)	Darotropium + 642444	DCL000515	COPD	Phase III
+TTDS00002	Drug(s)	Revatropate	DCL000957	Chronic obstructive pulmonary disease	Discontinued in Phase I
+TTDS00002	Antagonist	Revatropate	DCL000957
+TTDS00002	Agonist	Talsaclidine isomer	DCL000268
+TTDS00002	Agonist	Sabcomeline hydrochloride	DCL000279
+TTDS00002	Agonist	Talsaclidine fumarate	DCL000303
+TTDS00002	Agonist	Xanomeline tartrate	DCL000328
+TTDS00002	Agonist	GSK573719	DCL000381
+TTDS00002	Agonist	GSK961081	DCL000397
+TTDS00002	Agonist	GSK1034702	DCL000402
+TTDS00002	Agonist	Darotropium	DCL000514
+TTDS00002	Agonist	Darotropium + 642444	DCL000515
+TTDS00002	Multitarget	GSK961081	DCL000397
+TTDS00002	Multitarget	Revatropate	DCL000957
+TTDS00002	Agonist	77-LH-28-1	DNC000099
+TTDS00002	Agonist	AC-260584	DNC000137
+TTDS00002	Agonist	AC-42	DNC000138
+TTDS00002	Agonist	AF150(S)	DNC000165
+TTDS00002	Agonist	AF267B	DNC000166
+TTDS00002	Agonist	LY-593039	DNC000910
+TTDS00002	Agonist	NGX-267	DNC001012
+TTDS00002	Agonist	Sabcomeline	DNC001264
+TTDS00002	Agonist	WAY-132983	DNC001510
+TTDS00002	Inhibitor	Arecoline	DNC002508
+TTDS00002	Inhibitor	Acetic acid 8-aza-bicyclo[3.2.1]oct-6-yl ester	DNC003640
+TTDS00002	Inhibitor	Benzoic acid 8-aza-bicyclo[3.2.1]oct-6-yl ester	DNC003654
+TTDS00002	Inhibitor	Propionic acid 8-aza-bicyclo[3.2.1]oct-6-yl ester	DNC003659
+TTDS00002	Inhibitor	3-Methyl-7-pyrrolidin-1-yl-hept-5-yn-2-one	DNC004147
+TTDS00002	Inhibitor	2-Methyl-6-pyrrolidin-1-yl-hex-4-ynal oxime	DNC004159
+TTDS00002	Inhibitor	ISOCLOZAPINE	DNC004166
+TTDS00002	Inhibitor	SB-202026	DNC004272
+TTDS00002	Inhibitor	HIMBACINE	DNC004995
+TTDS00002	Inhibitor	RR(17)PZ	DNC005944
+TTDS00002	Inhibitor	Bo(15)PZ	DNC005945
+TTDS00002	Inhibitor	DIFLUOROBENZTROPINE	DNC005986
+TTDS00002	Inhibitor	BI-1356	DNC007901
+TTDS00002	Inhibitor	FM1-10	DNC008187
+TTDS00002	Inhibitor	FM1-43	DNC008188
+TTDS00002	Inhibitor	A-987306	DNC008996
+TTDS00002	Inhibitor	GNF-PF-5618	DNC009476
+TTDS00002	Inhibitor	CREMASTRINE	DNC009504
+TTDS00002	Inhibitor	1,1-diphenyl-2-(3-tropanyl)ethanol	DNC009866
+TTDS00002	Inhibitor	R-dimethindene	DNC009877
+TTDS00002	Inhibitor	Tiotropium Bromide	DNC009882
+TTDS00002	Inhibitor	XANOMELINE	DNC011170
+TTDS00002	Inhibitor	4-(4-butylpiperidin-1-yl)-1-o-tolylbutan-1-one	DNC011171
+TTDS00002	Inhibitor	1-Methyl-1-(4-pyrrolidin-1-yl-but-2-ynyl)-urea	DNC011427
+TTDS00002	Inhibitor	ISOLOXAPINE	DNC011498
+TTDS00002	Inhibitor	1'-Benzyl-3-phenyl-[3,4']bipiperidinyl-2,6-dione	DNC011500
+TTDS00002	Inhibitor	CARAMIPEN	DNC011755
+TTDS00002	Inhibitor	FLUMEZAPINE	DNC011857
+TTDS00002	Inhibitor	AMINOBENZTROPINE	DNC011950
+TTDS00002	Inhibitor	2-(4-Diethylamino-but-2-ynyl)-isoindole-1,3-dione	DNC012005
+TTDS00002	Inhibitor	3-Tetrazol-2-yl-1-aza-bicyclo[2.2.2]octane	DNC012098
+TTDS00002	Inhibitor	SULFOARECOLINE	DNC012122
+TTDS00002	Inhibitor	6-Dimethylamino-2-methyl-hex-4-ynal oxime	DNC012306
+TTDS00002	Inhibitor	7-Pyrrolidin-1-yl-hept-5-yn-2-one	DNC012322
+TTDS00002	Inhibitor	7-Dimethylamino-3-methyl-hept-5-yn-2-one	DNC012323
+TTDS00002	Inhibitor	7-Pyrrolidin-1-yl-hept-5-yn-2-one oxime	DNC012330
+TTDS00002	Inhibitor	7-Dimethylamino-hept-5-yn-2-one	DNC012350
+TTDS00002	Inhibitor	7-Dimethylamino-hept-5-yn-2-one oxime	DNC012351
+TTDS00002	Inhibitor	N-(4-Dimethylamino-but-2-ynyl)-N-methyl-acetamide	DNC012363
+TTDS00002	Inhibitor	ACECLIDINE	DNC012502
+TTDS00002	Inhibitor	N-methoxyquinuclidine-3-carboximidoyl fluoride	DNC012588
+TTDS00002	Inhibitor	BRL-55473	DNC012594
+TTDS00002	Inhibitor	N-methoxyquinuclidine-3-carboximidoyl chloride	DNC012616
+TTDS00002	Inhibitor	2,8-Dimethyl-1-oxa-8-aza-spiro[4.5]decan-3-one	DNC012765
+TTDS00002	Inhibitor	3alpha-(bis-chloro-phenylmethoxy)tropane	DNC013136
+TTDS00002	Inhibitor	3-(3-benzylamino)-piperidin-2-one	DNC013219
+TTDS00002	Target Validation	TTDS00002
+TTDS00003	UniProt ID	P08172
+TTDS00003	Name	Muscarinic acetylcholine receptor M2
+TTDS00003	Type of target	Successful target
+TTDS00003	Synonyms	M2 receptor
+TTDS00003	Disease	Alzheimer's disease
+TTDS00003	Disease	Analgesics
+TTDS00003	Disease	Autoimmune cardiomyopathy
+TTDS00003	Disease	Bronchoconstriction (cold air-induced)
+TTDS00003	Disease	Chronic obstructive pulmonary disease, unspecified
+TTDS00003	Disease	Hypothermia
+TTDS00003	Disease	Neurogenic bladder
+TTDS00003	Disease	Pain, unspecified
+TTDS00003	Disease	Tremor, unspecified
+TTDS00003	Function	The muscarinic acetylcholine receptor mediates various cellular responses, including inhibition of adenylate cyclase, breakdown of phosphoinositides and modulation of potassium channels through the action of G proteins.
+TTDS00003	Sequence	MNNSTNSSNNSLALTSPYKTFEVVFIVLVAGSLSLVTIIGNILVMVSIKVNRHLQTVNNYFLFSLACADLIIGVFSMNLYTLYTVIGYWPLGPVVCDLWLALDYVVSNASVMNLLIISFDRYFCVTKPLTYPVKRTTKMAGMMIAAAWVLSFILWAPAILFWQFIVGVRTVEDGECYIQFFSNAAVTFGTAIAAFYLPVIIMTVLYWHISRASKSRIKKDKKEPVANQDPVSPSLVQGRIVKPNNNNMPSSDDGLEHNKIQNGKAPRDPVTENCVQGEEKESSNDSTSVSAVASNMRDDEITQDENTVSTSLGHSKDENSKQTCIRIGTKTPKSDSCTPTNTTVEVVGSSGQNGDEKQNIVARKIVKMTKQPAKKKPPPSREKKVTRTILAILLAFIITWAPYNVMVLINTFCAPCIPNTVWTIGYWLCYINSTINPACYALCNATFKKTFKHLLMCHYKNIGATR
+TTDS00003	PDB Structure	1LUB
+TTDS00003	BioChemical Class	G-protein coupled receptor (rhodopsin family)
+TTDS00003	Pathway	Calcium signaling pathway
+TTDS00003	Pathway	Neuroactive ligand-receptor interaction
+TTDS00003	Pathway	Regulation of actin cytoskeleton
+TTDS00003	Related US Patent	6,288,068
+TTDS00003	Related US Patent	6,294,554
+TTDS00003	Related US Patent	6,498,168
+TTDS00003	Related US Patent	6,500,822
+TTDS00003	Related US Patent	6,627,644
+TTDS00003	Related US Patent	6,635,658
+TTDS00003	Related US Patent	6,645,958
+TTDS00003	Related US Patent	6,667,301
+TTDS00003	Drug(s)	Scopolamine	DAP000343	Nausea and Addiction	Approved
+TTDS00003	Drug(s)	Methylscopolamine	DAP001126	Peptic ulcer disease	Approved
+TTDS00003	Drug(s)	Gallamine Triethiodide	DAP001127	Stabilize muscle contractions	Approved
+TTDS00003	Antagonist	Scopolamine	DAP000343
+TTDS00003	Antagonist	Methylscopolamine	DAP001126
+TTDS00003	Antagonist	Gallamine Triethiodide	DAP001127
+TTDS00003	Antagonist	(R)-4-[2-[3-(4-methoxy-benzoylamino)-benzyl]-piperidin-1-ylmethyl]piperidine-1-carboxylic acid amide (Ro-320-6206)	DNC000011
+TTDS00003	Antagonist	AF-DX116	DNC000167
+TTDS00003	Agonist	CMI-1145	DNC000455
+TTDS00003	Agonist	CMI-936	DNC000456
+TTDS00003	Antagonist	Otenzepad	DNC001068
+TTDS00003	Agonist	Oxotremorine	DNC001081
+TTDS00003	Agonist	PTAC	DNC001161
+TTDS00003	Inhibitor	Acetic acid 8-aza-bicyclo[3.2.1]oct-6-yl ester	DNC003640
+TTDS00003	Inhibitor	Benzoic acid 8-aza-bicyclo[3.2.1]oct-6-yl ester	DNC003654
+TTDS00003	Inhibitor	Propionic acid 8-aza-bicyclo[3.2.1]oct-6-yl ester	DNC003659
+TTDS00003	Inhibitor	3-Methyl-7-pyrrolidin-1-yl-hept-5-yn-2-one	DNC004147
+TTDS00003	Inhibitor	2-Methyl-6-pyrrolidin-1-yl-hex-4-ynal oxime	DNC004159
+TTDS00003	Inhibitor	ISOCLOZAPINE	DNC004166
+TTDS00003	Inhibitor	N-DESMETHYLCLOZAPINE	DNC004426
+TTDS00003	Inhibitor	SCH-211803	DNC004557
+TTDS00003	Inhibitor	METHACHOLINE	DNC004591
+TTDS00003	Inhibitor	HIMBACINE	DNC004995
+TTDS00003	Inhibitor	METHOCTRAMINE	DNC005816
+TTDS00003	Inhibitor	METHOCTRAMINE HYDROCHLORIDE	DNC007831
+TTDS00003	Inhibitor	FM1-10	DNC008187
+TTDS00003	Inhibitor	FM1-43	DNC008188
+TTDS00003	Inhibitor	A-987306	DNC008996
+TTDS00003	Inhibitor	GNF-PF-5618	DNC009476
+TTDS00003	Inhibitor	1,1-diphenyl-2-(3-tropanyl)ethanol	DNC009866
+TTDS00003	Inhibitor	Tiotropium Bromide	DNC009882
+TTDS00003	Inhibitor	XANOMELINE	DNC011170
+TTDS00003	Inhibitor	4-(4-butylpiperidin-1-yl)-1-o-tolylbutan-1-one	DNC011171
+TTDS00003	Inhibitor	1-Methyl-1-(4-pyrrolidin-1-yl-but-2-ynyl)-urea	DNC011427
+TTDS00003	Inhibitor	ISOLOXAPINE	DNC011498
+TTDS00003	Inhibitor	1'-Benzyl-3-phenyl-[3,4']bipiperidinyl-2,6-dione	DNC011500
+TTDS00003	Inhibitor	CARAMIPEN	DNC011755
+TTDS00003	Inhibitor	FLUMEZAPINE	DNC011857
+TTDS00003	Inhibitor	2-(4-Diethylamino-but-2-ynyl)-isoindole-1,3-dione	DNC012005
+TTDS00003	Inhibitor	3-Tetrazol-2-yl-1-aza-bicyclo[2.2.2]octane	DNC012098
+TTDS00003	Inhibitor	SULFOARECOLINE	DNC012122
+TTDS00003	Inhibitor	6-Dimethylamino-2-methyl-hex-4-ynal oxime	DNC012306
+TTDS00003	Inhibitor	7-Pyrrolidin-1-yl-hept-5-yn-2-one	DNC012322
+TTDS00003	Inhibitor	7-Dimethylamino-3-methyl-hept-5-yn-2-one	DNC012323
+TTDS00003	Inhibitor	7-Pyrrolidin-1-yl-hept-5-yn-2-one oxime	DNC012330
+TTDS00003	Inhibitor	7-Dimethylamino-hept-5-yn-2-one	DNC012350
+TTDS00003	Inhibitor	7-Dimethylamino-hept-5-yn-2-one oxime	DNC012351
+TTDS00003	Inhibitor	N-(4-Dimethylamino-but-2-ynyl)-N-methyl-acetamide	DNC012363
+TTDS00003	Inhibitor	ACECLIDINE	DNC012502
+TTDS00003	Inhibitor	N-methoxyquinuclidine-3-carboximidoyl fluoride	DNC012588
+TTDS00003	Inhibitor	BRL-55473	DNC012594
+TTDS00003	Inhibitor	N-methoxyquinuclidine-3-carboximidoyl chloride	DNC012616
+TTDS00003	Inhibitor	2,8-Dimethyl-1-oxa-8-aza-spiro[4.5]decan-3-one	DNC012765
+TTDS00003	Inhibitor	3-(3-benzylamino)-piperidin-2-one	DNC013219
+TTDS00003	Target Validation	TTDS00003

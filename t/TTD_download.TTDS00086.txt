@@ -1,0 +1,202 @@
+TTDS00086	UniProt ID	P35367
+TTDS00086	Name	Histamine H1 receptor
+TTDS00086	Type of target	Successful target
+TTDS00086	Synonyms	H1 Histamine receptor
+TTDS00086	Synonyms	Histamine receptor 1
+TTDS00086	Disease	Acute lymphoblastic leukaemia (therapy-refractory)
+TTDS00086	Disease	Allergic diseases
+TTDS00086	Disease	Allergic rhinitis, unspecified
+TTDS00086	Disease	Anxiety disorder, unspecified
+TTDS00086	Disease	Chronic rhinitis
+TTDS00086	Disease	Chronic urticaria
+TTDS00086	Disease	Epidermal hyperplasia
+TTDS00086	Disease	Epilepsy
+TTDS00086	Disease	Hypotension
+TTDS00086	Disease	Intimal hyperplasia
+TTDS00086	Disease	Ischemia
+TTDS00086	Disease	Motion sickness
+TTDS00086	Disease	Nausea and vomiting
+TTDS00086	Disease	Seasonal allergic rhinitis
+TTDS00086	Disease	Systemic arterial vasodilation
+TTDS00086	Function	In peripheral tissues, the h1 subclass of histamine receptors mediates the contraction of smooth muscles, increase in capillary permeability due to contraction of terminal venules, and catecholamine release from adrenal medulla, as well as mediating neuro.
+TTDS00086	Sequence	MSLPNSSCLLEDKMCEGNKTTMASPQLMPLVVVLSTICLVTVGLNLLVLYAVRSERKLHTVGNLYIVSLSVADLIVGAVVMPMNILYLLMSKWSLGRPLCLFWLSMDYVASTASIFSVFILCIDRYRSVQQPLRYLKYRTKTRASATILGAWFLSFLWVIPILGWNHFMQQTSVRREDKCETDFYDVTWFKVMTAIINFYLPTLLMLWFYAKIYKAVRQHCQHRELINRSLPSFSEIKLRPENPKGDAKKPGKESPWEVLKRKPKDAGGGSVLKSPSQTPKEMKSPVVFSQEDDREVDKLYCFPLDIVHMQAAAEGSSRDYVAVNRSHGQLKTDEQGLNTHGASEISEDQMLGDSQSFSRTDSDTTTETAPGKGKLRSGSNTGLDYIKFTWKRLRSHSRQYVSGLHMNRERKAAKQLGFIMAAFILCWIPYFIFFMVIAFCKNCCNEHLHMFTIWLGYINSTLNPLIYPLCNENFKKTFKRILHIRS
+TTDS00086	BioChemical Class	G-protein coupled receptor (rhodopsin family)
+TTDS00086	Pathway	Calcium signaling pathway
+TTDS00086	Pathway	Neuroactive ligand-receptor interaction
+TTDS00086	Related US Patent	6,506,756
+TTDS00086	Related US Patent	6,509,353
+TTDS00086	Related US Patent	6,518,287
+TTDS00086	Related US Patent	6,525,070
+TTDS00086	Related US Patent	6,528,522
+TTDS00086	Related US Patent	6,605,302
+TTDS00086	Related US Patent	6,613,357
+TTDS00086	Related US Patent	6,649,602
+TTDS00086	QSAR Model	TTDS00086
+TTDS00086	Drug(s)	Loratadine	DAP000101	Allergies	Approved
+TTDS00086	Drug(s)	Terfenadine	DAP000102	Allergies	Approved
+TTDS00086	Drug(s)	Cyproheptadine	DAP000103	Allergies	Approved
+TTDS00086	Drug(s)	Doxepin	DAP000177	Depression	Approved
+TTDS00086	Drug(s)	Clemastine	DAP000322	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Cetirizine	DAP000323	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Hydroxyzine	DAP000324	Anxiety disorder	Approved
+TTDS00086	Drug(s)	Cinnarizine	DAP000325	Vertigo/meniere's disease	Approved
+TTDS00086	Drug(s)	Astemizole	DAP000326	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Propiomazine	DAP000327	Insomnia	Approved
+TTDS00086	Drug(s)	Tripelennamine	DAP000328	Asthma	Approved
+TTDS00086	Drug(s)	Ketotifen	DAP000329	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Fexofenadine	DAP000330	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Desloratadine	DAP000331	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Azelastine	DAP000332	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Dimenhydrinate	DAP000333	Nausea and vomiting	Approved
+TTDS00086	Drug(s)	Promethazine	DAP000334	Allergic disorders, itching, nausea and vomiting	Approved
+TTDS00086	Drug(s)	Levocabastine	DAP000335	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Chlorpheniramine	DAP000336	Allergic rhinitis and uriticaria	Approved
+TTDS00086	Drug(s)	Cyclizine	DAP000337	Nausea and vomiting	Approved
+TTDS00086	Drug(s)	Diphenhydramine	DAP000490	Vertigo/Meniere's disease	Approved
+TTDS00086	Drug(s)	Doxylamine	DAP000859	Anxiety and morning sickness	Approved
+TTDS00086	Drug(s)	Bepotastine	DAP001061	Allergic rhinitis and uriticaria/puritus	Approved
+TTDS00086	Drug(s)	Olopatadine	DAP001062	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Olopatadine	DAP001062	Ocular allergy	Phase III
+TTDS00086	Drug(s)	Pheniramine	DAP001063	Hay fever	Approved
+TTDS00086	Drug(s)	Pemirolast	DAP001064	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Triprolidine	DAP001065	Hay fever	Approved
+TTDS00086	Drug(s)	Brompheniramine	DAP001066	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Emedastine	DAP001067	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Dexbrompheniramine	DAP001068	Hay fever	Approved
+TTDS00086	Drug(s)	Carbinoxamine	DAP001069	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Methdilazine	DAP001070	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Diphenylpyraline	DAP001071	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Bromodiphenhydramine	DAP001072	Hay fever	Approved
+TTDS00086	Drug(s)	Phenindamine	DAP001073	Common Cold and Allergies	Approved
+TTDS00086	Drug(s)	Epinastine	DAP001074	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Aceprometazine	DAP001075	Sleep disorders	Approved
+TTDS00086	Drug(s)	Buclizine	DAP001076	Nausea and vomiting	Approved
+TTDS00086	Drug(s)	Trimeprazine	DAP001077	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Mequitazine	DAP001078	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Azatadine	DAP001079	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Chlophedianol	DAP001080	Anesthetic	Approved
+TTDS00086	Drug(s)	(S)-(+)-Dimethindene maleate	DAP001340	Pruritus	Approved
+TTDS00086	Drug(s)	Acrivastine	DAP001343	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Antazoline	DAP001347	Nasal congestion	Approved
+TTDS00086	Drug(s)	Antazoline hydrochloride	DAP001365	Ocular allergies	Approved
+TTDS00086	Drug(s)	Dimethindene	DAP001366	Respiratory allergies	Approved
+TTDS00086	Drug(s)	Antazoline phosphate	DAP001373	Ocular allergies	Approved
+TTDS00086	Drug(s)	Dimethindene maleate	DAP001378	Respiratory allergies	Approved
+TTDS00086	Drug(s)	Ergotidine	DAP001379	Respiratory allergies	Approved
+TTDS00086	Drug(s)	Levocetirizine dihydrochloride	DAP001397	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Mepyramine	DAP001399	Allergies	Approved
+TTDS00086	Drug(s)	Mepyramine maleate	DAP001400	Allergies	Approved
+TTDS00086	Drug(s)	Mizolastine	DAP001403	Allergic rhinitis	Approved
+TTDS00086	Drug(s)	Oxatomide	DAP001414	Hay fever	Approved
+TTDS00086	Drug(s)	Tranilast	DAP001531	Ocular allergy	Marketed
+TTDS00086	Drug(s)	Bepotastine besilate	DCL000719	Allergic conjunctivitis	Approved
+TTDS00086	Drug(s)	Bepotastine besilate	DCL000719	Ocular allergy	Phase III
+TTDS00086	Drug(s)	Alcaftadine	DAP001553	Allergic conjunctivitis	Approved
+TTDS00086	Inhibitor	Doxepin	DAP000177
+TTDS00086	Antagonist	Loratadine	DAP000101
+TTDS00086	Antagonist	Terfenadine	DAP000102
+TTDS00086	Antagonist	Cyproheptadine	DAP000103
+TTDS00086	Antagonist	Clemastine	DAP000322
+TTDS00086	Antagonist	Cetirizine	DAP000323
+TTDS00086	Antagonist	Hydroxyzine	DAP000324
+TTDS00086	Antagonist	Cinnarizine	DAP000325
+TTDS00086	Antagonist	Astemizole	DAP000326
+TTDS00086	Antagonist	Propiomazine	DAP000327
+TTDS00086	Antagonist	Tripelennamine	DAP000328
+TTDS00086	Antagonist	Ketotifen	DAP000329
+TTDS00086	Antagonist	Fexofenadine	DAP000330
+TTDS00086	Antagonist	Desloratadine	DAP000331
+TTDS00086	Antagonist	Azelastine	DAP000332
+TTDS00086	Antagonist	Dimenhydrinate	DAP000333
+TTDS00086	Antagonist	Promethazine	DAP000334
+TTDS00086	Antagonist	Levocabastine	DAP000335
+TTDS00086	Antagonist	Chlorpheniramine	DAP000336
+TTDS00086	Antagonist	Cyclizine	DAP000337
+TTDS00086	Antagonist	Diphenhydramine	DAP000490
+TTDS00086	Antagonist	Doxylamine	DAP000859
+TTDS00086	Antagonist	Bepotastine	DAP001061
+TTDS00086	Antagonist	Olopatadine	DAP001062
+TTDS00086	Antagonist	Olopatadine	DAP001062
+TTDS00086	Antagonist	Pheniramine	DAP001063
+TTDS00086	Antagonist	Pemirolast	DAP001064
+TTDS00086	Antagonist	Triprolidine	DAP001065
+TTDS00086	Antagonist	Brompheniramine	DAP001066
+TTDS00086	Antagonist	Emedastine	DAP001067
+TTDS00086	Antagonist	Dexbrompheniramine	DAP001068
+TTDS00086	Antagonist	Carbinoxamine	DAP001069
+TTDS00086	Antagonist	Methdilazine	DAP001070
+TTDS00086	Antagonist	Diphenylpyraline	DAP001071
+TTDS00086	Antagonist	Bromodiphenhydramine	DAP001072
+TTDS00086	Antagonist	Phenindamine	DAP001073
+TTDS00086	Antagonist	Epinastine	DAP001074
+TTDS00086	Antagonist	Aceprometazine	DAP001075
+TTDS00086	Antagonist	Buclizine	DAP001076
+TTDS00086	Antagonist	Trimeprazine	DAP001077
+TTDS00086	Antagonist	Mequitazine	DAP001078
+TTDS00086	Antagonist	Azatadine	DAP001079
+TTDS00086	Antagonist	Chlophedianol	DAP001080
+TTDS00086	Antagonist	(S)-(+)-Dimethindene maleate	DAP001340
+TTDS00086	Antagonist	Acrivastine	DAP001343
+TTDS00086	Antagonist	Antazoline	DAP001347
+TTDS00086	Antagonist	Antazoline hydrochloride	DAP001365
+TTDS00086	Antagonist	Dimethindene	DAP001366
+TTDS00086	Antagonist	Antazoline phosphate	DAP001373
+TTDS00086	Antagonist	Dimethindene maleate	DAP001378
+TTDS00086	Antagonist	Levocetirizine dihydrochloride	DAP001397
+TTDS00086	Antagonist	Mepyramine	DAP001399
+TTDS00086	Antagonist	Mepyramine maleate	DAP001400
+TTDS00086	Antagonist	Mizolastine	DAP001403
+TTDS00086	Antagonist	Oxatomide	DAP001414
+TTDS00086	Antagonist	Tranilast	DAP001531
+TTDS00086	Antagonist	Bepotastine besilate	DCL000719
+TTDS00086	Antagonist	Alcaftadine	DAP001553
+TTDS00086	Agonist	Ergotidine	DAP001379
+TTDS00086	Drug(s)	GSK835726	DCL000393	Allergic rhinitis	Suspended in Phase II in GSK 2009 Report
+TTDS00086	Drug(s)	GSK1004723	DCL000399	Allergic rhinitis	Suspended in Phase II in GSK 2009 Report
+TTDS00086	Drug(s)	Carebastine	DCL000738	Ocular allergy	Phase III
+TTDS00086	Antagonist	GSK835726	DCL000393
+TTDS00086	Antagonist	GSK1004723	DCL000399
+TTDS00086	Antagonist	Carebastine	DCL000738
+TTDS00086	Multitarget	GSK835726	DCL000393
+TTDS00086	Multitarget	GSK1004723	DCL000399
+TTDS00086	Agonist	8R-Lisuride	DNC000112
+TTDS00086	Antagonist	Hydroxyclemastine	DNC000753
+TTDS00086	Antagonist	Pyrilamine	DNC001174
+TTDS00086	Antagonist	Pyrilamine Maleate	DNC001175
+TTDS00086	Agonist	S-(-)-Lisuride	DNC001251
+TTDS00086	Antagonist	Sch 37370	DNC001304
+TTDS00086	Inhibitor	OCTOCLOTHEPIN	DNC004869
+TTDS00086	Inhibitor	N-hydroxycarbamate derivative	DNC004871
+TTDS00086	Inhibitor	N-hydroxycarbamate derivative	DNC004872
+TTDS00086	Inhibitor	N-hydroxycarbamate derivative	DNC004873
+TTDS00086	Inhibitor	N-hydroxycarbamate derivative	DNC004874
+TTDS00086	Inhibitor	N-hydroxycarbamate derivative	DNC004879
+TTDS00086	Inhibitor	N-hydroxycarbamate derivative	DNC004880
+TTDS00086	Inhibitor	ATC-0175	DNC004953
+TTDS00086	Inhibitor	SCH-37370	DNC005869
+TTDS00086	Inhibitor	RUPATADINE	DNC005871
+TTDS00086	Inhibitor	MDL-28163	DNC005872
+TTDS00086	Inhibitor	MDL-105212	DNC005873
+TTDS00086	Inhibitor	R-226161	DNC007402
+TTDS00086	Inhibitor	VUF-10148	DNC008438
+TTDS00086	Inhibitor	9-(Aminomethyl)-9,10-dihydroanthracene	DNC008730
+TTDS00086	Inhibitor	KF-A6	DNC009420
+TTDS00086	Inhibitor	R-dimethindene	DNC009877
+TTDS00086	Inhibitor	1-(4-p-Tolyl-butyl)-piperidine	DNC010155
+TTDS00086	Inhibitor	diphenyl(piperidin-4-yl)methanol	DNC010157
+TTDS00086	Inhibitor	9-(2-aminoethyl)-9,10-dihydroanthracene	DNC010209
+TTDS00086	Inhibitor	2-(9,10-dihydroanthracen-9-yl)-N-methylethanamine	DNC010210
+TTDS00086	Inhibitor	9-(2-aminopropyl)-9,10-dihydroanthracene	DNC010211
+TTDS00086	Inhibitor	N,N-dimethyl-2,2-diphenylethanamine	DNC010213
+TTDS00086	Inhibitor	N-methyl-3,3-diphenylpropan-1-amine	DNC010214
+TTDS00086	Inhibitor	N,N-Dimethyl-3,3-diphenylpropan-1-amine	DNC010215
+TTDS00086	Inhibitor	4,4-Diphenylbutan-1-amine	DNC010216
+TTDS00086	Inhibitor	N-methyl-4,4-diphenylbutan-1-amine	DNC010217
+TTDS00086	Inhibitor	N,N-dimethyl-4,4-diphenylbutan-1-amine	DNC010218
+TTDS00086	Inhibitor	3,3-diphenylpropan-1-amine	DNC010219
+TTDS00086	Inhibitor	DIMEBOLIN	DNC010278
+TTDS00086	Inhibitor	4-(4-butylpiperidin-1-yl)-1-o-tolylbutan-1-one	DNC011171
+TTDS00086	Inhibitor	MIANSERIN HYDROCHLORIDE	DNC011946
+TTDS00086	Inhibitor	9-Phenyl-2,3-dihydro-1H-indeno[2,1-c]pyridine	DNC012812
+TTDS00086	Inhibitor	1-[(Furan-2(5H)-one)-4-methyl]-desloratadine	DNC014184
+TTDS00086	Target Validation	TTDS00086
