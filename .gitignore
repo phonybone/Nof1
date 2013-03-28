@@ -8,3 +8,5 @@ out*
 *.log
 *.pot
 local_settings.py
+www
+db

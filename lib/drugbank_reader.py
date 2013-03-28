@@ -59,7 +59,7 @@ class DrugbankReader(Fysom):
                         {'regex':'^# (.*):',                     'event':'attr_name'},
                         {'regex':'^>(.*)',                       'event':'seq_desc'},
                         {'regex':'^([A-Z]+)$',                   'event':'seq'},
-                        {'regex':'(\S.+)',                       'event':'value'}]
+                        {'regex':'(\S+)',                       'event':'value'}]
 
         
     def __iter__(self):

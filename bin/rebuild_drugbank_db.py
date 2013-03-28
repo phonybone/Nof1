@@ -10,17 +10,15 @@ from dao_mongo import dao_mongo
 from dump_obj import dump
 
 def main(args):
-    dao_dc=dao_mongo(cls=Drugcard, db=args.db_name)
-    dao_dc.remove()
+    print args
 
-    builder=DrugcardBuilderFactory().get_instance(args.builder)
+    builder=DrugcardBuilderFactory().get_instance(args.builder, 
+                                                  clear_table=args.clear_table,
+                                                  uniprot_gene_fn=args.uniprot_gene_fn)
     reader=DrugbankReader(fn=args.in_fn, builder=builder)
-    stats={'n_saved':0}
     for dc in reader:
-        dao_dc.save(dc)
         print '%s saved' % dc.id
-        stats['n_saved']+=1
-    print dump(stats)
+    print dump(builder.stats)
 
 
 

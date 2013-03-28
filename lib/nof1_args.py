@@ -5,6 +5,7 @@ class Nof1Args(object):
         self.conf_fn=conf_fn
         self.desc=desc
         conf=self._load_config()
+        self.conf=conf
 
         parser=argparse.ArgumentParser(description=self.desc)
         parser.add_argument('--root_dir', dest='root_dir', 
@@ -14,7 +15,7 @@ class Nof1Args(object):
                             help='internal fuse for debugging')
         parser.add_argument('--in_fn', help='input file')
         parser.add_argument('--collection_name', help='collection name', 
-                            default=self.conf_val(conf, name, 'collection'))
+                            default=self.conf_val(name, 'collection'))
         parser.add_argument('--db_name', help='database name',
                             default=conf.get('DEFAULT', 'db_name'))
 
@@ -26,13 +27,13 @@ class Nof1Args(object):
 
         self.args=parser.parse_args()
 
-    def conf_val(self, conf, section, key):
+    def conf_val(self, section, key):
         sec=section if section else 'DEFAULT'
         try:
-            return conf.get(sec, key)
+            return self.conf.get(sec, key)
         except ConfigParser.NoSectionError:
             try:
-                return conf.get('DEFAULT', key)
+                return self.conf.get('DEFAULT', key)
             except ConfigParser.NoOptionError:
                 return None
 
@@ -44,10 +45,14 @@ class Nof1Args(object):
 
     def rebuild_ttd(self, parser):
         parser.add_argument('--burn-lines', dest='burn_lines', default=10, type=int)
-
+        parser.add_argument('--builder', default='django')
+        parser.add_argument('--clear_table', action='store_true')
+        parser.add_argument('--uniprot_gene_fn', default=self.conf_val('rebuild_ttd', 'uniprot_gene_fn'))
 
     def rebuild_db(self, parser): # db=drugbank, not database
-        parser.add_argument('--builder', default='drugcard_builder_rdf.DrugcardBuilderRdf')
+        parser.add_argument('--builder', default='django')
+        parser.add_argument('--clear_table', action='store_true')
+        parser.add_argument('--uniprot_gene_fn', default=self.conf_val('rebuild_ttd', 'uniprot_gene_fn'))
 
     def query(self, parser):
         print 'query called'
@@ -61,6 +66,17 @@ class Nof1Args(object):
     def path2targets(self, parser):
         parser.add_argument('path')
         parser.add_argument('--collection', default='graph')
+
+    def overlap(self, parser):
+        parser.add_argument('--uniprot_gene_fn', default=self.conf_val('rebuild_ttd', 'uniprot_gene_fn'))
+        parser.add_argument('--gene2syn_fn', default=self.conf_val('rebuild_ttd', 'gene2syn_fn'))
+        parser.add_argument('--samgenes_fn', default=self.conf_val('overlap', 'samgenes_fn'))
+        parser.add_argument('--tripnegs_fn', default=self.conf_val('overlap', 'tripneggenes_fn'))
+        
+    def gene_report(self, parser):
+        parser.add_argument('--tripnegs_fn', default=self.conf_val('overlap', 'tripneggenes_fn'))
+        parser.add_argument('--gene2syn_fn', default=self.conf_val('rebuild_ttd', 'gene2syn_fn'))
+        
 
 
 if __name__=='__main__':

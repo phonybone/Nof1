@@ -1,10 +1,11 @@
 import csv
-from dao_mongo import dao_mongo
-import rdf
+#from dao_mongo import dao_mongo
+#import rdf
 
 class ttd_reader(object):
-    def __init__(self, fn, n_burn=10, fuse=-1):
+    def __init__(self, fn, builder, n_burn=10, fuse=-1):
         self.fn=fn
+        self.builder=builder
         self.n_burn=n_burn
         self.fuse=fuse
 
@@ -17,15 +18,13 @@ class ttd_reader(object):
         If 6: compound statement: f3 'targets' f1 'for disease' f5 'in testing phase' f6
 
 
-f2 is always 'Drug(s)', but it also implies a 'for disease' clause.
-              so alter f2 accordingly.  
-f3 names f4, so (f4 'name' f3)
+        f2 is always 'Drug(s)', but it also implies a 'for disease' clause.
+        so alter f2 accordingly.  
+        f3 names f4, so (f4 'name' f3)
               
         '''
-        g=rdf.graph()
         with open(self.fn) as f:
             if self.n_burn > 0:
-                print 'n_burn: %s' % self.n_burn
                 for i in xrange(self.n_burn):
                     f.readline()
 
@@ -40,19 +39,18 @@ f3 names f4, so (f4 'name' f3)
                 row=r2
 
                 if len(row)==3:
-                    g.add_triple(rdf.triple(sub=row[0], pred=row[1], obj=row[2]))
+                    self.builder.on_line3(row)
+
                 elif len(row)==4:
-                    g.add_triple(rdf.triple(sub=row[0], pred=row[1], obj=row[3]))
-                    g.add_triple(rdf.triple(sub=row[3], pred='name', obj=row[2]))
+                    self.builder.on_line4(row)
+
                 elif len(row)==6:
-                    drug=rdf.triple(sub=row[3], pred=row[4], obj=row[5])
-                    target=rdf.triple(sub=row[0], pred=row[1], obj=drug)
-                    g.add_triple(target)
+                    self.builder.on_line6(row)
 
                 if fuse==0: break
                 fuse -= 1
                     
-        return g
+        return self.builder.on_eof()
 
     def utf_clean(self, s):
         try:

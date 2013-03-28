@@ -7,6 +7,9 @@ from histo import Histogram
 from drugcard import Drugcard
 
 def main(args):
+    '''
+    print out stats for mongo db
+    '''
     print args
     
     dc_dao=dao_mongo(cls=Drugcard, db='nof1')
