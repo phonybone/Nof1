@@ -6,7 +6,7 @@ from nof1_args import Nof1Args
 from dump_obj import dump
 from uniprot2gene import uniprot2gene
 from gene2synonym import gene2synonyms
-
+from gene import readgenes
 
 import django_env
 import django
@@ -44,12 +44,6 @@ def main(args):
                 for drug in drugs:
                     print '    drug: %s' % drug
             print
-
-def readgenes(fn):
-    ''' load the same genes that Ram gave us '''
-    with open(fn) as f:
-        samgenes=[x.strip() for x in f]
-    return samgenes
 
 
 if __name__=='__main__':

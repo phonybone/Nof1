@@ -10,3 +10,6 @@ out*
 local_settings.py
 www
 db
+.DS_Store
+._.DS_Store
+bin/variant_effect_predictor

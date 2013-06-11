@@ -77,6 +77,24 @@ class Nof1Args(object):
         parser.add_argument('--tripnegs_fn', default=self.conf_val('overlap', 'tripneggenes_fn'))
         parser.add_argument('--gene2syn_fn', default=self.conf_val('rebuild_ttd', 'gene2syn_fn'))
         
+    def oncotator(self, parser):
+        parser.add_argument('--base_url', default=self.conf_val('oncotator', 'base_url'))
+
+    def load_variations(self, parser):
+        parser.add_argument('src')
+        parser.add_argument('gene')
+        parser.add_argument('--clear_table', action='store_true')
+
+    def extract_trip_neg_details(self, parser):
+        pass
+
+    def rnaseq_count(self, parser):
+        parser.add_argument('--ucsc2ll', default='/mnt/price1/vcassen/Nof1/data/ucsc/ucsc_kg2ll')
+
+    def kg_babel_overlap(self, parser):
+        parser.add_argument('--kg', default='/mnt/price1/vcassen/Nof1/data/ucsc/knownGene.txt')
+        parser.add_argument('--babel', default='/mnt/price1/vcassen/Nof1/data/ucsc/ucsc_kg2entrez2sym.tsv')
+
 
 
 if __name__=='__main__':

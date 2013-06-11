@@ -6,6 +6,7 @@ from nof1_args import Nof1Args
 from dump_obj import dump
 from uniprot2gene import uniprot2gene
 from gene2synonym import gene2synonyms
+from gene import readgenes
 
 import django_env
 import django
@@ -46,12 +47,6 @@ def shared(attr):
     print '%d drugbank unique %s' % (len(db_genes), attr)
     shared_genes=ttd_genes & db_genes
     print '%d shared %s\n' % (len(shared_genes), attr)
-
-def readgenes(fn):
-    ''' load the same genes that Ram gave us '''
-    with open(fn) as f:
-        samgenes=[x.strip() for x in f]
-    return samgenes
 
 def SamGenesWithUniprot(genelist, u2g):
     ''' tabulate the sam genes that can have a uniprot associated with them '''

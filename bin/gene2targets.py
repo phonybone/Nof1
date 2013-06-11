@@ -10,6 +10,9 @@ from dump_obj import dump
 import rdf
 
 def main(args):
+    '''
+    Do a gene (syn) -> target lookup in the mongo collection 'graph'
+    '''
     print args
     
     g_syn=args.gene
