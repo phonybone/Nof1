@@ -91,6 +91,11 @@ class Nof1Args(object):
     def rnaseq_count(self, parser):
         parser.add_argument('--ucsc2ll', default='/mnt/price1/vcassen/Nof1/data/ucsc/ucsc_kg2ll')
 
+    def rnaseq_pipeline_proto(self, parser):
+        parser.add_argument('--data_basename', default='data/rawdata/1047-COPD.10K')
+        parser.add_argument('--bt2_index', default='hg19')
+        parser.add_argument('--ucsc2ll', default='data/ucsc/ucsc_kg2ll')
+
     def kg_babel_overlap(self, parser):
         parser.add_argument('--kg', default='/mnt/price1/vcassen/Nof1/data/ucsc/knownGene.txt')
         parser.add_argument('--babel', default='/mnt/price1/vcassen/Nof1/data/ucsc/ucsc_kg2entrez2sym.tsv')
