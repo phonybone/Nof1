@@ -20,14 +20,21 @@ def main(args):
     '''
 
 
-    pid=run_bowtie(args.data_basename, args.bt_index)
-    (pid, status)=waitpid(pid, 0)
-    print '%d: status=%s' % (pid, status)
+    try:
+        pid=run_bowtie(args.data_basename, args.bt_index)
+    except Exception, e:
+        print 'caught %s' % e
+        sys.exit(pid)
 
+    #    (pid, status)=waitpid(pid, 0)
+    #    print '%d: status=%s' % (pid, status)
+
+    '''
     pid=run_rnaseq_count(args.data_basename, args.ucsc2ll)
     (pid, status)=waitpid(pid, 0)
     print '%d: status=%s' % (pid, status)
-    
+    '''
+
     def run_bowtie(data_basename, ref_index):
         '''
         run bowtie; this will need refactoring
@@ -47,8 +54,8 @@ def main(args):
             v.append(params['threads'])
             v.append(params['input'])
             v.append(params['output'])
-            os.execv(params['bt2_exe'], v) # doesn't normally return
-            throw Exception('"%s" failed' % cmd) 
+#            os.execv(params['bt2_exe'], v) # doesn't normally return
+            raise Exception('"%s" failed' % cmd) 
 
         return pid
 
