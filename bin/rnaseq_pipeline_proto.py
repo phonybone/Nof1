@@ -32,11 +32,11 @@ def main(args):
         sys.exit(status)
     sys.exit(0)
 
-def run_bowtie2(data_basename, ref_index):
+def run_bowtie2(data_basename, ref_index, bt2_index_dir):
     '''
     run bowtie; this will need refactoring
     '''
-    bowtie2_index_dir='/local/src/bowtie2-2.0.5/indexes/'
+    bowtie2_index_dir=bt2_index_dir
     params={}
     params['bt2_exe']='/local/bin/bowtie2'
     params['index']=os.path.join(bowtie2_index_dir, ref_index)
