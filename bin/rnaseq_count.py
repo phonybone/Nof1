@@ -1,4 +1,4 @@
-import sys, os, csv
+import sys, os, csv, re
 libdir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','lib'))
 sys.path.append(libdir)
 
@@ -16,8 +16,15 @@ def main(args):
     ucsc2ll=read_ucsc2ll(args)
     ll2count=read_ucsc(args, ucsc2ll)
 
+    out_fn=re.sub(r'bt2.sam$', 'genes.count', args.in_fn)
+    special_ks={'n_alignments':None, 'no_gene':None, 'missing_ucsc':None, 'missing_ll':None, 'ambiguous':None}
+
+    print 'out_fn: %s' % out_fn
+    for k in sorted(ll2count.keys()):
+        if k in special_ks: continue
+        print '%s: %d' % (k, ll2count[k])
+
 #    print ll2count
-    special_ks=['n_alignments', 'no_gene', 'missing_ucsc', 'missing_ll', 'ambiguous']
     for k in special_ks:
         print '%s: %d' % (k, ll2count[k])
     print 'found (lls): %d' % (len(ll2count)-len(special_ks))
@@ -35,7 +42,9 @@ def read_ucsc2ll(args):
 def read_ucsc(args, ucsc2ll):
     ''' 
     try to assign all alignments in input file to a gene via Knowngene lookup.
-    could probably speed this up via smarter data structure (ie, not db look-ups)
+    could probably speed this up via smarter data structure (ie, not db look-ups).
+
+    Input file is output of bowtie2, ie a .sam file
     '''
     ll2count={'missing_ucsc':0, 'ambiguous':0, 'missing_ll':0, 'no_gene':0}
     fn=args.in_fn               # expects a .sam alignment file, as produced by bowtie[2]

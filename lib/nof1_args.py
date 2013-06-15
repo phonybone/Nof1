@@ -1,4 +1,5 @@
-import argparse, ConfigParser
+import argparse, ConfigParser, os
+root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 class Nof1Args(object):
     def __init__(self, conf_fn, desc, name=None):
@@ -9,7 +10,7 @@ class Nof1Args(object):
 
         parser=argparse.ArgumentParser(description=self.desc)
         parser.add_argument('--root_dir', dest='root_dir', 
-                            default=conf.get('DEFAULT', 'root_dir'),
+                            default=root_dir,
                             help='name of root directory')
         parser.add_argument('--fuse', dest='fuse', default=-1, type=int,
                             help='internal fuse for debugging')
@@ -22,8 +23,7 @@ class Nof1Args(object):
         try:
             getattr(self, name)(parser)
         except Exception, e:
-            pass
-#            print 'caught "%s" on attempt to call %s' % (e, name)
+            print 'caught "%s" on attempt to call %s' % (e, name)
 
         self.args=parser.parse_args()
 
@@ -89,7 +89,8 @@ class Nof1Args(object):
         pass
 
     def rnaseq_count(self, parser):
-        parser.add_argument('--ucsc2ll', default='/mnt/price1/vcassen/Nof1/data/ucsc/ucsc_kg2ll')
+        ucsc2ll=os.path.join(root_dir, 'data/ucsc/ucsc_kg2ll')
+        parser.add_argument('--ucsc2ll', default=ucsc2ll)
 
     def rnaseq_pipeline_proto(self, parser):
         parser.add_argument('--data_basename', default='data/rawdata/1047-COPD.10K')
@@ -97,8 +98,8 @@ class Nof1Args(object):
         parser.add_argument('--ucsc2ll', default='data/ucsc/ucsc_kg2ll')
 
     def kg_babel_overlap(self, parser):
-        parser.add_argument('--kg', default='/mnt/price1/vcassen/Nof1/data/ucsc/knownGene.txt')
-        parser.add_argument('--babel', default='/mnt/price1/vcassen/Nof1/data/ucsc/ucsc_kg2entrez2sym.tsv')
+        parser.add_argument('--kg', default=os.path.join(root_dir, 'data/ucsc/knownGene.txt'))
+        parser.add_argument('--babel', default=os.path.join(root_dir, 'data/ucsc/ucsc_kg2entrez2sym.tsv'))
 
 
 

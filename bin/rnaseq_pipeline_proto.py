@@ -76,7 +76,6 @@ def run_rnaseq_count(data_basename, ucsc2ll):
     params['script']='bin/rnaseq_count.py'
     params['ucsc2ll']=ucsc2ll
     params['input']='%s.bt2.sam' % data_basename
-    params['output']='%s.gene_count' % data_basename
     
     pid=os.fork()
     if pid==0:              # child process: exec and don't return
@@ -87,8 +86,6 @@ def run_rnaseq_count(data_basename, ucsc2ll):
         v.append(params['ucsc2ll'])
         v.append('--in_fn')
         v.append(params['input'])
-        v.append('--out_fn')
-        v.append(params['output'])
         os.execv(params['exe'], v) # doesn't normally return
         raise Exception('"%s" failed' % cmd) 
         

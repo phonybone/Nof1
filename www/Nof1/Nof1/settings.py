@@ -9,11 +9,14 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+import os
+PROJECT_ROOT=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#        'NAME': '/mnt/price1/vcassen/Nof1/db/knowngene.sqlite3', # Or path to database file if using sqlite3.
-        'NAME': '/mnt/price1/vcassen/Nof1/db/nof1.sqlite3', # Or path to database file if using sqlite3.
+        'NAME': os.path.abspath(os.path.join(PROJECT_ROOT, '..', '..', 'db/nof1.sqlite3')), # Or path to database file if using sqlite3.
 #        # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
