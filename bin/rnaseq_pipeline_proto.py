@@ -15,14 +15,12 @@ def main(args):
     and can therefore error out ahead of time.
     '''
 
-    '''
-    pid=run_bowtie2(args.data_basename, args.bt2_index)
+    pid=run_bowtie2(args.data_basename, args.bt2_index, args.bt2_index_dir)
     (pid, status)=os.waitpid(pid, 0)
     print 'bowtie2(%d): status=%s' % (pid, status)
     if status!=0:
         print 'status=%d: bailing!' % status
         sys.exit(status)
-    '''
 
     pid=run_rnaseq_count(args.data_basename, args.ucsc2ll)
     (pid, status)=os.waitpid(pid, 0)

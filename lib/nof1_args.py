@@ -94,6 +94,7 @@ class Nof1Args(object):
 
     def rnaseq_pipeline_proto(self, parser):
         parser.add_argument('--data_basename', default='data/rawdata/1047-COPD.10K')
+        parser.add_argument('--bt2_index_dir', default=os.path.join(root_dir, 'data/bt2_indexes'))
         parser.add_argument('--bt2_index', default='hg19')
         parser.add_argument('--ucsc2ll', default='data/ucsc/ucsc_kg2ll')
 
