@@ -6,52 +6,55 @@ from nof1_args import Nof1Args
 import django_env
 import django
 from data.models import Knowngene
-
+import pyBabel.Client as babel
 
 def main(args):
     '''
     
     '''
     print args
-    ucsc2ll=read_ucsc2ll(args)
-    ll2count=read_ucsc(args, ucsc2ll)
+    ucsc2output=get_output_ids(args.output_id_type)
+    ucsc2count=read_ucsc(args)
+    print '%d ucsc genes' % len(ucsc2count)
 
+    gene2count=ucsc2gene(ucsc2count, ucsc2output)
+    print '%d %s genes' % (len(gene2count), args.output_id_type)
+
+    # write results:
     out_fn=re.sub(r'bt2.sam$', 'genes.count', args.in_fn)
-    special_ks={'n_alignments':None, 'no_gene':None, 'missing_ucsc':None, 'missing_ll':None, 'ambiguous':None}
+    print 'writing results to %s...' % out_fn
+    with open(out_fn, 'w') as f:
+        for k in sorted(gene2count.keys()):
+            f.write('%s: %d\n' % (k, gene2count[k]))
 
-    print 'out_fn: %s' % out_fn
-    for k in sorted(ll2count.keys()):
-        if k in special_ks: continue
-        print '%s: %d' % (k, ll2count[k])
 
-#    print ll2count
-    for k in special_ks:
-        print '%s: %d' % (k, ll2count[k])
-    print 'found (lls): %d' % (len(ll2count)-len(special_ks))
+def get_output_ids(output_type):
+    client=babel.Client()
+    args={
+        'input_type' : 'gene_known',
+        'output_types' : [output_type],
+        }
 
-def read_ucsc2ll(args):
-    ucsc2ll={}
-    with open(args.ucsc2ll) as f:
-        reader=csv.reader(f, delimiter='\t')
-        for line in reader:
-            ucsc_id=line[0]
-            ll_id=line[1]
-            ucsc2ll[ucsc_id]=ll_id
-    return ucsc2ll
+    print 'fetching ucsc -> %s from babel...' % output_type
+    lol=client.translateAll(**args)
+    ucsc2output_id={}
+    for pair in lol:
+        try: ucsc2output_id[pair[0]].append(pair[1])
+        except KeyError: ucsc2output_id[pair[0]]=[pair[1]]
+    return ucsc2output_id
 
-def read_ucsc(args, ucsc2ll):
+def read_ucsc(args):
     ''' 
     try to assign all alignments in input file to a gene via Knowngene lookup.
     could probably speed this up via smarter data structure (ie, not db look-ups).
 
     Input file is output of bowtie2, ie a .sam file
     '''
-    ll2count={'missing_ucsc':0, 'ambiguous':0, 'missing_ll':0, 'no_gene':0}
-    fn=args.in_fn               # expects a .sam alignment file, as produced by bowtie[2]
-    fuse=args.fuse
-    n_alignments=0
+    print 'reading %s...' % args.in_fn
 
-    with open(fn) as f:
+    n_alignments=0
+    ucsc2count={'no_gene':0}
+    with open(args.in_fn) as f:
         reader=csv.reader(f, delimiter='\t')
         for line in reader:
             if line[0].startswith('@'): continue
@@ -59,36 +62,33 @@ def read_ucsc(args, ucsc2ll):
             pos=int(line[3])
             n_alignments+=1
 
-            genes=Knowngene.objects.filter(chrom=chrom, txstart__lte=pos, txend__gte=pos)
-            if len(genes)==0:
-                ll2count['no_gene']+=1
+            ucsc_genes=Knowngene.objects.filter(chrom=chrom, txstart__lte=pos, txend__gte=pos)
+            if len(ucsc_genes)==0:
+                ucsc2count['no_gene']+=1
                 continue
+            
+            # populate ucsc2count:
+            for name in [x.name for x in ucsc_genes]:
+                try: ucsc2count[name]+=1
+                except KeyError: ucsc2count[name]=1
 
-            lls=set()
-            for g in genes:
-                try:
-                    ll_id=ucsc2ll[g.name]
-                except KeyError:
-                    ll2count['missing_ucsc']+=1
-                    continue
-                lls.add(ll_id)
+    return ucsc2count
 
-            if len(lls) > 1:
-                ll2count['ambiguous']+=1
-                continue
+def ucsc2gene(ucsc2count, ucsc2output):
+    ''' convert the ucsc2count table into gene2count: k=gene, v=count '''
+    gene2count={}
+    n_no_output_type=0
+    for ucsc_id, count in ucsc2count.items():
+        try: out_ids=ucsc2output[ucsc_id]  
+        except KeyError:
+            n_no_output_type+=1
+            continue
 
-            ll_list=list(lls)
-            try: ll_id=ll_list[0]
-            except IndexError: ll_id='missing_ll'
-
-            try: ll2count[ll_id]+=1
-            except KeyError: ll2count[ll_id]=1
-                
-            fuse-=1
-            if fuse==0: break
-
-    ll2count['n_alignments']=n_alignments
-    return ll2count
+        for out_id in out_ids:
+            try: gene2count[out_id]+=count
+            except KeyError: gene2count[out_id]=count
+    return gene2count
+            
 
 
     
