@@ -15,6 +15,8 @@ def main(args):
     and can therefore error out ahead of time.
     '''
 
+def pipeline1(args):
+
     pid=run_bowtie2(args.data_basename, args.bt2_index, args.bt2_index_dir)
     (pid, status)=os.waitpid(pid, 0)
     print 'bowtie2(%d): status=%s' % (pid, status)

@@ -12,4 +12,6 @@ www
 db
 .DS_Store
 ._.DS_Store
-bin/variant_effect_predictor
+bin/variant_effect_predictor/*
+*.html
+*.txt

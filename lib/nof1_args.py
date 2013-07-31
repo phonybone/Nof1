@@ -22,7 +22,7 @@ class Nof1Args(object):
         self.parser=parser
 
         try:
-            getattr(self, name)(parser)
+            getattr(self, name)(parser) # get the function named 'name' and call it with parser as arg
         except Exception, e:
             print 'caught "%s" on attempt to call %s' % (e, name)
 
