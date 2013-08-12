@@ -1,14 +1,16 @@
-import unittest, sys, os, re, ConfigParser
+import unittest, sys, os, re
 from warnings import warn
 
 dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..'))
 sys.path.append(os.path.join(dir, 'lib'))
 from Nof1.Pipeline.run_bowtie2 import RunBowtie2
 
+from Nof1.Pipeline.host import Host
+host_conf=os.path.join(dir, 'config', 'hosts.conf')
+host=Host(host_conf, 'clutch')
+working_dir=os.path.join(dir, 'data')
+
 class TestBasic(unittest.TestCase):
-    conf=ConfigParser.ConfigParser()
-    fn=os.path.join(dir, 'config', 'hosts.conf')
-    conf.read(fn)
     
     def setUp(self):
         print
@@ -16,7 +18,7 @@ class TestBasic(unittest.TestCase):
     def test_cmd(self):
         data_basename='1047-COPD.10K'
         ref_index='hg19'
-        bt2=RunBowtie2(data_basename, ref_index, self.conf)
+        bt2=RunBowtie2(host, working_dir, data_basename, ref_index)
         cmd=bt2.cmd_string()
 
         self.assertIn('bowtie2', cmd)

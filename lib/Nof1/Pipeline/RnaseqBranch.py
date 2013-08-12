@@ -1,52 +1,26 @@
-import os, ConfigParser
-from socket import gethostname
+import sys
+from Nof1.Pipeline import Pipeline
+from Nof1.Pipeline.run_bowtie2 import RunBowtie2
+from Nof1.Pipeline.run_rnaseq_count import RunRnaseqCount
 
+class RnaseqBranch(Pipeline):
+    '''
+    this represents the Rnaseq branch of the Nof1 Pipeline.
+    Not sure if we're still using it or not; definitely not finished as of 8/8/13.
+    '''
 
-class RnaseqBranch(object):
-    def __init__(self, data_basename, ref_index, conf):
+    def __init__(self, 
+                 host,          # host to run on
+                 working_dir,   # directory to cd to; pathnames can be rel to this
+                 data_basename, 
+                 ref_index):
+        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir)
         self.data_basename=data_basename
         self.ref_index=ref_index
+        self.host=host
+        self.working_dir=working_dir
 
-        host=gethostname().split('.')[0]
-        self.bt2_exe=conf.get(host, 'bowtie2.exe')
-        self.bt2_index=conf.get(host, ref_index)
-        self.n_procs=conf.get(host, 'n_procs')
-        self.bowtie2_index_dir=conf.get(host, 'bowtie2.index_dir')
-        self.rnaseq_count=conf.get(host, 'rnaseq_count')
+    def run(self):
+        RunBowtie2(self.host, self.working_dir, self.data_basename, self.ref_index).run()
+        RunRnaseqCount(self.host, self.working_dir, self.data_basename).run()
 
-    def run():
-        self.run_bowtie2()
-        (pid, status)=os.waitpid(pid, 0)
-        if status!=0:
-            print 'status=%d: bailing!' % status
-            sys.exit(status)
-
-        self.run_rnaseq_count()
-
-
-    def run_bowtie2(self):
-        input1='%s_1.fastq' % self.data_basename
-        input2='%s_2.fastq' % self.data_basename
-        output='%s.bt2.sam' % self.data_basename
-        cmd=[self.ref_index, '-p', self.n_procs, 
-             '-1' input1, '-2', input2, '-S', output]
-        environ={'bt2_indexes' : bowtie2_index_dir}
-        pid=os.fork()
-        if pid==0:
-            os.execve(self.bt2_exe, cmd, environ) # this should never return
-            raise Exception('%s failed' % '\n'.join(cmd))
-
-        return pid
-
-
-    def run_rnaseq_count(self):
-        input='%s.bt2.sam' % self.data_basename
-        cmd=[self.rnaseq_count, '--in_fn', input]
-        environ={}
-        pid=os.fork()
-        if pid==0:
-            os.execve('python', cmd, environ) # this should never return
-            raise Exception('%s failed' % '\n'.join(cmd))
-
-        return pid
-        

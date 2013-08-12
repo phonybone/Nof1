@@ -25,40 +25,20 @@ def main(nof1_args):
                 chrm=line[4]
                 start=line[5]
                 try:
-                    istart=int(start)
+                    istart=int(start) # not used; just weeds out bad lines
                 except:
                     sys.stderr.write("can't convert %s to int\n" % start)
                     continue
-                stop=line[6]
-                strand=line[7]
-                t1=line[8]
-                t2=line[9]
-                ref=line[10]
-                a1=line[11]
-                a2=line[12]
-                '''
-                print 'chrm: %s' % chrm
-                print 'start: %s' % start
-                print 'stop: %s' % stop
-                print 'strand: %s' % strand
-                print 'ref: %s' % ref
-                print 'a1: %s' % a1
-                print 'a2: %s' % a2
-                print
-                '''
-                if a1 != ref:
+
+                (stop, strand, t1, t2, ref, a1, a2)=line[6:12]
+                if a1 != ref:   # a1 and a2 are reference alleles
                     print '%s %s %s %s/%s %s %s' % (chrm, start, stop, ref, a1, strand, sym)
-#                    print '# %s %s' % (t1, t2)
                 if a2 != ref:
                     print '%s %s %s %s/%s %s %s' % (chrm, start, stop, ref, a2, strand, sym)
-#                    print '# %s %s' % (t1, t2)
                 
             except Exception, e:
                 print 'caught %s' % e
                 traceback.print_exc()
-#                traceback.print_exception(sys.exc_type, sys.exc_value, sys.exc_traceback, None, sys.stderr)
-                pass
-#                print 'oops (%s): %s' % (type(e), e)
 
 
 if __name__=='__main__':

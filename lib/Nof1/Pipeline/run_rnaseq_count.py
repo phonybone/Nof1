@@ -1,18 +1,17 @@
 from .run_cmd import RunCmd
 
-class RunBowtie(RunCmd):
-    def __init__(self, data_basename, conf):
+class RunRnaseqCount(RunCmd):
+    def __init__(self, host, working_dir, data_basename):
+        super(RunRnaseqCount, self).__init__('rnaseq_count', host, working_dir)
         self.data_basename=data_basename
 
-        host=gethostname().split('.')[0]
-        self.cmd=conf.get(host, 'rnaseq_count')
 
     def get_cmd(self):
-        return self.cmd
+        return 'python'
 
     def get_args(self):
         input='%s_1.bt2.sam' % self.data_basename
-        cmd=[input]
+        cmd=[self.host.get('rnaseq_count.script'), input]
         return cmd
     
     def get_environ(self):

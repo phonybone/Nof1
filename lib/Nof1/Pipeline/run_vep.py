@@ -5,19 +5,27 @@ from socket import gethostname
 class RunVep(RunCmd):
     output_extension=".vep.out"
 
-    def __init__(self, variants_fn, conf):
+    '''
+    sample input: data/trip_neg_Vic/triple_negativ_mut_seq.vep; used 
+    bin/extract_trip_neg_details.py --in_fn data/trip_neg_Vic/triple_negativ_mut_seq
+    to convert
+    '''
+
+    def __init__(self, host, working_dir, variants_fn):
+        super(RunVep, self).__init__('vep', host, working_dir)
         self.variants_fn=variants_fn
-        host=gethostname().split('.')[0]
-        self.vep_script=conf.get(host, 'vep.script')
-        self.cmd='perl'
 
     def get_cmd(self):
-        return self.cmd
+        return 'perl'
 
     def get_args(self):
-        base=os.path.splitext(self.variants_fn)[0]
-        output_fn=base+self.output_extension
-        cmd=[self.vep_script, '-i', self.variants_fn, '--cache', '--format', 'guess', '-o', output_fn, '--force_overwrite']
+        output_fn=os.path.splitext(self.variants_fn)[0] + self.output_extension
+        cmd=[self.host.get('vep.script'),
+             '-i', self.variants_fn, 
+             '--cache', 
+             '--format', 'guess', 
+             '--force_overwrite',
+             '-o', output_fn]
         return cmd
     
     def get_environ(self):
