@@ -13,6 +13,10 @@ def main(args):
     
     '''
     print args
+    if not args.out_fn:         # hack because this arg is necessary for all programs using nof1_args
+        print 'missing argument "--out_fn"'
+        sys.exit(1)
+
     ucsc2output=get_output_ids(args.output_id_type)
     ucsc2count=read_ucsc(args)
     print '%d ucsc genes' % len(ucsc2count)
@@ -21,7 +25,6 @@ def main(args):
     print '%d %s genes' % (len(gene2count), args.output_id_type)
 
     # write results:
-    out_fn=re.sub(r'bt2.sam$', 'genes.count', args.in_fn)
     print 'writing results to %s...' % out_fn
     with open(out_fn, 'w') as f:
         for k in sorted(gene2count.keys()):

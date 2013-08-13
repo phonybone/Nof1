@@ -12,6 +12,16 @@ def main(nof1_args):
 #    print args
     
     stats={'n_vars':0}
+    keep_refs=['Frame_Shift_Del',
+               'Frame_Shift_Ins',
+               'In_Frame_Del',
+               'In_Frame_Ins',
+               'Missense_Mutation',
+#               'Nonsense_Mutation',
+#               'RNA',
+#               'Silent',
+               'Splice_Site']
+
     fn=args.in_fn
     if not fn:
         nof1_args.parser.print_help()
@@ -31,6 +41,7 @@ def main(nof1_args):
                     continue
 
                 (stop, strand, t1, t2, ref, a1, a2)=line[6:12]
+                if ref not in keep_refs: 
                 if a1 != ref:   # a1 and a2 are reference alleles
                     print '%s %s %s %s/%s %s %s' % (chrm, start, stop, ref, a1, strand, sym)
                 if a2 != ref:

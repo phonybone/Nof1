@@ -15,6 +15,7 @@ class Nof1Args(object):
         parser.add_argument('--fuse', dest='fuse', default=-1, type=int,
                             help='internal fuse for debugging')
         parser.add_argument('--in_fn', help='input file')
+        parser.add_argument('--out_fn', help='output file', nargs='?')
         parser.add_argument('--collection_name', help='collection name', 
                             default=self.conf_val(name, 'collection'))
         parser.add_argument('--db_name', help='database name',
