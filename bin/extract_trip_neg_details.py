@@ -3,32 +3,46 @@ libdir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','lib'))
 sys.path.append(libdir)
 
 from nof1_args import Nof1Args
+from read1write2 import read1write2
+
 
 def main(nof1_args):
     '''
     convert data/trip_neg_Vic/triple_mut_seq into a format that the Ensembl VEP can use.
     '''
     args=nof1_args.args
-#    print args
+    if args.v: print args
     
-    stats={'n_vars':0}
-    keep_refs=['Frame_Shift_Del',
-               'Frame_Shift_Ins',
-               'In_Frame_Del',
-               'In_Frame_Ins',
-               'Missense_Mutation',
-#               'Nonsense_Mutation',
-#               'RNA',
-#               'Silent',
-               'Splice_Site']
+    stats={'n_auto':0,
+           'n_ignored':0,
+           'n_polyphen':0,
+           'n_unknown':0,
+           'n_total':0,
+           }
+    
+    ref_types={
+        'Frame_Shift_Del':   'auto',
+        'Frame_Shift_Ins':   'auto',
+        'In_Frame_Del':      'polyphen',
+        'In_Frame_Ins':      'polyphen',
+        'Missense_Mutation': 'polyphen',
+        'Nonsense_Mutation': 'auto',
+        'RNA':               'ignore',
+        'Silent':            'ignore',
+        'Splice_Site':       'auto'
+        } 
 
-    fn=args.in_fn
-    if not fn:
+    in_fn=args.in_fn
+    if not in_fn:                  # argparse doesn't require it
         nof1_args.parser.print_help()
         sys.exit(1)
 
-    with open(fn) as f:
-        reader=csv.reader(f, delimiter='\t')
+    poly_fn=args.poly_fn
+    auto_fn=args.auto_fn
+
+
+    with read1write2(in_fn, poly_fn, auto_fn) as f3:
+        reader=csv.reader(f3.r1, delimiter='\t')
         for line in reader:
             try:
                 sym=line[0]
@@ -37,23 +51,43 @@ def main(nof1_args):
                 try:
                     istart=int(start) # not used; just weeds out bad lines
                 except:
-                    sys.stderr.write("can't convert %s to int\n" % start)
+                    if args.v:
+                        sys.stderr.write("can't convert %s to int\n" % start)
                     continue
 
-                (stop, strand, t1, t2, ref, a1, a2)=line[6:12]
-                if ref not in keep_refs: 
+                stats['n_total']+=1
+                (stop, strand, var_class, var_type, ref, a1, t1, t2)=line[6:14]
+                try:
+                    ref_type=ref_types[var_class]
+                except KeyError:
+                    stats['n_unknown']+=1
+                    continue
+
+                if ref_type=='ignore':
+                    stats['n_ignored']+=1
+                    continue
+                elif ref_type=='auto':
+                    f3.w2.write('\t'.join(line))
+                    stats['n_auto']+=1
+                    continue
+
                 if a1 != ref:   # a1 and a2 are reference alleles
-                    print '%s %s %s %s/%s %s %s' % (chrm, start, stop, ref, a1, strand, sym)
-                if a2 != ref:
-                    print '%s %s %s %s/%s %s %s' % (chrm, start, stop, ref, a2, strand, sym)
+                    f3.w1.write('%s %s %s %s/%s %s %s\n' % (chrm, start, stop, ref, a1, strand, sym))
+                if t1 != ref:
+                    f3.w1.write('%s %s %s %s/%s %s %s\n' % (chrm, start, stop, ref, t1, strand, sym))
                 
+                stats['n_polyphen']+=1
+
             except Exception, e:
                 print 'caught %s' % e
+                print '\t'.join(line)
                 traceback.print_exc()
+                print
 
+    print '%s' % stats
 
 if __name__=='__main__':
     config_fn=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'nof1.conf'))
-    args=Nof1Args(config_fn, 'extract the fields from the trip_neg_details_6cases.txt file', 'extract_trip_neg_details')
+    args=Nof1Args(config_fn, 'extract the fields from the trip_neg_details_6cases.txt file (or similar)', 'extract_trip_neg_details')
     main(args)
 

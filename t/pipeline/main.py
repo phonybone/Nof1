@@ -20,7 +20,7 @@ class TestBasic(unittest.TestCase):
     def test_cmd(self):
         data_basename='data/test_rnaseq/rawdata/1047-COPD.10K'
         ref_index='hg19'
-    	variants_fn='data/trip_neg_Vic/triple_negativ_mut_seq.vep'
+    	variants_fn='data/trip_neg_Vic/triple_negativ_mut_seq'
 
         old_stdout=sys.stdout
         sys.stdout=mystdout=StringIO()

@@ -1,6 +1,5 @@
 import os
 from .run_cmd import RunCmd
-from socket import gethostname
 
 class RunVep(RunCmd):
     output_extension=".vep.out"
@@ -25,6 +24,8 @@ class RunVep(RunCmd):
              '--cache', 
              '--format', 'guess', 
              '--force_overwrite',
+             '--poly', 'p',
+             '--sift', 'p',
              '-o', output_fn]
         return cmd
     

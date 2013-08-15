@@ -8,14 +8,16 @@ class VEPBranch(Pipeline):
         self.variants_fn=variants_fn
 
         self.m2v=RunMuts2Vep(self.host, self.working_dir, self.variants_fn)
-        self.vep=RunVep(self.host, self.working_dir, self.m2v.outputs()[0])
+        self.vep=RunVep(self.host, self.working_dir, self.m2v.outputs()[1])
+        self.filter_vep=RunFilterVep(self.host, self.working_dir, self.vep.outputs()[0])
 
     def run(self):
         self.m2v.run()
         self.vep.run()
+        self.filter_vep.run()
 
     def outputs(self):
-        return self.vep.outputs()
+        return self.filter_vep.outputs()
 
 
                  

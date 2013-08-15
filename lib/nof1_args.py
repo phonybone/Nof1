@@ -20,6 +20,8 @@ class Nof1Args(object):
                             default=self.conf_val(name, 'collection'))
         parser.add_argument('--db_name', help='database name',
                             default=conf.get('DEFAULT', 'db_name'))
+        parser.add_argument('-v', action='store_true', help='verbose')
+        parser.add_argument('-d', action='store_true', help='debugging flag')
         self.parser=parser
 
         try:
@@ -88,7 +90,8 @@ class Nof1Args(object):
         parser.add_argument('--clear_table', action='store_true')
 
     def extract_trip_neg_details(self, parser):
-        pass
+        parser.add_argument('--auto_fn', help='auto-excepted variants filename')
+        parser.add_argument('--poly_fn', help='poly-excepted variants filename')
 
     def rnaseq_count(self, parser):
         ucsc2ll=os.path.join(root_dir, 'data/ucsc/ucsc_kg2ll')
