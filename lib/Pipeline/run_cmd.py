@@ -11,21 +11,18 @@ class RunCmd(object):
     And may override:
     get_envion()
     '''
-    def __init__(self, name, host, working_dir, dry_run=False):
+    def __init__(self, name, pipeline):
         self.name=name
-        self.host=host
-        self.working_dir=working_dir
-        self.dry_run=dry_run
-        # get output dir from host 
+        self.pipeline=pipeline
 
     def run(self):
-        if self.dry_run or self.host.get('dry_run').lower()=='true':
+        if self.pipeline.dry_run or self.pipeline.host.get('dry_run').lower()=='true':
             print '# %s' % self.name
             print self.cmd_string()
             print
             return (-1,-1)
 
-        os.chdir(working_dir)
+        os.chdir(self.pipeline.working_dir) # fixme: make pipeline.run() do this?
 
         # put in something about checking for readability of all input files...
 
