@@ -32,6 +32,10 @@ this: that
                 self.fail('localhost not found: %s' % e)
 
         
+    def test_localhost_no_config(self):
+        with self.assertRaises(ConfigParser.NoSectionError): # true error is that the file don't exist
+            host=Host()
+
 
     def test_remote_host(self):
         try:

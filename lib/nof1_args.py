@@ -24,6 +24,7 @@ class Nof1Args(object):
         parser.add_argument('-d', action='store_true', help='debugging flag')
         self.parser=parser
 
+        print 'name is %s' % name
         try:
             getattr(self, name)(parser) # get the function named 'name' and call it with parser as arg
         except Exception, e:
@@ -108,7 +109,16 @@ class Nof1Args(object):
         parser.add_argument('--kg', default=os.path.join(root_dir, 'data/ucsc/knownGene.txt'))
         parser.add_argument('--babel', default=os.path.join(root_dir, 'data/ucsc/ucsc_kg2entrez2sym.tsv'))
 
+    def filter_vep(self, parser):
+        pass
 
+    def combine_rnaseq_vep(self, parser):
+        parser.add_argument('gene_counts_fn')
+        parser.add_argument('auto_fn')
+        parser.add_argument('polyphen_sift_fn')
+
+    def find_regions(self, parser):
+        parser.add_argument('--delimiter', default='\t')
 
 if __name__=='__main__':
     args=Nof1Args('nof1.conf', 'testing Nof1')

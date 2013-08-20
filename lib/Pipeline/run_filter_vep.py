@@ -1,11 +1,11 @@
 import os
 from .run_cmd import RunCmd
 
-class RunVep(RunCmd):
-    output_extension=".vep.filtered"
+class RunFilterVep(RunCmd):
+    output_extension="filtered"
 
     def __init__(self, host, working_dir, vep_out):
-        super(RunVep, self).__init__('vep', host, working_dir)
+        super(RunFilterVep, self).__init__('filter_vep', host, working_dir)
         self.vep_out=vep_out
 
     def get_cmd(self):
@@ -22,6 +22,6 @@ class RunVep(RunCmd):
         return {}
         
     def outputs(self):
-        return [os.path.splitext(self.vep_out)[0] + self.output_extension] # also a .html file!
+        return ['%s.%s' % (os.path.splitext(self.vep_out)[0], self.output_extension)]
     
     

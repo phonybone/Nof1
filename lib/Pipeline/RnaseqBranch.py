@@ -1,6 +1,7 @@
 from Pipeline import Pipeline
 from .run_bowtie2 import RunBowtie2
 from .run_rnaseq_count import RunRnaseqCount
+from .exceptions import *
 
 class RnaseqBranch(Pipeline):
     '''
@@ -24,8 +25,12 @@ class RnaseqBranch(Pipeline):
         
 
     def run(self):
-        self.bt2.run()
-        self.rc.run()
+        try:
+            self.bt2.run()
+            self.rc.run()
+        except CmdFailed, e:
+            print "this failed:\n%s" % e.cmd_string()
+            raise PipelineFailed(self, e)
 
     def outputs(self):
         return self.rc.outputs()
