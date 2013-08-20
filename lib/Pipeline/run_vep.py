@@ -10,8 +10,8 @@ class RunVep(RunCmd):
     to convert
     '''
 
-    def __init__(self, host, working_dir, variants_fn):
-        super(RunVep, self).__init__('vep', host, working_dir)
+    def __init__(self, pipeline, variants_fn):
+        super(RunVep, self).__init__('vep', pipeline)
         self.variants_fn=variants_fn
 
     def get_cmd(self):
@@ -19,7 +19,7 @@ class RunVep(RunCmd):
 
     def get_args(self):
         output_fn=self.outputs()[0]
-        cmd=[self.host.get('vep.script'),
+        cmd=[self.pipeline.host.get('vep.script'),
              '-i', self.variants_fn, 
              '--cache', 
              '--format', 'guess', 

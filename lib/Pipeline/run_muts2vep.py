@@ -10,8 +10,8 @@ class RunMuts2Vep(RunCmd):
     to convert
     '''
 
-    def __init__(self, host, working_dir, variants_fn):
-        super(RunMuts2Vep, self).__init__('muts2vep', host, working_dir)
+    def __init__(self, pipeline, variants_fn):
+        super(RunMuts2Vep, self).__init__('muts2vep', pipeline)
         self.variants_fn=variants_fn
         base=os.path.splitext(self.variants_fn)[0]
         self.auto_fn='%s.%s' % (base,self.auto_extension)
@@ -21,7 +21,7 @@ class RunMuts2Vep(RunCmd):
         return 'python'
 
     def get_args(self):
-        cmd=[self.host.get('muts2vep.script'), 
+        cmd=[self.pipeline.host.get('muts2vep.script'), 
              '--in_fn', self.variants_fn, 
              '--auto_fn', self.auto_fn,
              '--poly_fn', self.poly_fn

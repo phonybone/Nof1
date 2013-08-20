@@ -13,15 +13,16 @@ class RnaseqBranch(Pipeline):
                  host,          # host to run on
                  working_dir,   # directory to cd to; pathnames can be rel to this
                  data_basename, 
-                 ref_index):
-        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir)
+                 ref_index,
+                 dry_run=None):
+        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir, dry_run)
         self.data_basename=data_basename
         self.ref_index=ref_index
         self.host=host
         self.working_dir=working_dir
 
-        self.bt2=RunBowtie2(self.host, self.working_dir, self.data_basename, self.ref_index)
-        self.rc=RunRnaseqCount(self.host, self.working_dir, self.data_basename)
+        self.bt2=RunBowtie2(self, data_basename, ref_index)
+        self.rc=RunRnaseqCount(self, data_basename)
         
 
     def run(self):

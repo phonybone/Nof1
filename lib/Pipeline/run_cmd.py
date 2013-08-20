@@ -22,6 +22,8 @@ class RunCmd(object):
             print
             (self.pid, self.status)=(-1,-1)
             return
+        
+        print self.cmd_string()
 
         os.chdir(self.pipeline.working_dir) # fixme: make pipeline.run() do this?
 

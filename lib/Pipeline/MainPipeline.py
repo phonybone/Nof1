@@ -5,19 +5,17 @@ from .run_combine import RunCombine
 from .exceptions import *
 
 class MainPipeline(Pipeline):
-    def __init__(self, host, working_dir, data_basename, ref_index, variants_fn):
-        super(MainPipeline, self).__init__('Main', host, working_dir)
+    def __init__(self, host, working_dir, data_basename, ref_index, variants_fn, dry_run=None):
+        super(MainPipeline, self).__init__('Main', host, working_dir, dry_run)
         self.data_basename=data_basename
         self.ref_index=ref_index
         self.variants_fn=variants_fn
         
-        self.rnaseq_branch=RnaseqBranch(self.host, self.working_dir, 
-                                        self.data_basename, self.ref_index)
+        self.rnaseq_branch=RnaseqBranch(host, working_dir, data_basename, ref_index)
 
-        self.vep_branch=VEPBranch(self.host, self.working_dir, 
-                                  self.variants_fn)
+        self.vep_branch=VEPBranch(host, working_dir, variants_fn)
         
-        self.combine=RunCombine(self.host, self.working_dir, 
+        self.combine=RunCombine(self,
                                 self.rnaseq_branch.outputs()[0], # .genes.count
                                 self.vep_branch.outputs()[0],    # .auto
                                 self.vep_branch.outputs()[1],    # .vep.filtered
