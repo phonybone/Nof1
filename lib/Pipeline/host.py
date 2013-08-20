@@ -9,6 +9,7 @@ class Host(object):
         if not config_file:
             root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..', '..'))
             fn=os.path.join(root_dir, 'config', 'hosts.conf')
+            print 'fn is %s' % fn
             self.config.read(fn)
         else:
             self.config.read(config_file)

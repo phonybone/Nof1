@@ -1,6 +1,7 @@
 from Pipeline import Pipeline
-from Pipeline.run_vep import RunVep
-from Pipeline.run_muts2vep import RunMuts2Vep
+from .run_vep import RunVep
+from .run_muts2vep import RunMuts2Vep
+from .run_filter_vep import RunFilterVep
 
 class VEPBranch(Pipeline):
     def __init__(self, host, working_dir, variants_fn):
@@ -17,7 +18,9 @@ class VEPBranch(Pipeline):
         self.filter_vep.run()
 
     def outputs(self):
-        return self.filter_vep.outputs()
+        auto=self.m2v.outputs()[0]
+        polyphen_sift_filtered=self.filter_vep.outputs()[0]
+        return [auto, polyphen_sift_filtered]
 
 
                  

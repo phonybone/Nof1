@@ -9,6 +9,10 @@ from read1write2 import read1write2
 def main(nof1_args):
     '''
     convert data/trip_neg_Vic/triple_mut_seq into a format that the Ensembl VEP can use.
+    input: raw mutations file (eg triple_negativ_mut_seq
+    outputs:
+      - file suitable for feeding to vep.pl script
+      - file of auto-selected mutations taken verbatim from input file (see ref_types w/value='auto')
     '''
     args=nof1_args.args
     if args.v: print args
@@ -67,7 +71,7 @@ def main(nof1_args):
                     stats['n_ignored']+=1
                     continue
                 elif ref_type=='auto':
-                    f3.w2.write('\t'.join(line))
+                    f3.w2.write('\t'.join(line)+'\n')
                     stats['n_auto']+=1
                     continue
 

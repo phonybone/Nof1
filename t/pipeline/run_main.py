@@ -1,9 +1,12 @@
 import unittest, sys, os, re
+from cStringIO import StringIO
 from warnings import warn
 
 root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..'))
 sys.path.append(os.path.join(root_dir, 'lib'))
-from Pipeline.run_bowtie2 import RunBowtie2
+
+from Pipeline.MainPipeline import MainPipeline
+
 
 from Pipeline.host import Host
 host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
@@ -13,22 +16,18 @@ working_dir=os.path.join(root_dir, 'data')
 class TestBasic(unittest.TestCase):
     
     def setUp(self):
+        host.set('dry_run', str(False))
         print
 
-    def test_bowtie2(self):
-        data_basename='1047-COPD.10K'
+    def test_cmd(self):
+        data_basename='data/test_rnaseq/rawdata/1047-COPD.10K'
         ref_index='hg19'
-        bt2=RunBowtie2(host, working_dir, data_basename, ref_index)
-        cmd=bt2.cmd_string()
+    	variants_fn='data/trip_neg_Vic/triple_negativ_mut_seq'
 
-        self.assertIn('bowtie2', cmd)
-        self.assertIn(ref_index, cmd)
-        self.assertIn(data_basename, cmd)
-        self.assertIn('-1', cmd)
-        self.assertIn('-2', cmd)
-        self.assertIn('-S', cmd)
+        MainPipeline(host, working_dir, data_basename, ref_index, variants_fn).run()
+            
 
-if __name__ == '__main__':
+if __name__=='__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestBasic)
     unittest.TextTestRunner(verbosity=2).run(suite)
 
