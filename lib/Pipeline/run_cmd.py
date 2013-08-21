@@ -1,4 +1,6 @@
 import os, sys, subprocess
+from datetime import datetime
+from lazy import lazy
 
 class RunCmd(object):
     '''
@@ -11,6 +13,13 @@ class RunCmd(object):
     And may override:
     get_envion()
     '''
+
+    @lazy
+    def _ts(self):
+        return datetime.now()
+
+    _ts_format='%Y%b%d.%H:%m:%S'
+
     def __init__(self, name, pipeline):
         self.name=name
         self.pipeline=pipeline
@@ -23,21 +32,37 @@ class RunCmd(object):
             (self.pid, self.status)=(-1,-1)
             return
         
-        os.chdir(self.pipeline.working_dir) # fixme: make pipeline.run() do this?
+        os.chdir(self.pipeline.working_dir) 
+        # fixme: make pipeline.run() do this?
+        #   or keep this, so that individual cmds can set their own working_dir?
 
         # put in something about checking for readability of all input files...
 
-        pid=os.fork()
-        if pid==0:
-            os.execve(self.get_cmd(), self.get_args(), self.get_environ()) # this should never return
-            raise CmdFailed(self)
+        new_stdout=open(self._get_stdout(), 'w')
+        new_stderr=open(self._get_stderr(), 'w')
 
-        (self.pid, self.status)=os.waitpid(pid, 0)
+        cmd=[self.get_cmd()]
+        cmd.extend(self.get_args())
+        retcode=subprocess.call(cmd, env=self.get_environ(),
+                                stdout=new_stdout, stderr=new_stderr)
+        return retcode
+
+
 
         # could put something here about provenance
         # could also put something here about capturing stdout and stderr 
 
+    def __get_output_fn(self, fn_type):
+        return os.path.join(self.pipeline.output_dir,
+                            '%s.%s.%s' % (self.name, self._ts.strftime(self._ts_format), fn_type))
 
+    def _get_stdout(self):
+        ''' return the name of the file to which to redirect stdout '''
+        return self.__get_output_fn('stdout')
+                            
+    def _get_stderr(self):
+        ''' return the name of the file to which to redirect stderr '''
+        return self.__get_output_fn('stderr')
 
     def cmd_string(self):
         stuff=[self.get_cmd()]

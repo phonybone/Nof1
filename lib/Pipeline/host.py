@@ -34,7 +34,6 @@ class Host(object):
     # getboolean, items, etc.
 
     def get(self, key):
-        print 'getting %s:%s' % (self.hostname, key)
         return self.config.get(self.hostname, key)
 
     def set(self, key, value):

@@ -3,19 +3,49 @@ from warnings import warn
 
 root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..','..'))
 sys.path.append(os.path.join(root_dir, 'lib'))
-from Pipeline.run_bowtie2 import RunBowtie2
+from Pipeline.run_cmd import RunCmd
 from Pipeline.Pipeline import Pipeline
 from Pipeline.host import Host
 host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
 host=Host(host_conf, 'clutch')
-working_dir=os.path.join(root_dir, 'data')
+working_dir=os.path.dirname(__file__) or os.path.abspath('.')
 
 class TestBasic(unittest.TestCase):
     
     def setUp(self):
-        print
+        pass
 
-    def test_bowtie2(self):
+    def test_simplest(self):
+        class simple_cmd(RunCmd):
+            def get_cmd(self): 
+                return 'python'
+            def get_args(self): 
+                return [os.path.join(os.path.dirname(__file__), 'writer.py')]
+            def get_environ(self): 
+                return {}
+            def outputs(self): return []
+                
+
+
+        pipeline=Pipeline('mock', host, working_dir)
+        cmd=simple_cmd('writer', pipeline)
+        cmd.run()
+
+        with open(cmd._get_stdout()) as f:
+            contents=f.read()
+            expected='this goes to stdout\n'
+            self.assertEqual(contents, expected)
+
+        with open(cmd._get_stderr()) as f:
+            contents=f.read()
+            expected='this goes to stderr\n'
+            self.assertEqual(contents, expected)
+
+        os.unlink(cmd._get_stdout())
+        os.unlink(cmd._get_stderr())
+
+
+    def _test_bowtie2(self):
         pipeline=Pipeline('mock', host, working_dir)
         data_basename='1047-COPD.10K'
         ref_index='hg19'
