@@ -1,7 +1,7 @@
 from .exceptions import *
 
 class Pipeline(object):
-    def __init__(self, name, host, working_dir, dry_run):
+    def __init__(self, name, host, working_dir, dry_run=False):
         self.name=name
         self.host=host
         self.working_dir=working_dir

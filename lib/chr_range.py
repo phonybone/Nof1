@@ -23,7 +23,7 @@ class ChrRange(CommonEqualityMixin, CommonInequalityMixin):
                 raise ChrIndexError('%s: chr out of range' % self)
             self.n_chr=n_chr
         except ValueError, e:
-            bad_chr=e.message.split(':')[1].strip().upper()[1:-1]
+            bad_chr=e.message.split(':')[1].strip().lower()[1:-1]
             if bad_chr=='x':
                 self.n_char=24
                 self.chr='chrX'

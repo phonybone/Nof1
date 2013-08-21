@@ -24,7 +24,6 @@ class Nof1Args(object):
         parser.add_argument('-d', action='store_true', help='debugging flag')
         self.parser=parser
 
-        print 'name is %s' % name
         try:
             getattr(self, name)(parser) # get the function named 'name' and call it with parser as arg
         except Exception, e:

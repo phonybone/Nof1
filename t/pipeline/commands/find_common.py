@@ -1,10 +1,10 @@
 import unittest, sys, os, re
 from warnings import warn
 
-dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..'))
+dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..','..'))
 sys.path.append(os.path.join(dir, 'lib'))
 from Pipeline.run_find_common import RunFindCommon
-
+from Pipeline.Pipeline import Pipeline
 from Pipeline.host import Host
 host_conf=os.path.join(dir, 'config', 'hosts.conf')
 host=Host(host_conf, 'clutch')
@@ -27,10 +27,10 @@ class TestBasic(unittest.TestCase):
 
  
         out_fn=os.path.join(working_dir, '1047-COPD_triple_negativ_mut_seq.common')
-        print out_fn
         expected='%s --out_fn %s test_rnaseq/rawdata/1047-COPD.10K.genes.count,rnaseq,1,: trip_neg_Vic/triple_negativ_mut_seq.vep.out,vep,4' % (host.get('find_common.script'), out_fn)
 
-        fc=RunFindCommon(host, working_dir, [arg1, arg2])
+        pipeline=Pipeline('mock', host, working_dir, True)
+        fc=RunFindCommon(pipeline, [arg1, arg2])
         cmd=fc.cmd_string()
         self.assertEqual(cmd, expected, '\ncmd:      %s\nexpected: %s' % (cmd, expected))
 

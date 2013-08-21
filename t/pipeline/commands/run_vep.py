@@ -1,16 +1,16 @@
 import unittest, sys, os
 from warnings import warn
 
-dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..'))
-sys.path.append(os.path.join(dir, 'lib'))
+root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..','..'))
+sys.path.append(os.path.join(root_dir, 'lib'))
 from Pipeline.run_vep import RunVep
-
-sys.path.append(os.path.join(dir, 't', 'pipeline'))
+from Pipeline.Pipeline import Pipeline
+sys.path.append(os.path.join(root_dir, 't', 'pipeline'))
 
 from Pipeline.host import Host
-host_conf=os.path.join(dir, 'config', 'hosts.conf')
+host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
 host=Host(host_conf, 'clutch')
-working_dir=os.path.join(dir, 'data')
+working_dir=os.path.join(root_dir, 'data')
 
 class TestBasic(unittest.TestCase):
     
@@ -19,7 +19,8 @@ class TestBasic(unittest.TestCase):
 
     def test_vep(self):
     	in_fn='data/trip_neg_Vic/triple_negativ_mut_seq.vep'
-        bt2=RunVep(host, working_dir, in_fn)
+        pipeline=Pipeline('mock', host, working_dir, True)
+        bt2=RunVep(pipeline, in_fn)
         cmd=bt2.cmd_string()
 	print cmd
 

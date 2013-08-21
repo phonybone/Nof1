@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, subprocess
 
 class RunCmd(object):
     '''
@@ -16,15 +16,13 @@ class RunCmd(object):
         self.pipeline=pipeline
 
     def run(self):
-        if self.pipeline.dry_run or self.pipeline.host.get('dry_run').lower()=='true':
+        if self.pipeline.dry_run or self.pipeline.dry_run:
             print '# %s' % self.name
             print self.cmd_string()
             print
             (self.pid, self.status)=(-1,-1)
             return
         
-        print self.cmd_string()
-
         os.chdir(self.pipeline.working_dir) # fixme: make pipeline.run() do this?
 
         # put in something about checking for readability of all input files...
@@ -32,7 +30,6 @@ class RunCmd(object):
         pid=os.fork()
         if pid==0:
             os.execve(self.get_cmd(), self.get_args(), self.get_environ()) # this should never return
-#            raise Exception('%s failed' % '\n'.join(cmd))
             raise CmdFailed(self)
 
         (self.pid, self.status)=os.waitpid(pid, 0)

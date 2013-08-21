@@ -1,3 +1,4 @@
+import os
 from Pipeline import Pipeline
 from .VEPBranch import VEPBranch
 from .RnaseqBranch import RnaseqBranch
@@ -22,10 +23,11 @@ class MainPipeline(Pipeline):
                                 )
 
     def run(self):
+        os.chdir(self.working_dir)
         try:
             self.rnaseq_branch.run()
-            self.vep_branch.run()
-            self.combine.run()
+#            self.vep_branch.run()
+#            self.combine.run()
         except PipelineException, e:
             print e
 

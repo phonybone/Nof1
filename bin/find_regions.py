@@ -20,8 +20,6 @@ def main(args):
         
         row=reader.next()
         current=ChrRange(*row)
-        print 'row is %s' % row
-        print 'current is %s' % current
 
         for row in reader:
             (chr, start, stop)=row
@@ -50,6 +48,7 @@ def main(args):
                 try: stats[cr.chr]['n_regions']+=1
                 except KeyError: stats[cr.chr]['n_regions']=1
 
+    print '\nStats:--------------------------------------------------------'
     for k in sorted(stats.keys()):
         d=stats[k]
         try:

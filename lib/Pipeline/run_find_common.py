@@ -7,12 +7,12 @@ class RunFindCommon(RunCmd):
     '''
     find_common test_rnaseq/rawdata/1047-COPD.10K.genes.count,rnaseq,1,: trip_neg_Vic/triple_negativ_mut_seq.vep.out,vep,4
     '''
-    def __init__(self, host, working_dir, fc_args, arg_delim=','):
+    def __init__(self, pipeline, fc_args, arg_delim=','):
         '''
         each fc_arg must be a dict containing the following keys: fn, alias, field_no, delimiter
         defaults exist (in find_common) for alias (fn), field_no (None), and delimiter (None)
         '''
-        super(RunFindCommon, self).__init__('find_common', host, working_dir)
+        super(RunFindCommon, self).__init__('find_common', pipeline)
         self.arg_delim=arg_delim
 
         self.fc_args=fc_args
@@ -20,7 +20,7 @@ class RunFindCommon(RunCmd):
             raise MissingArgs('fc_args')
 
     def get_cmd(self):
-        return self.host.get('find_common.script')
+        return self.pipeline.host.get('find_common.script')
 
     def get_args(self):
         args=['--out_fn', self.outputs()[0]]
@@ -38,4 +38,4 @@ class RunFindCommon(RunCmd):
         
     def outputs(self):
         l=[os.path.basename(a['fn'].split('.')[0]) for a in self.fc_args]
-        return [os.path.join(self.working_dir, '%s.%s' % ('_'.join(l), self.output_extension))]
+        return [os.path.join(self.pipeline.working_dir, '%s.%s' % ('_'.join(l), self.output_extension))]
