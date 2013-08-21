@@ -23,7 +23,7 @@ class RunCombine(RunCmd):
                                                   self.out_extension))
 
     def get_cmd(self):
-        return 'python'
+        return self.pipeline.host.get('python.exe')
 
     def get_args(self):
         cmd=[self.pipeline.host.get('combine.script'), '\\\n',

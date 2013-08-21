@@ -34,16 +34,6 @@ class TestBasic(unittest.TestCase):
         for l in lines:
             print l
 
-
-        '''
-        self.assertIn('bowtie2', lines[0])
-        self.assertIn(data_basename, lines[0])
-        self.assertIn(ref_index, lines[0])
-
-        self.assertIn('rnaseq_count.py', lines[1])
-        self.assertIn(data_basename, lines[1])
-        '''
-
 if __name__=='__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestBasic)
     unittest.TextTestRunner(verbosity=2).run(suite)

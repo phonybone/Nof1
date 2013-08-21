@@ -18,7 +18,7 @@ class RunMuts2Vep(RunCmd):
         self.poly_fn='%s.%s' % (base,self.poly_extension)
 
     def get_cmd(self):
-        return 'python'
+        return self.pipeline.host.get('python.exe')
 
     def get_args(self):
         cmd=[self.pipeline.host.get('muts2vep.script'), 

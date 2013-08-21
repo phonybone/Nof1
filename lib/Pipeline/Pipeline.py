@@ -1,3 +1,4 @@
+import os, tempfile
 from .exceptions import *
 
 class Pipeline(object):
@@ -15,3 +16,11 @@ class Pipeline(object):
 
     def run(self):
         raise AbstractMethodNotImplementedException('Pipeline.Pipeline.run')
+
+    def _create_output_dir(self):
+        try:
+            with tempfile.TemporaryFile(dir=self.output_dir) as tmp:
+                tmp.write('testing')
+        except OSError, e:
+            os.mkdir(self.output_dir) # fixme: could still fail...
+

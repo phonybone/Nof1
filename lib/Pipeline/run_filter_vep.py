@@ -9,7 +9,7 @@ class RunFilterVep(RunCmd):
         self.vep_out=vep_out
 
     def get_cmd(self):
-        return 'python'
+        return self.pipeline.host.get('python.exe')
 
     def get_args(self):
         output_fn=self.outputs()[0]

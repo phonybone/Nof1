@@ -1,10 +1,10 @@
 import sys, os, csv, re
 libdir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','lib'))
+print 'libdir is %s' % libdir
 sys.path.append(libdir)
 
 from nof1_args import Nof1Args
 import django_env
-import django
 from data.models import Knowngene
 import pyBabel.Client as babel
 
@@ -25,8 +25,8 @@ def main(args):
     print '%d %s genes' % (len(gene2count), args.output_id_type)
 
     # write results:
-    print 'writing results to %s...' % out_fn
-    with open(out_fn, 'w') as f:
+    print 'writing results to %s...' % args.out_fn
+    with open(args.out_fn, 'w') as f:
         for k in sorted(gene2count.keys()):
             f.write('%s: %d\n' % (k, gene2count[k]))
 

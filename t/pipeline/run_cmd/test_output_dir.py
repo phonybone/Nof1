@@ -11,14 +11,15 @@ from writer_cmd import writer_cmd
 host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
 host=Host(host_conf, 'clutch')
 working_dir=os.path.dirname(__file__) or os.path.abspath('.')
+output_dir=os.path.dirname(__file__) or os.path.abspath('./outputs/test_output_dir')
 
 class TestBasic(unittest.TestCase):
     
     def setUp(self):
         pass
 
-    def test_simplest(self):
-        pipeline=Pipeline('mock', host, working_dir)
+    def test_output_dir(self):
+        pipeline=Pipeline('mock', host, working_dir, output_dir=output_dir)
         cmd=writer_cmd('writer', pipeline)
         cmd.run()
 
@@ -35,13 +36,6 @@ class TestBasic(unittest.TestCase):
         os.unlink(cmd._get_stdout())
         os.unlink(cmd._get_stderr())
 
-
-    def _test_bowtie2(self):
-        pipeline=Pipeline('mock', host, working_dir)
-        data_basename='1047-COPD.10K'
-        ref_index='hg19'
-        bt2=RunBowtie2(pipeline, data_basename, ref_index)
-        bt2.run()
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(TestBasic)

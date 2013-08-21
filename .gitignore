@@ -15,3 +15,5 @@ db
 bin/variant_effect_predictor/*
 *.html
 *.txt
+*.stdout
+*.stderr

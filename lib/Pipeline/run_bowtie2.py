@@ -1,3 +1,4 @@
+import os
 from .run_cmd import RunCmd
 
 class RunBowtie2(RunCmd):
@@ -11,10 +12,11 @@ class RunBowtie2(RunCmd):
         return self.pipeline.host.get('bowtie2.exe')
 
     def get_args(self):
+        index_path=os.path.join(self.pipeline.host.get('bowtie2.index_dir'), self.ref_index)
         input1='%s_1.fastq' % self.data_basename
         input2='%s_2.fastq' % self.data_basename
         output=self.outputs()[0]
-        cmd=[self.ref_index, 
+        cmd=[index_path,
              '-p', self.pipeline.host.get('n_procs'),
              '-1', input1, 
              '-2', input2, 
@@ -22,7 +24,7 @@ class RunBowtie2(RunCmd):
         return cmd
     
     def get_environ(self):
-        return {'bt2_indexes' : self.pipeline.host.get('bowtie2.index_dir')}
+        return {'BT2_INDEXES' : self.pipeline.host.get('bowtie2.index_dir')}
 
     def outputs(self):
         return ['%s.bt2.sam' % self.data_basename]

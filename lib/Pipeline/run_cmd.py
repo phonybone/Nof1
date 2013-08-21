@@ -1,4 +1,4 @@
-import os, sys, subprocess
+import os, sys, subprocess, tempfile
 from datetime import datetime
 from lazy import lazy
 
@@ -18,7 +18,7 @@ class RunCmd(object):
     def _ts(self):
         return datetime.now()
 
-    _ts_format='%Y%b%d.%H:%m:%S'
+    _ts_format='%Y%b%d.%H.%m.%S'
 
     def __init__(self, name, pipeline):
         self.name=name
@@ -33,6 +33,7 @@ class RunCmd(object):
             return
         
         os.chdir(self.pipeline.working_dir) 
+
         # fixme: make pipeline.run() do this?
         #   or keep this, so that individual cmds can set their own working_dir?
 
@@ -44,7 +45,12 @@ class RunCmd(object):
         cmd=[self.get_cmd()]
         cmd.extend(self.get_args())
         retcode=subprocess.call(cmd, env=self.get_environ(),
-                                stdout=new_stdout, stderr=new_stderr)
+                                stdout=new_stdout, stderr=new_stderr,
+                                )
+        new_stdout.close()      # don't know if these are necessary or not...
+        new_stderr.close()      # ...but they don't seem to hurt
+
+        self.retcode=retcode
         return retcode
 
 
