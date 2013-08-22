@@ -1,4 +1,4 @@
-import os, sys, subprocess, tempfile
+import os, sys, subprocess, tempfile, logging
 from datetime import datetime
 from lazy import lazy
 
@@ -24,15 +24,23 @@ class RunCmd(object):
         self.name=name
         self.pipeline=pipeline
 
+    log=logging.getLogger('Pipeline')
+
     def run(self):
-        if self.pipeline.dry_run or self.pipeline.dry_run:
+        self.log.info('')
+        self.log.info('running %s' % self.name)
+        self.log.info('dry_run is %s' % self.pipeline.dry_run)
+        if self.pipeline.dry_run:
             print '# %s' % self.name
             print self.cmd_string()
             print
             (self.pid, self.status)=(-1,-1)
-            return
+            self.log.info('bye!')
+            return 0            # success!
         
         os.chdir(self.pipeline.working_dir) 
+        self.log.info("chdir\'d to %s" % self.pipeline.working_dir)
+        self.log.info(self.cmd_string())
 
         # fixme: make pipeline.run() do this?
         #   or keep this, so that individual cmds can set their own working_dir?
@@ -47,6 +55,7 @@ class RunCmd(object):
         retcode=subprocess.call(cmd, env=self.get_environ(),
                                 stdout=new_stdout, stderr=new_stderr,
                                 )
+        self.log.info('retcode=%d' % retcode)
         new_stdout.close()      # don't know if these are necessary or not...
         new_stderr.close()      # ...but they don't seem to hurt
 

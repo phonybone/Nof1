@@ -22,6 +22,7 @@ class Nof1Args(object):
                             default=conf.get('DEFAULT', 'db_name'))
         parser.add_argument('-v', action='store_true', help='verbose')
         parser.add_argument('-d', action='store_true', help='debugging flag')
+        parser.add_argument('--log', default='INFO', help='log level')
         self.parser=parser
 
         try:

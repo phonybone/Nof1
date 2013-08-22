@@ -6,7 +6,7 @@ from .run_filter_vep import RunFilterVep
 class VEPBranch(Pipeline):
     def __init__(self, host, working_dir, variants_fn, dry_run=False, output_dir=None):
         super(VEPBranch, self).__init__('VepBranch', host, working_dir, 
-                                        dry_run, output_dir)
+                                        output_dir, dry_run=dry_run)
         self.variants_fn=variants_fn
 
         self.m2v=RunMuts2Vep(self, variants_fn)
@@ -14,9 +14,7 @@ class VEPBranch(Pipeline):
         self.filter_vep=RunFilterVep(self, self.vep.outputs()[0])
 
     def run(self):
-        self.m2v.run()
-        self.vep.run()
-        self.filter_vep.run()
+        self._run_cmds(self.m2v, self.vep, self.filter_vep)
 
     def outputs(self):
         auto=self.m2v.outputs()[0]

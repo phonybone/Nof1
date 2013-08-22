@@ -1,17 +1,9 @@
-import unittest, sys, os, re
+import unittest, sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+
+from pipeline import *
+from Pipeline.Nof1Pipeline import Nof1Pipeline
 from cStringIO import StringIO
-from warnings import warn
-
-root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..'))
-sys.path.append(os.path.join(root_dir, 'lib'))
-
-from Pipeline.MainPipeline import MainPipeline
-
-
-from Pipeline.host import Host
-host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
-host=Host(host_conf, 'clutch')
-working_dir=os.path.join(root_dir, 'data')
 
 class TestBasic(unittest.TestCase):
     
@@ -27,7 +19,8 @@ class TestBasic(unittest.TestCase):
         old_stdout=sys.stdout
         sys.stdout=mystdout=StringIO()
         
-        MainPipeline(host, working_dir, data_basename, ref_index, variants_fn).run()
+        p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, dry_run=True)
+        p.run()
         sys.stdout=old_stdout
             
         lines=mystdout.getvalue().split('\n')

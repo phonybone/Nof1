@@ -16,7 +16,8 @@ class RnaseqBranch(Pipeline):
                  ref_index,
                  dry_run=False,
                  output_dir=None):
-        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir, dry_run, output_dir)
+        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir, output_dir, 
+                                           dry_run=dry_run)
         self.data_basename=data_basename
         self.ref_index=ref_index
         self.host=host
@@ -27,19 +28,7 @@ class RnaseqBranch(Pipeline):
         
 
     def run(self):
-        try:
-            retcode=self.bt2.run()
-            print 'retcode is %s' % retcode
-            if retcode != 0:
-                raise CmdFailed(self.bt2)
-            retcode=self.rc.run()
-            print 'retcode is %s' % retcode
-            if retcode != 0:
-                raise CmdFailed(self.rc)
-        except CmdFailed, e:
-            print "this failed (retcode=%d):\n%s" % (e.run_cmd.retcode, e.run_cmd.cmd_string())
-            print "see %s for details" % e.run_cmd._get_stderr()
-            raise PipelineFailed(self, e)
+        self._run_cmds(self.bt2, self.rc)
 
     def outputs(self):
         return self.rc.outputs()
