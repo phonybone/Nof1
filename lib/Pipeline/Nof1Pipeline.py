@@ -10,22 +10,27 @@ from .exceptions import *
 class Nof1Pipeline(Pipeline):
     log=logging.getLogger(__name__)
     def __init__(self, host, working_dir, data_basename, ref_index, variants_fn, 
-                 dry_run=False, output_dir=None, echo=False):
-        super(Nof1Pipeline, self).__init__('Main', host, working_dir, output_dir=output_dir, dry_run=dry_run, echo=echo)
+                 dry_run=False, output_dir=None, echo=False, skip_if_current=False):
+        super(Nof1Pipeline, self).__init__('Main', host, working_dir, 
+                                           output_dir=output_dir, dry_run=dry_run, echo=echo, 
+                                           skip_if_current=skip_if_current)
         self.data_basename=data_basename
         self.ref_index=ref_index
         self.variants_fn=variants_fn
         
         self.rnaseq_branch=RnaseqBranch(host, working_dir, data_basename, ref_index, 
-                                        dry_run=dry_run, output_dir=output_dir, echo=echo)
+                                        dry_run=dry_run, output_dir=output_dir, echo=echo,
+                                        skip_if_current=skip_if_current)
 
         self.vep_branch=VEPBranch(host, working_dir, variants_fn,
-                                  dry_run=dry_run, output_dir=output_dir, echo=echo)
+                                  dry_run=dry_run, output_dir=output_dir, echo=echo,
+                                  skip_if_current=skip_if_current)
         
         self.combine=RunCombine(self,
                                 self.rnaseq_branch.outputs()[0], # .genes.count
                                 self.vep_branch.outputs()[0],    # .auto
-                                self.vep_branch.outputs()[1],    # .vep.filtered
+                                self.vep_branch.outputs()[1],    # .vep.out.filtered
+                                skip_if_current=skip_if_current,
                                 )
 
 
@@ -38,7 +43,7 @@ class Nof1Pipeline(Pipeline):
         try:
             self.rnaseq_branch.run()
             self.vep_branch.run()
-            self.combine.run()
+            self._run_cmds(self.combine)
         except PipelineException, e:
             self.log.exception(e)
             print e

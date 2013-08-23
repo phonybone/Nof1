@@ -11,11 +11,12 @@ class TestBasic(unittest.TestCase):
         print
 
     def test_cmd(self):
-        data_basename='data/test_rnaseq/rawdata/1047-COPD.10K'
+        data_basename='test_rnaseq/rawdata/1047-COPD.10K'
         ref_index='hg19'
-    	variants_fn='data/trip_neg_Vic/triple_negativ_mut_seq'
+    	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
 
-        p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, dry_run=True)
+        p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, 
+                       dry_run=True, skip_if_current=True)
         p.run()
 
 

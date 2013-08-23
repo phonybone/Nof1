@@ -20,11 +20,13 @@ def main(args):
     
     # return intersection(union(auto, poly_sift), rnaseq)
     genes=(auto | polyphen_sift) & rnaseq # set ops, wheeee!
-    with open(args.out_fn) as f:
+    with open(args.out_fn, 'w') as f:
         for g in genes:
             print g
-    if args.v: print '%s written' % args.out_fn
-
+    if args.v: 
+        print '%s written' % args.out_fn
+        print 'returning 0'
+    return 0
 
 
 
@@ -61,4 +63,4 @@ def get_polyphen_sift(args, babel_client):
 if __name__=='__main__':
     config_fn=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'nof1.conf'))
     args=Nof1Args(config_fn, 'combine the results of the RnaseqCount branch and the VEP branch', 'combine_rnaseq_vep')
-    main(args.args)
+    sys.exit(main(args.args))

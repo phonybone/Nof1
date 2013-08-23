@@ -4,22 +4,25 @@ from .exceptions import *
 class Pipeline(object):
     log=logging.getLogger(__name__)
 
-    def __init__(self, name, host, working_dir, dry_run=False, output_dir=None, echo=False):
+    def __init__(self, name, host, working_dir, 
+                 dry_run=False, output_dir=None, echo=False, skip_if_current=False):
         self.name=name
         self.host=host
         self.working_dir=working_dir
         self.output_dir=output_dir or working_dir
         self.dry_run=dry_run
         self.echo=echo
+        self.skip_if_current=skip_if_current
 
     def __repr__(self):
-        return 'Pipeline %s: host=%s working_dir=%s output_dir=%s dry_run=%s echo=%s' % (
+        return 'Pipeline %s: host=%s working_dir=%s output_dir=%s dry_run=%s echo=%s skip=%s' % (
             self.name, 
             self.host,
             self.working_dir,
             self.output_dir,
             self.dry_run,
             self.echo,
+            self.skip_if_current,
             )
 
     def run(self):
@@ -28,19 +31,20 @@ class Pipeline(object):
     def _run_cmd(self, cmd):
             retcode=cmd.run()
             if retcode != 0:
-                self.log.debug('%s failed (retcode=%s), throwing exception' % (cmd.name, retcode))
+                self.log.info('%s failed (retcode=%s), throwing exception' % (cmd.name, retcode))
                 raise CmdFailed(cmd)
         
     def _run_cmds(self, *cmds):
         try:
             for cmd in cmds:
-                self.log.debug('about to run %s' % cmd.name)
                 self._run_cmd(cmd)
-                self.log.debug('%s returned' % cmd.name)
         except CmdFailed, e:
             try: retcode=e.run_cmd.retcode
             except: retcode=None
             self.log.error("this failed (retcode=%s):\n%s" % (retcode, e.run_cmd.cmd_string()))
+            self.log.error("Envrionment:")
+            for k,v in e.run_cmd._build_environ().items():
+                self.log.error("env: %s: %s" % (k,v))
             self.log.error("see %s for details" % e.run_cmd._get_stderr())
             raise PipelineFailed(self, e)
 

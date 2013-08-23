@@ -16,14 +16,16 @@ class RnaseqBranch(Pipeline):
                  ref_index,
                  dry_run=False,
                  output_dir=None,
-                 echo=False):
+                 echo=False,
+                 skip_if_current=False):
         super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir, 
-                                           output_dir=output_dir, dry_run=dry_run, echo=echo)
+                                           output_dir=output_dir, dry_run=dry_run, echo=echo,
+                                           skip_if_current=skip_if_current)
         self.data_basename=data_basename
         self.ref_index=ref_index
 
-        self.bt2=RunBowtie2(self, data_basename, ref_index)
-        self.rc=RunRnaseqCount(self, data_basename)
+        self.bt2=RunBowtie2(self, data_basename, ref_index, skip_if_current)
+        self.rc=RunRnaseqCount(self, data_basename, skip_if_current)
         
 
     def run(self):

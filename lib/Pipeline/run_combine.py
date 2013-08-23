@@ -7,9 +7,11 @@ class RunCombine(RunCmd):
     out_extension='.combined'
     def __init__(self, pipeline,
                  gene_counts_fn, auto_fn, polyphen_sift_fn,
-                 out_fn=None
+                 out_fn=None,
+                 skip_if_current=False,
                  ):
-        super(RunCombine, self).__init__('combine rnaseq and vep', pipeline)
+        super(RunCombine, self).__init__('combine_rnaseq_vep', pipeline, 
+                                         skip_if_current=skip_if_current)
         self.gene_counts_fn=gene_counts_fn
         self.auto_fn=auto_fn
         self.polyphen_sift_fn=polyphen_sift_fn
@@ -26,16 +28,19 @@ class RunCombine(RunCmd):
         return self.pipeline.host.get('python.exe')
 
     def get_args(self):
-        cmd=[self.pipeline.host.get('combine.script'), '\\\n',
-             self.gene_counts_fn, '\\\n',
-             self.auto_fn, '\\\n' ,
-             self.polyphen_sift_fn, '\\\n',
+        cmd=[self.pipeline.host.get('combine.script'), 
+             self.gene_counts_fn,
+             self.auto_fn,
+             self.polyphen_sift_fn,
              '--out_fn', self.out_fn,
              ]
         return cmd
     
     def get_environ(self):
         return {}
+
+    def inputs(self):
+        return [self.gene_counts_fn, self.auto_fn, self.polyphen_sift_fn]
 
     def outputs(self):
         return [self.out_fn]

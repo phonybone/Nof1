@@ -4,14 +4,16 @@ from .run_muts2vep import RunMuts2Vep
 from .run_filter_vep import RunFilterVep
 
 class VEPBranch(Pipeline):
-    def __init__(self, host, working_dir, variants_fn, dry_run=False, output_dir=None, echo=False):
+    def __init__(self, host, working_dir, variants_fn, 
+                 dry_run=False, output_dir=None, echo=False, skip_if_current=False):
         super(VEPBranch, self).__init__('VepBranch', host, working_dir, 
-                                        output_dir=output_dir, dry_run=dry_run, echo=echo)
+                                        output_dir=output_dir, dry_run=dry_run, echo=echo,
+                                        skip_if_current=skip_if_current)
         self.variants_fn=variants_fn
 
-        self.m2v=RunMuts2Vep(self, variants_fn)
-        self.vep=RunVep(self, self.m2v.outputs()[1])
-        self.filter_vep=RunFilterVep(self, self.vep.outputs()[0])
+        self.m2v=RunMuts2Vep(self, variants_fn, skip_if_current)
+        self.vep=RunVep(self, self.m2v.outputs()[1], skip_if_current)
+        self.filter_vep=RunFilterVep(self, self.vep.outputs()[0], skip_if_current)
 
     def run(self):
         self._run_cmds(self.m2v, 
