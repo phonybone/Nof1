@@ -4,18 +4,23 @@ from .exceptions import *
 class Pipeline(object):
     log=logging.getLogger(__name__)
 
-    def __init__(self, name, host, working_dir, logger, dry_run=False, output_dir=None):
+    def __init__(self, name, host, working_dir, dry_run=False, output_dir=None, echo=False):
         self.name=name
         self.host=host
         self.working_dir=working_dir
-        self.logger=logger
         self.output_dir=output_dir or working_dir
         self.dry_run=dry_run
+        self.echo=echo
 
     def __repr__(self):
-        return 'Pipeline %s: working_dir=%s' % (
+        return 'Pipeline %s: host=%s working_dir=%s output_dir=%s dry_run=%s echo=%s' % (
             self.name, 
-            self.working_dir)
+            self.host,
+            self.working_dir,
+            self.output_dir,
+            self.dry_run,
+            self.echo,
+            )
 
     def run(self):
         raise AbstractMethodNotImplementedException('Pipeline.Pipeline.run')
@@ -35,8 +40,8 @@ class Pipeline(object):
         except CmdFailed, e:
             try: retcode=e.run_cmd.retcode
             except: retcode=None
-            self.log.info("this failed (retcode=%s):\n%s" % (retcode, e.run_cmd.cmd_string()))
-            self.log.info("see %s for details" % e.run_cmd._get_stderr())
+            self.log.error("this failed (retcode=%s):\n%s" % (retcode, e.run_cmd.cmd_string()))
+            self.log.error("see %s for details" % e.run_cmd._get_stderr())
             raise PipelineFailed(self, e)
 
 
@@ -46,4 +51,4 @@ class Pipeline(object):
                 tmp.write('testing')
         except OSError, e:
             os.mkdir(self.output_dir) # fixme: could still fail...
-
+            self.log.info('output_dir: %s created' % self.output_dir)

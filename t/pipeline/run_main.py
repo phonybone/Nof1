@@ -16,7 +16,7 @@ class TestBasic(unittest.TestCase):
     	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
 
         Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn,
-                     output_dir=output_dir).run()
+                     output_dir=output_dir, echo=True).run()
             
 
 if __name__=='__main__':

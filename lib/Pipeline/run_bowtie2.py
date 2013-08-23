@@ -24,7 +24,9 @@ class RunBowtie2(RunCmd):
         return cmd
     
     def get_environ(self):
-        return {'BT2_INDEXES' : self.pipeline.host.get('bowtie2.index_dir')}
+        env=super(RunBowtie2, self).get_environ()
+        env.update({'BT2_INDEXES' : self.pipeline.host.get('bowtie2.index_dir')})
+        return env
 
     def outputs(self):
         return ['%s.bt2.sam' % self.data_basename]

@@ -27,16 +27,15 @@ class RunCmd(object):
     log=logging.getLogger('Pipeline')
 
     def run(self):
-        self.log.info('')
         self.log.info('running %s' % self.name)
-        self.log.info('dry_run is %s' % self.pipeline.dry_run)
-        if self.pipeline.dry_run:
+        if self.pipeline.dry_run or self.pipeline.echo:
             print '# %s' % self.name
             print self.cmd_string()
             print
-            (self.pid, self.status)=(-1,-1)
-            self.log.info('bye!')
-            return 0            # success!
+            if self.pipeline.dry_run:
+                (self.pid, self.status)=(-1,-1)
+                self.log.info('dry_run is True: bye!')
+                return 0            # success!
         
         os.chdir(self.pipeline.working_dir) 
         self.log.info("chdir\'d to %s" % self.pipeline.working_dir)
@@ -85,7 +84,7 @@ class RunCmd(object):
         return ' '.join(stuff)
 
     def get_environ(self):
-        return {}
-
+        env={'HOME':os.environ['HOME']}
+        return env
 
         
