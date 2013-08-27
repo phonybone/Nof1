@@ -21,6 +21,7 @@ class TestBasic(unittest.TestCase):
         ref_index='hg19'
         bt2=RunBowtie2(pipeline, data_basename, ref_index)
         cmd=bt2.cmd_string()
+        print cmd
 
         self.assertIn('bowtie2', cmd)
         self.assertIn(ref_index, cmd)

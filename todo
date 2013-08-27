@@ -1,0 +1,4 @@
+Implement LinearPipeline
+- has list of run_cmds
+- runs each, does checking for retcode, throws exceptions, etc
+

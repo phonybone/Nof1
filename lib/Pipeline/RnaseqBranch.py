@@ -14,24 +14,23 @@ class RnaseqBranch(Pipeline):
                  working_dir,   # directory to cd to; pathnames can be rel to this
                  data_basename, 
                  ref_index,
-                 dry_run=None):
-        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir, dry_run)
+                 dry_run=False,
+                 output_dir=None,
+                 echo=False,
+                 skip_if_current=False):
+        super(RnaseqBranch, self).__init__('RnaseqBranch', host, working_dir, 
+                                           output_dir=output_dir, dry_run=dry_run, echo=echo,
+                                           skip_if_current=skip_if_current)
         self.data_basename=data_basename
         self.ref_index=ref_index
-        self.host=host
-        self.working_dir=working_dir
 
-        self.bt2=RunBowtie2(self, data_basename, ref_index)
-        self.rc=RunRnaseqCount(self, data_basename)
+        self.bt2=RunBowtie2(self, data_basename, ref_index, skip_if_current)
+        self.rc=RunRnaseqCount(self, data_basename, skip_if_current)
         
 
     def run(self):
-        try:
-            self.bt2.run()
-            self.rc.run()
-        except CmdFailed, e:
-            print "this failed:\n%s" % e.cmd_string()
-            raise PipelineFailed(self, e)
+        self._run_cmds(self.bt2, 
+                       self.rc)
 
     def outputs(self):
         return self.rc.outputs()

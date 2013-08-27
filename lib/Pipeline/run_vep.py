@@ -10,8 +10,8 @@ class RunVep(RunCmd):
     to convert
     '''
 
-    def __init__(self, pipeline, variants_fn):
-        super(RunVep, self).__init__('vep', pipeline)
+    def __init__(self, pipeline, variants_fn, skip_if_current=False):
+        super(RunVep, self).__init__('vep', pipeline, skip_if_current=skip_if_current)
         self.variants_fn=variants_fn
 
     def get_cmd(self):
@@ -28,10 +28,10 @@ class RunVep(RunCmd):
              '--sift', 'p',
              '-o', output_fn]
         return cmd
-    
-    def get_environ(self):
-        return {}
         
+    def inputs(self):
+        return [self.variants_fn]
+
     def outputs(self):
         return [os.path.splitext(self.variants_fn)[0] + self.output_extension] # also a .html file!
     

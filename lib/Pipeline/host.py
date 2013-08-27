@@ -28,13 +28,16 @@ class Host(object):
                 hn=hostname if hostname else 'localhost (%s)' % gethostname()
                 raise NoSectionError(hn)
 
+    def __str__(self):
+        return self.hostname
+
+
     # trying to figure out how to wrap self.config functions, but also use
     # a decorator to give them an extra section argument...  All without
     # having to list each function by name... Want to this on getint, getfloat,
     # getboolean, items, etc.
 
     def get(self, key):
-        print 'getting %s:%s' % (self.hostname, key)
         return self.config.get(self.hostname, key)
 
     def set(self, key, value):
