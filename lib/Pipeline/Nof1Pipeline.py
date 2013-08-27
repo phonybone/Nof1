@@ -40,13 +40,10 @@ class Nof1Pipeline(Pipeline):
         os.chdir(self.working_dir)
         self._create_output_dir()
 
-        try:
-            self.rnaseq_branch.run()
-            self.vep_branch.run()
-            self._run_cmds(self.combine)
-        except PipelineException, e:
-            self.log.exception(e)
-            print e
+
+        self.rnaseq_branch.run()
+        self.vep_branch.run()
+        self._run_cmds(self.combine)
 
         self.log.info('ended: %s' % str(datetime.now()))
 

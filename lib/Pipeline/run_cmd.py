@@ -55,8 +55,8 @@ class RunCmd(object):
 
         # put in something about checking for readability of all input files...
 
-        new_stdout=open(self._get_stdout(), 'w')
-        new_stderr=open(self._get_stderr(), 'w')
+        new_stdout=open(self.get_stdout(), 'w')
+        new_stderr=open(self.get_stderr(), 'w')
 
         cmd=[self.get_cmd()]
         cmd.extend(self.get_args())
@@ -84,7 +84,6 @@ class RunCmd(object):
         try: env=self.get_envrion()
         except AttributeError: env={}
         env.update({'HOME':os.environ['HOME']})
-        self.log.info('%s: _build_environ returning %s' % (self.name, env))
         return env
 
 #    def outputs(self):
@@ -123,11 +122,11 @@ class RunCmd(object):
         return os.path.join(self.pipeline.output_dir,
                             '%s.%s.%s' % (self.name, self._ts.strftime(self._ts_format), fn_type))
 
-    def _get_stdout(self):
+    def get_stdout(self):
         ''' return the name of the file to which to redirect stdout '''
         return self.__get_output_fn('stdout')
                             
-    def _get_stderr(self):
+    def get_stderr(self):
         ''' return the name of the file to which to redirect stderr '''
         return self.__get_output_fn('stderr')
 

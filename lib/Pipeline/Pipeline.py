@@ -45,8 +45,8 @@ class Pipeline(object):
             self.log.error("Envrionment:")
             for k,v in e.run_cmd._build_environ().items():
                 self.log.error("env: %s: %s" % (k,v))
-            self.log.error("see %s for details" % e.run_cmd._get_stderr())
-            raise PipelineFailed(self, e)
+            self.log.error("see %s for details" % e.run_cmd.get_stderr())
+            raise PipelineFailed(self, cmd, e)
 
 
     def _create_output_dir(self):

@@ -11,8 +11,9 @@ class MissingArgs(PipelineException):
     pass
 
 class PipelineFailed(PipelineException):
-    def __init__(self, pipeline, exp):
+    def __init__(self, pipeline, cmd, exp):
         self.pipeline=pipeline
+        self.cmd=cmd
         self.exp=exp
 
 class CmdFailed(PipelineException):
