@@ -1,16 +1,9 @@
 import unittest, sys, os
-from warnings import warn
 
-root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..','..'))
-sys.path.append(os.path.join(root_dir, 'lib'))
-from Pipeline.run_vep import RunVep
-from Pipeline.Pipeline import Pipeline
-sys.path.append(os.path.join(root_dir, 't', 'pipeline'))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from pipeline import *
 
-from Pipeline.host import Host
-host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
-host=Host(host_conf, 'clutch')
-working_dir=os.path.join(root_dir, 'data')
+from Nof1Pipeline.run_vep import RunVep
 
 class TestBasic(unittest.TestCase):
     

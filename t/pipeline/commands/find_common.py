@@ -1,14 +1,9 @@
 import unittest, sys, os, re
-from warnings import warn
 
-dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..','..'))
-sys.path.append(os.path.join(dir, 'lib'))
-from Pipeline.run_find_common import RunFindCommon
-from Pipeline.Pipeline import Pipeline
-from Pipeline.host import Host
-host_conf=os.path.join(dir, 'config', 'hosts.conf')
-host=Host(host_conf, 'clutch')
-working_dir=os.path.join(dir, 'data')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from pipeline import *
+
+from Nof1Pipeline.run_find_common import RunFindCommon
 
 class TestBasic(unittest.TestCase):
     
@@ -38,7 +33,6 @@ class TestBasic(unittest.TestCase):
         
 
 if __name__ == '__main__':
-#    unittest.main()
     suite = unittest.TestLoader().loadTestsFromTestCase(TestBasic)
     unittest.TextTestRunner(verbosity=2).run(suite)
 

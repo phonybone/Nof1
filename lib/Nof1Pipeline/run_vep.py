@@ -1,5 +1,5 @@
 import os
-from .run_cmd import RunCmd
+from Pipeline.run_cmd import RunCmd
 
 class RunVep(RunCmd):
     output_extension=".vep.out"

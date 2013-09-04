@@ -1,7 +1,7 @@
-from Pipeline import Pipeline
+from Pipeline.Pipeline import Pipeline
 from .run_bowtie2 import RunBowtie2
 from .run_rnaseq_count import RunRnaseqCount
-from .exceptions import *
+from Pipeline.exceptions import *
 
 class RnaseqBranch(Pipeline):
     '''

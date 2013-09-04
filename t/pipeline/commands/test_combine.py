@@ -1,14 +1,10 @@
 import unittest, sys, os, re
 from warnings import warn
 
-root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__),'..','..','..'))
-sys.path.append(os.path.join(root_dir, 'lib'))
-from Pipeline.run_combine import RunCombine
-from Pipeline.Pipeline import Pipeline
-from Pipeline.host import Host
-host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
-host=Host(host_conf, 'clutch')
-working_dir=os.path.join(root_dir, 'data')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+from pipeline import *
+
+from Nof1Pipeline.run_combine import RunCombine
 
 class TestBasic(unittest.TestCase):
     

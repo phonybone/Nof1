@@ -1,5 +1,5 @@
 import os
-from .run_cmd import RunCmd
+from Pipeline.run_cmd import RunCmd
 from run_rnaseq_count import RunRnaseqCount
 from run_muts2vep import RunMuts2Vep
 

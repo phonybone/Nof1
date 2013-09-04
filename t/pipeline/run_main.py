@@ -2,8 +2,8 @@ import unittest, sys, os, argparse
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from pipeline import *
-from Pipeline.Nof1Pipeline import Nof1Pipeline
-from Pipeline.exceptions import *
+from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
+from Nof1Pipeline.exceptions import *
 
 class TestBasic(unittest.TestCase):
     

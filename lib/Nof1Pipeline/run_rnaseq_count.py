@@ -1,4 +1,4 @@
-from .run_cmd import RunCmd
+from Pipeline.run_cmd import RunCmd
 
 class RunRnaseqCount(RunCmd):
     output_extension='genes.count'

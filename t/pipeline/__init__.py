@@ -6,6 +6,7 @@ sys.path.append(root_dir)
 sys.path.append(os.path.join(root_dir, 'lib'))
 
 
+from Pipeline.Pipeline import Pipeline
 from Pipeline.host import Host
 host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
 host=Host(host_conf, 'clutch')

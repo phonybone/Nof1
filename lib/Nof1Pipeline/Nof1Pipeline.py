@@ -1,14 +1,14 @@
 import os, tempfile, logging
 from datetime import datetime
 
-from .Pipeline import Pipeline
+from Pipeline.Pipeline import Pipeline
 from .VEPBranch import VEPBranch
 from .RnaseqBranch import RnaseqBranch
 from .run_combine import RunCombine
-from .exceptions import *
+from Pipeline.exceptions import *
 
 class Nof1Pipeline(Pipeline):
-    log=logging.getLogger(__name__)
+    log=logging.getLogger('Pipeline')
     def __init__(self, host, working_dir, data_basename, ref_index, variants_fn, 
                  dry_run=False, output_dir=None, echo=False, skip_if_current=False):
         super(Nof1Pipeline, self).__init__('Main', host, working_dir, 

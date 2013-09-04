@@ -1,6 +1,6 @@
 import os
-from .run_cmd import RunCmd
-from .exceptions import MissingArgs
+from Pipeline.run_cmd import RunCmd
+from Pipeline.exceptions import MissingArgs
 
 class RunFindCommon(RunCmd):
     output_extension="common"

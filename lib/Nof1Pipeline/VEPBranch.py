@@ -1,4 +1,4 @@
-from Pipeline import Pipeline
+from Pipeline.Pipeline import Pipeline
 from .run_vep import RunVep
 from .run_muts2vep import RunMuts2Vep
 from .run_filter_vep import RunFilterVep
