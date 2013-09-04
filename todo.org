@@ -1,0 +1,9 @@
+* Implement LinearPipeline
+- replaced with Pipeline._run_cmds
+- has list of run_cmds
+- runs each, does checking for retcode, throws exceptions, etc
+
+* Provenance
+- Incorporate Pipeline/* into django as a new application
+- Read up on project-independent django applications
+
