@@ -12,5 +12,5 @@ OUTPUT="-S ${input}.bt2.sam"
 fuse_opt='-qupto 100000'
 
 echo bowtie2 ${index} -q ${THREADS} ${INPUT} ${OUTPUT}
-time bowtie2 ${index} -q ${THREADS} ${INPUT} ${OUTPUT}
+#time bowtie2 ${index} -q ${THREADS} ${INPUT} ${OUTPUT}
 
