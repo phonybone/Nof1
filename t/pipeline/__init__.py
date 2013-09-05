@@ -13,5 +13,4 @@ host=Host(host_conf, 'clutch')
 working_dir=os.path.join(root_dir, 'data')
 output_dir=os.path.join(root_dir, 'outputs')
 
-logging.config.fileConfig(os.path.join(root_dir, 't', 'pipeline', 'logging.conf'))
 log=logging.getLogger('Pipeline')

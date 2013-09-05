@@ -120,6 +120,11 @@ class Nof1Args(object):
     def find_regions(self, parser):
         parser.add_argument('--delimiter', default='\t')
 
+    def variant_count(self, parser):
+        parser.add_argument('--variant_fn', default='data/trip_neg_Vic/triple_negativ_mut_seq')
+        parser.add_argument('--rnaseq_fn', default='data/test_rnaseq/rawdata/1047-COPD.bt2.sam')
+        
+
 if __name__=='__main__':
     args=Nof1Args('nof1.conf', 'testing Nof1')
     print args.args

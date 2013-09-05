@@ -1,8 +1,8 @@
 import unittest, sys, os
-from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
 
-sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
 from pipeline import *
+from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
 
 class TestBasic(unittest.TestCase):
     
