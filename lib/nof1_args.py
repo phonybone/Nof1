@@ -15,14 +15,18 @@ class Nof1Args(object):
         parser.add_argument('--fuse', dest='fuse', default=-1, type=int,
                             help='internal fuse for debugging')
         parser.add_argument('--in_fn', help='input file')
+        parser.add_argument('--out_fn', help='output file', nargs='?')
         parser.add_argument('--collection_name', help='collection name', 
                             default=self.conf_val(name, 'collection'))
         parser.add_argument('--db_name', help='database name',
                             default=conf.get('DEFAULT', 'db_name'))
+        parser.add_argument('-v', action='store_true', help='verbose')
+        parser.add_argument('-d', action='store_true', help='debugging flag')
+        parser.add_argument('--log', default='INFO', help='log level')
         self.parser=parser
 
         try:
-            getattr(self, name)(parser)
+            getattr(self, name)(parser) # get the function named 'name' and call it with parser as arg
         except Exception, e:
             print 'caught "%s" on attempt to call %s' % (e, name)
 
@@ -87,7 +91,8 @@ class Nof1Args(object):
         parser.add_argument('--clear_table', action='store_true')
 
     def extract_trip_neg_details(self, parser):
-        pass
+        parser.add_argument('--auto_fn', help='auto-excepted variants filename')
+        parser.add_argument('--poly_fn', help='poly-excepted variants filename')
 
     def rnaseq_count(self, parser):
         ucsc2ll=os.path.join(root_dir, 'data/ucsc/ucsc_kg2ll')
@@ -104,7 +109,21 @@ class Nof1Args(object):
         parser.add_argument('--kg', default=os.path.join(root_dir, 'data/ucsc/knownGene.txt'))
         parser.add_argument('--babel', default=os.path.join(root_dir, 'data/ucsc/ucsc_kg2entrez2sym.tsv'))
 
+    def filter_vep(self, parser):
+        pass
 
+    def combine_rnaseq_vep(self, parser):
+        parser.add_argument('gene_counts_fn')
+        parser.add_argument('auto_fn')
+        parser.add_argument('polyphen_sift_fn')
+
+    def find_regions(self, parser):
+        parser.add_argument('--delimiter', default='\t')
+
+    def variant_count(self, parser):
+        parser.add_argument('--variant_fn', default='data/trip_neg_Vic/triple_negativ_mut_seq')
+        parser.add_argument('--rnaseq_fn', default='data/test_rnaseq/rawdata/1047-COPD.bt2.sam')
+        
 
 if __name__=='__main__':
     args=Nof1Args('nof1.conf', 'testing Nof1')

@@ -14,9 +14,13 @@ class Drug(models.Model):
     def __unicode__(self):
         return 'drug %s (%s, %s, %s)' % (self.name, self.id, self.primary_acc, self.src)
                
+
 class DrugSynonym(models.Model):
     drug=models.ForeignKey(Drug)
     synonym=models.CharField(max_length=20)
+
+    def __unicode__(self):
+        return '%s -> %s' % (self.drug, self.synonym)
 
 class DrugPathway(models.Model):
     name = models.CharField(max_length=50)

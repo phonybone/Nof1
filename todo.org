@@ -1,0 +1,19 @@
+* Implement LinearPipeline
+- replaced with Pipeline._run_cmds
+- has list of run_cmds
+- runs each, does checking for retcode, throws exceptions, etc
+
+* Provenance
+- Incorporate Pipeline/* into django as a new application
+- Read up on project-independent django applications
+
+* API Improvements
+Currently, the process to create a new pipeline from scratch goes 
+something like this: 
+- Write a class for each command, derived from RunCmd, and implementing
+  each of get_cmd(), get_args(), get_environ(), inputs(), and outputs()
+- Write a class for each branch of the pipeline, derived from Pipeline, 
+  and implementing run() and outputs().
+- define a hosts.conf file, since Pipeline demands it (but doesn't actually use it).
+  This means creating the hosts.conf file, too.
+- provide a logging.conf file (this really should be included in the Pipeline package)
