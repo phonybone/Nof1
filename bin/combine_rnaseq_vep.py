@@ -5,6 +5,20 @@ sys.path.append(libdir)
 from nof1_args import Nof1Args
 import pyBabel.SmartClient as babel
 
+'''
+Combine the results of the RnaseqBranch and VEPBranch parts of the Nof1Pipeline
+by taking the union of the two outputs of the VEPBranch, and then taking the 
+intersection of those genes with those from the RnaseqBranch.  
+
+The RnaseqBranch leaves its results as a .genes.out file, which contains ensembl
+gene ids and their counts.
+
+The VEPBranch leaves its results as two files: variants that were automatically
+selected as interestings (.auto), and variants that passed the VEP filter (.poly).
+
+This script converts all outputs to hugo (gene symbol) ids.
+'''
+
 def main(args):
     if args.v: print args
 

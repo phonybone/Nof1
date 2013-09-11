@@ -122,8 +122,15 @@ class Nof1Args(object):
 
     def variant_count(self, parser):
         parser.add_argument('--variant_fn', default='data/trip_neg_Vic/triple_negativ_mut_seq')
-        parser.add_argument('--rnaseq_fn', default='data/test_rnaseq/rawdata/1047-COPD.bt2.sam')
-        
+
+#        parser.add_argument('--rnaseq_fn', default='data/test_rnaseq/rawdata/1047-COPD.bt2.sam')        # clutch
+
+#        parser.add_argument('--rnaseq_fn', default='data/rawdata/var1.sam')
+        parser.add_argument('--rnaseq_fn', default='data/rawdata/1047-COPD.bt2.sam')         # buffy
+
+        parser.add_argument('--dot_counter', default=5000)
+        parser.add_argument('--line_counter', default=250000)
+        parser.add_argument('--progress', action='store_true')
 
 if __name__=='__main__':
     args=Nof1Args('nof1.conf', 'testing Nof1')

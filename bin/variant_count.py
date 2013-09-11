@@ -7,11 +7,15 @@ from variant_counter import VariantCounter
 
 def main(args):
     if args.v: print args
-    sys.exit(VariantCounter(args).go())
+    try:
+        return VariantCounter(args).go()
+    except e:
+        print e
+        return 1
 
 
 
 if __name__=='__main__':
     config_fn=os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'nof1.conf'))
     args=Nof1Args(config_fn, 'attempt to calculate some measure of variant expression using a variants file and an rnaseq input', 'variant_count')
-    main(args.args)
+    sys.exit(main(args.args))
