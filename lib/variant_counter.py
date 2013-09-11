@@ -2,6 +2,10 @@ import csv
 from variant import Variant
 
 class VariantCounter(object):
+    '''
+    
+    '''
+
     def __init__(self, args):
         self.variant_fn=args.variant_fn
         self.rnaseq_fn=args.rnaseq_fn
@@ -10,12 +14,12 @@ class VariantCounter(object):
                     'n_variant_hits':0}
 
     def go(self):
-        self.var2info=self.read_var_file()
+        self.var2info=self.read_variant_file()
         self.count_variants()
         self.report()
         return 0
 
-    def read_var_file(self):
+    def read_variant_file(self):
         var2info={}
         with open(self.variant_fn) as vf:
             reader=csv.reader(vf, delimiter='\t')
