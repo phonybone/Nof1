@@ -3,6 +3,10 @@ from variant import Variant, VariantError
 from progress_dots import ProgressDots
 
 class VariantCounter(object):
+    '''
+    
+    '''
+
     def __init__(self, args):
         self.args=args
         self.variant_fn=args.variant_fn
@@ -17,20 +21,21 @@ class VariantCounter(object):
         }
 
     def go(self):
-        self.pos2var=self.read_var_file()
+        self.pos2var=self.read_variant_file()
         print
         self.count_variants()
         self.consolidate_pos2var()
         self.report()
         return 0
 
-    def read_var_file(self):
+    def read_variant_file(self):
         '''
         Read in the variant file, store to dict "pos2var"
         k is "chr%s_%d" % (variant.start, i) where i is each position on the chromosome 
         that the variant occupies.  v is the variant.
         '''
         pos2var={}
+
         with open(self.variant_fn) as vf:
             reader=csv.reader(vf, delimiter='\t')
             for line in reader:
