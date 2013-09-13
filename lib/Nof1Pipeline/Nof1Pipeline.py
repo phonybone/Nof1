@@ -18,32 +18,33 @@ class Nof1Pipeline(Pipeline):
         self.ref_index=ref_index
         self.variants_fn=variants_fn
         
-        self.rnaseq_branch=RnaseqBranch(host, working_dir, data_basename, ref_index, 
-                                        dry_run=dry_run, output_dir=output_dir, echo=echo,
-                                        skip_if_current=skip_if_current)
+        self.add_pipeline(RnaseqBranch(host, working_dir, data_basename, ref_index, variants_fn,
+                                       dry_run=dry_run, output_dir=output_dir, echo=echo,
+                                       skip_if_current=skip_if_current))
 
-        self.vep_branch=VEPBranch(host, working_dir, variants_fn,
-                                  dry_run=dry_run, output_dir=output_dir, echo=echo,
-                                  skip_if_current=skip_if_current)
+        self.add_pipeline(VEPBranch(host, working_dir, variants_fn,
+                                    dry_run=dry_run, output_dir=output_dir, echo=echo,
+                                    skip_if_current=skip_if_current))
         
-        self.combine=RunCombine(self,
-                                self.rnaseq_branch.outputs()[0], # .genes.count
-                                self.vep_branch.outputs()[0],    # .auto
-                                self.vep_branch.outputs()[1],    # .vep.out.filtered
+        self.add_cmd(RunCombine(self,
+                                self.RnaseqBranch.outputs()[0], # .genes.count
+                                self.VepBranch.outputs()[0],    # .auto
+                                self.VepBranch.outputs()[1],    # .vep.out.filtered
                                 skip_if_current=skip_if_current,
-                                )
+                                ))
 
 
     def run(self):
+        self.check_continuity()
         self.log.info(repr(self))
         self.log.info('started: %s' % str(datetime.now()))
         os.chdir(self.working_dir)
         self._create_output_dir()
 
 
-        self.rnaseq_branch.run()
-        self.vep_branch.run()
-        self._run_cmds(self.combine)
+        self.RnaseqBranch.run()
+        self.VepBranch.run()
+        self._run_cmds(self.combine_rnaseq_vep)
 
         self.log.info('ended: %s' % str(datetime.now()))
 

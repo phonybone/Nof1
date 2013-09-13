@@ -11,17 +11,15 @@ class VEPBranch(Pipeline):
                                         skip_if_current=skip_if_current)
         self.variants_fn=variants_fn
 
-        self.m2v=RunMuts2Vep(self, variants_fn, skip_if_current)
-        self.vep=RunVep(self, self.m2v.outputs()[1], skip_if_current)
-        self.filter_vep=RunFilterVep(self, self.vep.outputs()[0], skip_if_current)
+        self.add_cmd(RunMuts2Vep(self, variants_fn, skip_if_current))
+        self.add_cmd(RunVep(self, self.muts2vep.outputs()[1], skip_if_current))
+        self.add_cmd(RunFilterVep(self, self.vep.outputs()[0], skip_if_current))
 
     def run(self):
-        self._run_cmds(self.m2v, 
-                       self.vep, 
-                       self.filter_vep)
+        self._run_cmds()
 
     def outputs(self):
-        auto=self.m2v.outputs()[0]
+        auto=self.muts2vep.outputs()[0]
         polyphen_sift_filtered=self.filter_vep.outputs()[0]
         return [auto, polyphen_sift_filtered]
 
