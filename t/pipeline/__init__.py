@@ -7,7 +7,8 @@ sys.path.append(os.path.join(root_dir, 'lib'))
 
 
 from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
-from Nof1Pipeline.host import Host
+from Pipeline.host import Host
+from Pipeline.Pipeline import Pipeline
 host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
 host=Host(host_conf, 'clutch')
 working_dir=os.path.join(root_dir, 'data')

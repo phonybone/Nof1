@@ -25,7 +25,9 @@ class RnaseqBranch(Pipeline):
         self.ref_index=ref_index
 
         self.bt2=RunBowtie2(self, data_basename, ref_index, skip_if_current)
-        self.rc=RunRnaseqCount(self, data_basename, skip_if_current)
+        self.vc=RunVariantCount(self, 
+#        self.rc=RunRnaseqCount(self, data_basename, skip_if_current)
+
         
 
     def run(self):

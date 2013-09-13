@@ -18,6 +18,7 @@ class VariantCounter(object):
                     'n_snp':0,
                     'n_ins':0,
                     'n_del':0,
+                    'n_ignored':0,
         }
 
     def go(self):
@@ -56,7 +57,9 @@ class VariantCounter(object):
                     continue
                 
                 self.stats['n_variants']+=1
-
+                if variant.ref_type == 'ignore':
+                    self.stats['n_ignored']+=1
+                    continue
 
                 # make a hash entry for each possible variant location:
                 # print 'adding %s: chr%s:%d-%d (%d)' % (variant.symbol, variant.chrom, variant.start, variant.stop, variant.stop-variant.start+1)

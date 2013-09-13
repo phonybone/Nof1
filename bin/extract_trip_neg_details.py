@@ -6,6 +6,20 @@ from nof1_args import Nof1Args
 from read1write2 import read1write2
 
 
+ref_types={
+    'Frame_Shift_Del':   'auto',
+    'Frame_Shift_Ins':   'auto',
+    'In_Frame_Del':      'polyphen',
+    'In_Frame_Ins':      'polyphen',
+    'Missense_Mutation': 'polyphen',
+    'Nonsense_Mutation': 'auto',
+    'RNA':               'ignore',
+    'Silent':            'ignore',
+    'Splice_Site':       'auto'
+} 
+    
+
+
 def main(nof1_args):
     '''
     convert data/trip_neg_Vic/triple_mut_seq into a format that the Ensembl VEP can use.
@@ -24,17 +38,6 @@ def main(nof1_args):
            'n_total':0,
            }
     
-    ref_types={
-        'Frame_Shift_Del':   'auto',
-        'Frame_Shift_Ins':   'auto',
-        'In_Frame_Del':      'polyphen',
-        'In_Frame_Ins':      'polyphen',
-        'Missense_Mutation': 'polyphen',
-        'Nonsense_Mutation': 'auto',
-        'RNA':               'ignore',
-        'Silent':            'ignore',
-        'Splice_Site':       'auto'
-        } 
 
     in_fn=args.in_fn
     if not in_fn:                  # argparse doesn't require it

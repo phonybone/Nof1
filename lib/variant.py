@@ -2,6 +2,7 @@ class VariantError(Exception):
     pass
 
 class Variant(object):
+
     def __init__(self, symbol, entrez, center, build, chrom, start, stop, 
                  strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2):
         self.symbol=symbol
@@ -60,3 +61,20 @@ class Variant(object):
 
         # this is redundant, as this error should have been caught in the constructor
         raise VariantError('variant: unknown type "%s"' % self.var_type)
+
+
+    ref_types={
+        'Frame_Shift_Del':   'auto',
+        'Frame_Shift_Ins':   'auto',
+        'In_Frame_Del':      'polyphen',
+        'In_Frame_Ins':      'polyphen',
+        'Missense_Mutation': 'polyphen',
+        'Nonsense_Mutation': 'auto',
+        'RNA':               'ignore',
+        'Silent':            'ignore',
+        'Splice_Site':       'auto'
+        } 
+    
+    @property
+    def ref_type(self):
+        return ref_types[self.var_type]

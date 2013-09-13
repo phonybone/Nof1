@@ -9,7 +9,7 @@ def main(args):
     if args.v: print args
     try:
         return VariantCounter(args).go()
-    except e:
+    except Exception, e:
         print e
         return 1
 
