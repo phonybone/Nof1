@@ -22,54 +22,17 @@ class VariantCounter(object):
         }
 
     def go(self):
-        self.pos2var=self.read_variant_file()
+        pos2var=VariantPositions(self.variant_fn)
+        self.stats.update(pos2var.stats)
         print
-        self.count_variants()
-        self.consolidate_pos2var()
-        self.report()
+        self.count_variants(pos2var)
+        self.consolidate_pos2var(pos2var)
+        self.report(pos2var)
         return 0
 
-    def read_variant_file(self):
-        '''
-        Read in the variant file, store to dict "pos2var"
-        k is "chr%s_%d" % (variant.start, i) where i is each position on the chromosome 
-        that the variant occupies.  v is the variant.
-        '''
-        pos2var={}
-
-        with open(self.variant_fn) as vf:
-            reader=csv.reader(vf, delimiter='\t')
-            for line in reader:
-                if line[0].startswith('#'): continue
-                (symbol, entrez, center, build, chrom, start, stop, strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2)=line[:13]
-
-                # fixme: filter on var_type (or var_class??)
-
-                try:
-                    variant=Variant(symbol, entrez, center, build, chrom, start, stop, strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2)
-                    self.stats['n_'+var_type.lower()]+=1
-                except ValueError:
-                    continue
-                except VariantError, e:
-                    if self.args.v: 
-                        print e
-                    self.stats['n_variant_errors']+=1
-                    continue
-                
-                self.stats['n_variants']+=1
-                if variant.ref_type == 'ignore':
-                    self.stats['n_ignored']+=1
-                    continue
-
-                # make a hash entry for each possible variant location:
-                # print 'adding %s: chr%s:%d-%d (%d)' % (variant.symbol, variant.chrom, variant.start, variant.stop, variant.stop-variant.start+1)
-                for i in range(variant.start, variant.stop+1):
-                    key='chr%s_%d' % (variant.chrom, i)
-                    pos2var[key]=variant
-        return pos2var
                 
 
-    def count_variants(self):
+    def count_variants(self, pos2var):
         dots=ProgressDots(self.args.dot_counter)
 
         with open(self.rnaseq_fn) as rf:
@@ -88,33 +51,24 @@ class VariantCounter(object):
                 # This is O(m*n) on the number and length of the reads,
                 # but it's O(1) for programmer laziness.
                 for i in range(len(seq)):
-                    key='%s_%d' % (chrom, pos+i)
-                    if key in self.pos2var:
-                        variant=self.pos2var[key]
-                        variant.n_alignments+=1
+                    variant=pos2var.variant_for(line)
+                    if not variant: continue
+                    variant.n_alignments+=1
+                    self.stats['n_variant_hits']+=1
 
-                        # do something here about figuring out which allele is represented
-                        if self.args.v:
-                            print 'alignment: %s (pos=%d, strand=%s)' % (seq, pos, variant.strand)
-                            print 'overlaps with variant: %s, chr=%s, %d-%d\n' % (variant.symbol, 
-                                                                                  variant.chrom,
-                                                                                  variant.start,
-                                                                                  variant.stop)
-                        
-                        self.stats['n_variant_hits']+=1
-                        if variant.is_expressed_in_seq(seq, pos):
-                            variant.n_mut+=1
-                        else:
-                            variant.n_wt+=1
+                    if variant.is_expressed_in_seq(seq, pos):
+                        variant.n_mut+=1
+                    else:
+                        variant.n_wt+=1
+                    break
 
-                        break
 
 
                 
 
-    def consolidate_pos2var(self):
+    def consolidate_pos2var(self, pos2var):
         sym2var={}
-        for variant in self.pos2var.values():
+        for variant in pos2var.values():
             try:
                 var=sym2var[variant.symbol]
                 var.n_alignments+=variant.n_alignments
@@ -129,8 +83,8 @@ class VariantCounter(object):
         self.sym2var=sym2var
 
 
-    def report(self):
-#        for variant in self.pos2var.values():
+    def report(self, pos2var):
+#        for variant in pos2var.values():
 
         row='\t'.join(['symbol', 'chrom', 'start', 'stop', 'strand',
                        'n_align', 'n_wt', 'n_mut', 'ratio', 'n_spans'])

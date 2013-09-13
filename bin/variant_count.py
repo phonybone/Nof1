@@ -10,7 +10,9 @@ def main(args):
     try:
         return VariantCounter(args).go()
     except Exception, e:
-        print e
+        import traceback
+        traceback.print_exc()
+        
         return 1
 
 

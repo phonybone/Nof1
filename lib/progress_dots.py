@@ -17,6 +17,6 @@ class ProgressDots(object):
             self.n_dots+=1
             if self.n_dots % self.dots_per_line == 0:
                 msg=self.msg if self.msg else ''
-                sys.stdout.write(' %-15d%s\n' % self.counter, msg)
+                sys.stdout.write(' %-15d%s\n' % (self.counter, msg))
                 self.n_dots=0
             sys.stdout.flush()

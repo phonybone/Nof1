@@ -4,6 +4,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
 from pipeline import *
 from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
 
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument('skip', action='store_true')
+args=parser.parse_args()
+
+
 class TestBasic(unittest.TestCase):
     
     def setUp(self):
@@ -16,7 +22,7 @@ class TestBasic(unittest.TestCase):
     	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
 
         p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, 
-                       dry_run=True, skip_if_current=False)
+                       dry_run=True, skip_if_current=args.skip)
         p.run()
 
 

@@ -37,10 +37,16 @@ class Variant(object):
                                (var_type, start, stop, seq))
         
 
+    def __str__(self):
+        return '%s: %s %d-%d %s %s %s' % (self.symbol,
+                                          self.chrom, self.start, self.stop, self.strand,
+                                          self.var_class, self.var_type)
+                                       
+
     def is_expressed_in_seq(self, seq, pos):
         ''' 
         does an rnaseq read express the wt allele or something different? 
-        returns ?
+        returns True or False, or throws exception if self.var_type is unknown.
         '''
         # should put in a check to make sure the right chrom is being checked...
 
@@ -51,9 +57,6 @@ class Variant(object):
 
         if self.var_type == 'SNP' or self.var_type == 'INS':
             return expressed_seq == self.tum_seq2
-
-        if self.var_type == 'INS':
-            pass
 
         if self.var_type == 'DEL':
             return expressed_seq != self.ref_allele
@@ -77,4 +80,4 @@ class Variant(object):
     
     @property
     def ref_type(self):
-        return ref_types[self.var_type]
+        return self.ref_types[self.var_class]
