@@ -17,3 +17,11 @@ something like this:
 - define a hosts.conf file, since Pipeline demands it (but doesn't actually use it).
   This means creating the hosts.conf file, too.
 - provide a logging.conf file (this really should be included in the Pipeline package)
+* Continuity Checks:
+- Add a continuity check that makes sure of the following:
+-- The execution graph is connected; 
+-- Anything else?  Can't check that every output is consumed as an input, because there are "spinoffs";
+   Can't check that every input is consumed
+-- Possible to check that the run commands actually create what the say they're going to create,
+   other than actually running the pipeline?
+

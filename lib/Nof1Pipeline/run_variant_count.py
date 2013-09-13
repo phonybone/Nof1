@@ -8,8 +8,8 @@ class RunVariantCount(RunCmd):
         super(RunVariantCount, self).__init__('variant_count', pipeline, skip_if_current=skip_if_current)
         
         self.rnaseq_fn='%s.bt2.sam' % data_basename
-        self.variant_fn=
-        self.out_fn='%s.%s' % (self.variant_basename, self.output_extension)
+        self.variant_fn=variant_basename
+        self.out_fn='%s.%s' % (self.variant_fn, self.output_extension)
 
     def get_cmd(self):
         return self.pipeline.host.get('python.exe')
