@@ -2,6 +2,12 @@ import re
 from read1writeN import Read1WriteN
 
 class RegexFileSplitter(object):
+    '''
+    split up a file into a number of other files based
+    on regular expressions.  For each line in the input,
+    apply a list of regexes; the first one matches determines which
+    output file the line will get written to.
+    '''
     def __init__(self, fn, *reg2fn):
         self.fn=fn
         self.reg2fn=reg2fn
