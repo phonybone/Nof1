@@ -97,7 +97,7 @@ class Nof1Args(object):
     def rnaseq_count(self, parser):
         ucsc2ll=os.path.join(root_dir, 'data/ucsc/ucsc_kg2ll')
 #        parser.add_argument('--ucsc2ll', default=ucsc2ll)
-        parser.add_argument('--output_id_type', default='gene_ensembl') # must be babel-compliant
+        parser.add_argument('--output_id_type', default='gene_symbol') # must be babel-compliant
 
     def rnaseq_pipeline_proto(self, parser):
         parser.add_argument('--data_basename', default='data/rawdata/1047-COPD.10K')

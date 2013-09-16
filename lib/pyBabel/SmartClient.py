@@ -2,8 +2,27 @@ import os, types, cPickle
 import pyBabel.Client as babel
 
 class SmartClient(babel.Client):
-    def __init__(self):
+    '''
+    Extends the basic functionality of the babel client by:
+    - caching a whole translation table, both in memory and on disk for later use
+    - creating translation functions from translation data, eg:
+        babel_client.load(['gene_ensembl','gene_symbol'])
+        symbol=babel_client.gene_ensembl2gene_symbol(ensembl_id)
+
+    Downloaded data is cached in ~/.babel (unless othewise specified), in pickeled format.
+    '''
+
+    def __init__(self, cache_dir=None):
         super(SmartClient,self).__init__()
+
+        if cache_dir:
+            self.cache_dir=cache_dir
+        else:
+            self.cache_dir=os.path.join(os.environ['HOME'], '.babel')
+
+        if not os.path.exists(self.cache_dir):
+            os.makedirs(self.cache_dir)
+        
         self.tables={}
 
 
@@ -14,17 +33,16 @@ class SmartClient(babel.Client):
         self._make_funcs(id_types)
         return self
 
-    def _cache_dir(self):
-        cd=os.path.join(os.environ['HOME'], '.babel')
-        if not os.path.exists(cd):
-            os.makedirs(cd)
-        return cd
+    def get_map(self, in_type, out_type):
+        key='%s2%s' % (in_type, out_type)
+        return self.tables[key]
+
 
     def _get_id_key(self, id_types):
         return '-'.join(id_types)
 
     def _get_cache_path(self, id_types):
-        return os.path.join(self._cache_dir(), '%s.pkl' % self._get_id_key(id_types))
+        return os.path.join(self.cache_dir, '%s.pkl' % self._get_id_key(id_types))
 
     def _get_cache(self, id_types):
         '''
@@ -58,7 +76,7 @@ class SmartClient(babel.Client):
             
 
     def _table2maps(self, id_types, table):
-        ''' take a list of lists, as returned by babel, and return '''
+        ''' take a list of lists, as returned by babel, and return a lookup dict '''
         in_type=id_types[0]
 
         # init maps:
@@ -72,7 +90,10 @@ class SmartClient(babel.Client):
             # line[0] is input value, line[i>0] is output value:
             for out_type,out_val in zip(id_types[1:], line[1:]):
                 key='%s2%s' % (in_type, out_type)
-                maps[key][in_val]=out_val
+                try:
+                    maps[key][in_val].append(out_val)
+                except KeyError:
+                    maps[key][in_val]=[out_val]
 
         return maps
 

@@ -11,7 +11,7 @@ class Nof1Pipeline(Pipeline):
     log=logging.getLogger('Pipeline')
     def __init__(self, host, working_dir, data_basename, ref_index, variants_fn, 
                  dry_run=False, output_dir=None, echo=False, skip_if_current=False):
-        super(Nof1Pipeline, self).__init__('Main', host, working_dir, 
+        super(Nof1Pipeline, self).__init__('Nof1', host, working_dir, 
                                            output_dir=output_dir, dry_run=dry_run, echo=echo, 
                                            skip_if_current=skip_if_current)
         self.data_basename=data_basename

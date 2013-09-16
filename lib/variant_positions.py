@@ -66,14 +66,11 @@ class VariantPositions(dict):
                     self[key]=variant
         return stats
 
-    def variant_for(self, read):
-        row=read.split('\t')
-        chrom=row[2]
-        pos=int(row[3])
-        l=len(row[9])
-
-        for i in range(l):
+    def variant_for(self, chrom, pos, length):
+        for i in range(length):
             key='%s_%d' % (chrom, pos+i)
             if key in self:
                 return self[key]
         return None
+
+

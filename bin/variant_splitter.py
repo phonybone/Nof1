@@ -29,11 +29,13 @@ def main(args):
     print 'reading %s...' % args.rnaseq_fn
     with open(args.rnaseq_fn) as f:
         for line in f:
-            stats['n_reads']+=1
             dots.ping()
             if line.startswith('@'):
                 continue
-            var=pos2var.variant_for(line)
+            stats['n_reads']+=1
+
+            row=line.split('\t')
+            var=pos2var.variant_for(row[2], int(row[3]), len(row[9]))
             if not var: continue
             stats['n_variants']+=1
             try:
@@ -44,10 +46,13 @@ def main(args):
 
     # write out all reads for each variant:
     for var in pos2var.values():
-        fn=os.path.join(args.output_dir, '%s.fastq' % var.symbol)
-        with open(fn, 'w') as var_f:
-            for line in var.reads:
-                var_f.write(line)
+        try:
+            fn=os.path.join(args.output_dir, '%s.fastq' % var.symbol)
+            with open(fn, 'w') as var_f:
+                for line in var.reads:
+                    var_f.write(line)
+        except AttributeError:  # on var.reads
+            pass
 
     print stats
     return 0

@@ -1,5 +1,6 @@
 import sys, csv
 from variant import Variant, VariantError
+from variant_positions import VariantPositions
 from progress_dots import ProgressDots
 
 class VariantCounter(object):
@@ -11,6 +12,8 @@ class VariantCounter(object):
         self.args=args
         self.variant_fn=args.variant_fn
         self.rnaseq_fn=args.rnaseq_fn
+        self.out_fn=args.out_fn
+
         self.stats={'n_variants':0,
                     'n_alignments':0,
                     'n_variant_hits':0,
@@ -24,7 +27,7 @@ class VariantCounter(object):
     def go(self):
         pos2var=VariantPositions(self.variant_fn)
         self.stats.update(pos2var.stats)
-        print
+        if self.args.v: print self.stats
         self.count_variants(pos2var)
         self.consolidate_pos2var(pos2var)
         self.report(pos2var)
@@ -33,6 +36,7 @@ class VariantCounter(object):
                 
 
     def count_variants(self, pos2var):
+        if self.args.v: print 'processing %s...' % self.rnaseq_fn
         dots=ProgressDots(self.args.dot_counter)
 
         with open(self.rnaseq_fn) as rf:
@@ -50,18 +54,15 @@ class VariantCounter(object):
                 # crawl the aligned read, looking for a variant:
                 # This is O(m*n) on the number and length of the reads,
                 # but it's O(1) for programmer laziness.
-                for i in range(len(seq)):
-                    variant=pos2var.variant_for(line)
-                    if not variant: continue
-                    variant.n_alignments+=1
-                    self.stats['n_variant_hits']+=1
-
-                    if variant.is_expressed_in_seq(seq, pos):
-                        variant.n_mut+=1
-                    else:
-                        variant.n_wt+=1
-                    break
-
+                variant=pos2var.variant_for(chrom, pos, len(seq))
+                if not variant: continue
+                variant.n_alignments+=1
+                self.stats['n_variant_hits']+=1
+                
+                if variant.is_expressed_in_seq(seq, pos):
+                    variant.n_mut+=1
+                else:
+                    variant.n_wt+=1
 
 
                 
@@ -84,11 +85,16 @@ class VariantCounter(object):
 
 
     def report(self, pos2var):
+        if self.args.out_fn:
+            f=open(self.args.out_fn, 'w')
+        else:
+            f=sys.stdout
+
 #        for variant in pos2var.values():
 
         row='\t'.join(['symbol', 'chrom', 'start', 'stop', 'strand',
                        'n_align', 'n_wt', 'n_mut', 'ratio', 'n_spans'])
-        print '# %s' % row
+        f.write('# %s\n' % row)
 
         for key in sorted(self.sym2var.keys()):
             variant=self.sym2var[key]
@@ -105,8 +111,14 @@ class VariantCounter(object):
                                             variant.strand,
                                             variant.n_alignments, variant.n_wt, variant.n_mut, 
                                             ratio, variant.n_spans]])
-            print row
+            f.write('%s\n' % row)
 
         # print stats
         for k,v in self.stats.items():
-            print '%s: %d' % (k,v)
+            f.write('# %s: %d\n' % (k,v))
+
+        if self.args.out_fn:
+            f.close()
+            if self.args.v:
+                print '%s written' % self.args.out_fn
+

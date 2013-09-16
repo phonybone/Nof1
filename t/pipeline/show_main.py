@@ -6,7 +6,7 @@ from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
 
 import argparse
 parser=argparse.ArgumentParser()
-parser.add_argument('skip', action='store_true')
+parser.add_argument('--skip', action='store_true')
 args=parser.parse_args()
 
 
@@ -17,12 +17,17 @@ class TestBasic(unittest.TestCase):
         print
 
     def test_cmd(self):
-        data_basename='test_rnaseq/rawdata/1047-COPD.10K'
+#        data_basename='test_rnaseq/rawdata/1047-COPD.10K' # clutch
+        data_basename='rawdata/1047-COPD.10K' # buffy
         ref_index='hg19'
     	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
 
         p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, 
                        dry_run=True, skip_if_current=args.skip)
+        print '# Running pipeline %s' % p.name
+        p.check_continuity()
+        print '# continuity check ok'
+        print
         p.run()
 
 
