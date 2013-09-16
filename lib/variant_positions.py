@@ -35,6 +35,9 @@ class VariantPositions(dict):
             'n_variant_errors':0,
             'n_ignored':0,
         }
+
+        gene_symbols={}
+
         with open(self.variant_fn) as vf:
             reader=csv.reader(vf, delimiter='\t')
             for line in reader:
@@ -44,8 +47,13 @@ class VariantPositions(dict):
                 try:
                     variant=Variant(symbol, entrez, center, build, chrom, start, stop, strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2)
                     stats['n_'+var_type.lower()]+=1
-                except ValueError:
+                    
+                    try: gene_symbols[symbol]+=1
+                    except KeyError: gene_symbols[symbol]=1
+
+                except ValueError: # happens for comment lines, etc
                     continue
+
                 except VariantError, e:
                     if self.verbose: 
                         print e
@@ -64,6 +72,9 @@ class VariantPositions(dict):
                     #print 'adding %s->%s: chr%s:%d-%d (%d)' % (key, variant.symbol, variant.chrom, variant.start, variant.stop, variant.stop-variant.start+1)
 
                     self[key]=variant
+
+        stats['n_genes']=len(gene_symbols)
+        stats['ratio_genes_variants']=float(stats['n_genes'])/stats['n_variants']
         return stats
 
     def variant_for(self, chrom, pos, length):
