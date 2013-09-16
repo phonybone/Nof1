@@ -22,8 +22,11 @@ class TestReadVariantFile(unittest.TestCase):
         self.assertEqual(stats['n_del'], 105)
         self.assertEqual(stats['n_ignored'], 264)
         self.assertEqual(stats['n_variant_errors'], 13)
+        self.assertEqual(stats['n_genes'], 496)
         self.assertEqual(len(pos2var), 740)
+        print stats
 
+        # check that all variants bracket the alignments assigned to them:
         for k, var in pos2var.items():
             (chr, pos)=k.split('_')
             nchr=chr[3:]
