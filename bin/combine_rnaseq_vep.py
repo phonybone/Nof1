@@ -49,9 +49,7 @@ def get_rnaseq(args, babel_client):
     with open(args.gene_counts_fn) as f:
         reader=csv.reader(f, delimiter=':')
         for row in reader:
-            ensembl=row[0]
-            hugo=babel_client.gene_ensembl2gene_symbol(ensembl)
-            rnaseq.add(hugo)
+            rnaseq.add(row[0])
     return rnaseq
 
 def get_auto(args, babel_client):
