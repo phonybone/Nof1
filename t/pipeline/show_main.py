@@ -5,13 +5,16 @@ from pipeline import *
 from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
 
 import argparse
-parser=argparse.ArgumentParser()
-parser.add_argument('--skip', action='store_true')
-args=parser.parse_args()
 
 
-class TestBasic(unittest.TestCase):
-    
+class TestShowMain(unittest.TestCase):
+
+    @classmethod
+    def get_args(self):
+        parser=argparse.ArgumentParser()
+        parser.add_argument('--skip', action='store_true')
+        self.args=parser.parse_args()
+        
     def setUp(self):
         host.set('dry_run', str(True))
         print
@@ -23,7 +26,7 @@ class TestBasic(unittest.TestCase):
     	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
 
         p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, 
-                       dry_run=True, skip_if_current=args.skip)
+                       dry_run=True, skip_if_current=self.args.skip)
         print '# Running pipeline %s' % p.name
         p.check_continuity()
         print '# continuity check ok'
@@ -32,6 +35,7 @@ class TestBasic(unittest.TestCase):
 
 
 if __name__=='__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestBasic)
+    TestShowMain.get_args()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestShowMain)
     unittest.TextTestRunner(verbosity=2).run(suite)
 

@@ -3,25 +3,39 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from pipeline import *
 from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
-from Nof1Pipeline.exceptions import *
+from Pipeline.exceptions import *
 
-class TestBasic(unittest.TestCase):
+class TestRunMain(unittest.TestCase):
     
+    @classmethod
+    def get_args(self):
+        parser=argparse.ArgumentParser(description='run pipeline harness')
+
+        parser.add_argument('--data_basename', default='test_rnaseq/rawdata/1047-COPD.1K2')
+        parser.add_argument('--ref_index', default='hg19')
+
+        parser.add_argument('--variants_fn', default='trip_neg_Vic/triple_negativ_mut_seq')
+
+        parser.add_argument('--dry_run', default=False, action='store_true')
+        parser.add_argument('--no_echo', default=False, action='store_true')
+        parser.add_argument('--skip', default=False, action='store_true')
+        self.args=parser.parse_args()
+        print self.args
+
     def setUp(self):
 #        host.set('dry_run', str(False))
         print
 
     def test_cmd(self):
-        data_basename='test_rnaseq/rawdata/1047-COPD.1K2'
-        ref_index='hg19'
-    	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
-
         try:
-            p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn,
+            p=Nof1Pipeline(host, working_dir, 
+                           self.args.data_basename, 
+                           self.args.ref_index, 
+                           self.args.variants_fn,
                            output_dir=output_dir, 
-                           dry_run=args.dry_run,
-                           echo=not args.no_echo, 
-                           skip_if_current=args.skip)
+                           dry_run=self.args.dry_run,
+                           echo=not self.args.no_echo, 
+                           skip_if_current=self.args.skip)
             p.run()
         except PipelineException, e:
             print 'Failed: %s' % e.cmd.name
@@ -31,13 +45,7 @@ class TestBasic(unittest.TestCase):
             
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(description='run pipeline harness')
-    parser.add_argument('--dry_run', default=False, action='store_true')
-    parser.add_argument('--no_echo', default=False, action='store_true')
-    parser.add_argument('--skip', default=False, action='store_true')
-    args=parser.parse_args()
-    print args
-
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestBasic)
+    TestRunMain.get_args()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestRunMain)
     unittest.TextTestRunner(verbosity=2).run(suite)
 
