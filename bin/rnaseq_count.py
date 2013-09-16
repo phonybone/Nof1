@@ -78,9 +78,6 @@ def ucsc2gene(ucsc2count, ucsc2output):
     gene2count={}
     n_no_output_type=0
 
-    import pdb
-    pdb.set_trace()
-
     for ucsc_id, count in ucsc2count.items():
         try: out_ids=ucsc2output[ucsc_id]  
         except KeyError:
