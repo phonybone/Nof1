@@ -19,3 +19,6 @@ bin/variant_effect_predictor/*
 *.stderr
 *.aln
 *.full
+output
+logs
+*.combined

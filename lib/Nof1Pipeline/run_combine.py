@@ -33,6 +33,7 @@ class RunCombine(RunCmd):
              self.auto_fn,
              self.polyphen_sift_fn,
              '--out_fn', self.out_fn,
+             '-v',
              ]
         return cmd
     

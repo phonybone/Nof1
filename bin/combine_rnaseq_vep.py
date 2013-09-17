@@ -19,11 +19,19 @@ selected as interestings (.auto), and variants that passed the VEP filter (.poly
 This script converts all outputs to hugo (gene symbol) ids.
 '''
 
+stats={
+    'n_bad_line':0,
+    'n_ensembl_2_gene':0,
+    'n_no_ensembl_2_gene':0,
+    'n_multiple_ensembl_2_gene':0,
+}
+
 def main(args):
     if args.v: print args
 
     babel_client=babel.SmartClient()
     babel_client.load(['gene_ensembl','gene_symbol'])
+    babel_client.load(['transcript_ensembl', 'gene_symbol'])
 
     # make a set of (expressed) gene symbols from the rnaseq_branch; (convert from ensembl->hugo) (rnaseq)
     # make a set of auto-selected genes from beginning of VEP (already in hugo) (auto)
@@ -39,6 +47,8 @@ def main(args):
             print g
     if args.v: 
         print '%s written' % args.out_fn
+        for k in sorted(stats.keys()):
+            print '%-30s: %s' % (k, stats[k])
         print 'returning 0'
     return 0
 
@@ -64,11 +74,26 @@ def get_auto(args, babel_client):
 def get_polyphen_sift(args, babel_client):
     ps=set()
     with open(args.polyphen_sift_fn) as f:
-        reader=csv.reader(f, delimiter=':')
+        reader=csv.reader(f, delimiter='\t')
         for row in reader:
-            ensembl=row[4]
-            hugo=babel_client.gene_ensembl2gene_symbol(ensembl)
-            ps.add(hugo)
+            try:
+                ensembl=row[4]
+            except IndexError, e:
+                print 'no ensembl id (row[4]) in %s' % '\t'.join(row)
+                stats['n_bad_line']+=1
+                continue
+            try:
+                hugo=babel_client.transcript_ensembl2gene_symbol(ensembl)
+                if len(hugo) > 1:
+                    if args.v: print 'multiple translations for %s, using first' % ensembl
+                    stats['n_multiple_ensembl_2_gene']+=1
+                ps.add(hugo[0])
+            except KeyError, e:
+                if args.v: print 'no gene symbol for %s, skipping' % e
+                stats['n_no_ensembl_2_gene']+=1
+                ps.add(ensembl) # punt
+                continue
+            stats['n_ensembl_2_gene']+=1
     return ps
 
 

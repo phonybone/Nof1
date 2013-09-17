@@ -15,7 +15,7 @@ class RunVep(RunCmd):
         self.variants_fn=variants_fn
 
     def get_cmd(self):
-        return 'perl'
+        return self.pipeline.host.get('perl.exe')
 
     def get_args(self):
         output_fn=self.outputs()[0]
@@ -28,7 +28,7 @@ class RunVep(RunCmd):
              '--sift', 'p',
              '-o', output_fn]
         return cmd
-        
+
     def inputs(self):
         return [self.variants_fn]
 

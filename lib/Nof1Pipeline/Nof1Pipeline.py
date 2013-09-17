@@ -38,6 +38,7 @@ class Nof1Pipeline(Pipeline):
         self.check_continuity()
         self.log.info(repr(self))
         self.log.info('started: %s' % str(datetime.now()))
+        self.log.info('working_dir: %s' % self.working_dir)
         os.chdir(self.working_dir)
         self._create_output_dir()
 
