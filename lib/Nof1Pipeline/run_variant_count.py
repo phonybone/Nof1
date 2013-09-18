@@ -7,7 +7,7 @@ class RunVariantCount(RunCmd):
                  skip_if_current=False):
         super(RunVariantCount, self).__init__('variant_count', pipeline, skip_if_current=skip_if_current)
         
-        self.rnaseq_fn='%s.bt2.sam' % data_basename
+        self.rnaseq_fn='%s.sam' % data_basename
         self.variant_fn=variant_basename
         self.out_fn='%s.%s' % (self.variant_fn, self.output_extension)
 

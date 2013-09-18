@@ -32,6 +32,6 @@ class RunBowtie2(RunCmd):
         return [input1, input2] # skipping index_path for the moment; actually refers to lots of files
 
     def outputs(self):
-        return ['%s.bt2.sam' % self.data_basename]
+        return ['%s.sam' % self.data_basename]
     
     

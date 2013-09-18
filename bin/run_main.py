@@ -21,12 +21,24 @@ def main(args):
                        dry_run=args.dry_run,
                        echo=not args.no_echo, 
                        skip_if_current=args.skip)
-        return p.run()
-    except PipelineException, e:
+
+        if args.cmd:
+            cmd=p.find_command(args.cmd)
+            if not cmd: raise UnknownCommandException(p, args.cmd)
+            return cmd.run_cmd()
+        else:
+            return p.run()
+
+    except PipelineFailed, e:
         print 'Failed: %s' % e.cmd.name
         print '  see %s for details' % e.cmd.get_stderr()
         return 1
 
+    except PipelineException, e:
+        print e
+        return 1
+
+    return 0
             
 
 if __name__=='__main__':

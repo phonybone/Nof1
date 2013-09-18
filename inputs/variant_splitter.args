@@ -1,0 +1,4 @@
+[args]
+variant_basename: data/trip_neg_Vic/triple_negativ_mut_seq
+data_basename: data/rawdata/var1
+output_dir: tmp

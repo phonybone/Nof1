@@ -7,7 +7,6 @@ from Pipeline.exceptions import *
 class RnaseqBranch(Pipeline):
     '''
     this represents the Rnaseq branch of the Nof1 Pipeline.
-    Not sure if we're still using it or not; definitely not finished as of 8/8/13.
     '''
 
     def __init__(self, 

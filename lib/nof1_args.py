@@ -150,17 +150,26 @@ class Nof1Args(object):
     def run_main(self, parser):
         parser.add_argument('variants_fn')
         parser.add_argument('data_basename')
+        parser.add_argument('--cmd')
 
         parser.add_argument('--working_dir', default='.')
         parser.add_argument('--output_dir', default=os.path.join(root_dir, 'logs'))
 
         parser.add_argument('--ref_index', default='hg19')
 
-
         parser.add_argument('--dry_run', default=False, action='store_true')
         parser.add_argument('--no_echo', default=False, action='store_true')
         parser.add_argument('--skip', default=False, action='store_true')
 
+
+    def run_cmd(self, parser):
+        parser.add_argument('cmd_name')
+        parser.add_argument('--pipeline_args', default=None)
+        parser.add_argument('--working_dir', default='.')
+        parser.add_argument('--output_dir', default=os.path.join(root_dir, 'logs'))
+        parser.add_argument('--dry_run', default=False, action='store_true')
+        parser.add_argument('--no_echo', default=False, action='store_true')
+        parser.add_argument('--skip', default=False, action='store_true')
 
 
 if __name__=='__main__':

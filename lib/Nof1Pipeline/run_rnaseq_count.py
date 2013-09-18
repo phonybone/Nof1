@@ -5,7 +5,7 @@ class RunRnaseqCount(RunCmd):
     def __init__(self, pipeline, data_basename, skip_if_current=False):
         super(RunRnaseqCount, self).__init__('rnaseq_count', pipeline, skip_if_current=skip_if_current)
         self.data_basename=data_basename
-        self.in_fn='%s.bt2.sam' % self.data_basename
+        self.in_fn='%s.sam' % self.data_basename
         self.out_fn='%s.%s' % (self.data_basename, self.output_extension)
 
     def get_cmd(self):
