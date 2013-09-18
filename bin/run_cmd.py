@@ -5,6 +5,7 @@ sys.path.append(os.path.join(root_dir, 'lib'))
 from nof1_args import Nof1Args
 from Pipeline.Pipeline import Pipeline
 from Pipeline.host import Host
+from Pipeline.exceptions import *
 
 def main(args):
     if args.v: print args
@@ -13,14 +14,20 @@ def main(args):
     cls=get_cmd_class(args)
 
     needed=inspect.getargspec(cls.__init__)[0]
-    cls_args={'pipeline': pl}
-    
     pl_args=get_pipeline_args(args, needed)
+
+    cls_args={'pipeline': pl}
     cls_args.update(pl_args)
 
     cmd=cls(**cls_args)
-    print '# %s' % cmd.cmd_string()
-    cmd.run()
+    pl.add_cmd(cmd)
+    try:
+        pl._run_cmds()
+    except PipelineFailed, e:
+        print '%s failed' % cmd.name
+        print 'Error message: %s' % str(e.exp)
+        print 'see %s for details' % cmd.get_stderr()
+        return 1
 
     return 0
 
@@ -35,10 +42,10 @@ def get_pipeline(args):
 def get_cmd_class(args):
     mod_name='Nof1Pipeline.run_%s' % args.cmd_name
     cls_name='Run%s' % uscore2cc(args.cmd_name)
-    print 'looking for %s.%s' % (mod_name, cls_name)
+    if args.d: print 'looking for %s.%s' % (mod_name, cls_name)
     mod=importlib.import_module(mod_name)
     cls=getattr(mod, cls_name)
-    print 'found %s' % args.cmd_name
+    if args.d: print 'found %s' % args.cmd_name
     return cls
 
 def get_pipeline_args(args, arg_names):
@@ -53,20 +60,20 @@ def get_pipeline_args(args, arg_names):
         conf=ConfigParser.ConfigParser()
         conf.read(args.pipeline_args)
         d=dict(conf._sections['args'])
-        print 'config\'d args: %s' % d
+        if args.d: print 'config\'d args: %s' % d
     else:
         d=vars(args)
                 
     final_args={}
     for name in list(arg_names):
-        print 'name is %s' % name
+        if args.d: print 'name is %s' % name
         try: 
             final_args[name]=d[name]
-            print 'fa[%s]=%s' % (name, final_args[name])
+            if args.d: print 'fa[%s]=%s' % (name, final_args[name])
         except KeyError: 
-            print 'arg %s not found' % name
+            if args.d: print 'arg %s not found' % name
         except Exception, e:
-            print 'caught %s: %s' % (type(e), e)
+            if args.d: print 'caught %s: %s' % (type(e), e)
     return final_args
 
 

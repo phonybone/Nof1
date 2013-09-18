@@ -74,7 +74,10 @@ class VariantPositions(dict):
                     self[key]=variant
 
         stats['n_genes']=len(gene_symbols)
-        stats['ratio_genes_variants']=float(stats['n_genes'])/stats['n_variants']
+        try:
+            stats['ratio_genes_variants']=float(stats['n_genes'])/stats['n_variants']
+        except ZeroDivisionError:
+            stats['ratio_genes_variants']=None
         return stats
 
     def variant_for(self, chrom, pos, length):

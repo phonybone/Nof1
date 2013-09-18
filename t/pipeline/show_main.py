@@ -5,7 +5,9 @@ from pipeline import *
 from Nof1Pipeline.Nof1Pipeline import Nof1Pipeline
 
 import argparse
-
+'''
+I think this should be deprecated in favor of bin/run_main.py --dry_run
+'''
 
 class TestShowMain(unittest.TestCase):
 
@@ -24,8 +26,10 @@ class TestShowMain(unittest.TestCase):
         data_basename='rawdata/1047-COPD.10K' # buffy
         ref_index='hg19'
     	variants_fn='trip_neg_Vic/triple_negativ_mut_seq'
+        variants_dir='data/var2reads'
 
-        p=Nof1Pipeline(host, working_dir, data_basename, ref_index, variants_fn, 
+        p=Nof1Pipeline(host, working_dir, 
+                       data_basename, ref_index, variants_fn, variants_dir,
                        dry_run=True, skip_if_current=self.args.skip)
         print '# Running pipeline %s' % p.name
         p.check_continuity()

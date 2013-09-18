@@ -9,6 +9,8 @@ from Pipeline.exceptions import *
 
 
 def main(args):
+    if args.v: print args
+
     host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
     host=Host(host_conf)
 
@@ -17,6 +19,7 @@ def main(args):
                        args.data_basename, 
                        args.ref_index, 
                        args.variants_fn,
+                       args.variants_dir,
                        output_dir=args.output_dir, 
                        dry_run=args.dry_run,
                        echo=not args.no_echo, 

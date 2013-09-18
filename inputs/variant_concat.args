@@ -1,0 +1,4 @@
+[args]
+input_dir=tmp
+variant_basename=data/trip_neg_Vic/tmp
+v=

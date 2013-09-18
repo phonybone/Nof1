@@ -2,6 +2,8 @@ from Pipeline.Pipeline import Pipeline
 from .run_bowtie2 import RunBowtie2
 from .run_rnaseq_count import RunRnaseqCount
 from .run_variant_count import RunVariantCount
+from .run_variant_splitter import RunVariantSplitter
+from .run_variant_concat import RunVariantConcat
 from Pipeline.exceptions import *
 
 class RnaseqBranch(Pipeline):
@@ -15,6 +17,7 @@ class RnaseqBranch(Pipeline):
                  data_basename, 
                  ref_index,
                  variant_fn,
+                 variants_dir,
                  dry_run=False,
                  output_dir=None,
                  echo=False,
@@ -27,7 +30,10 @@ class RnaseqBranch(Pipeline):
 
         self.add_cmd(RunBowtie2(self, data_basename, ref_index, skip_if_current))
 #        self.add_cmd(RunRnaseqCount(self, data_basename, skip_if_current))
-        self.add_cmd(RunVariantCount(self, data_basename, variant_fn, skip_if_current))
+
+        self.add_cmd(RunVariantSplitter(self, data_basename, variant_fn, variants_dir, skip_if_current))
+        self.add_cmd(RunVariantConcat(self, variants_dir, variant_fn, skip_if_current))
+        self.add_cmd(RunVariantCount(self, data_basename, self.variant_concat.outputs()[0], skip_if_current))
 
     def run(self):
         self._run_cmds()

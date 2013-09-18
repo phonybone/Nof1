@@ -8,7 +8,7 @@ class Nof1Args(object):
         conf=self._load_config()
         self.conf=conf
 
-        parser=argparse.ArgumentParser(description=self.desc)
+        parser=argparse.ArgumentParser(description=self.desc, fromfile_prefix_chars='@')
         parser.add_argument('--root_dir', dest='root_dir', 
                             default=root_dir,
                             help='name of root directory')
@@ -23,6 +23,7 @@ class Nof1Args(object):
         parser.add_argument('-v', action='store_true', help='verbose')
         parser.add_argument('-d', action='store_true', help='debugging flag')
         parser.add_argument('--log', default='INFO', help='log level')
+        parser.add_argument('--more_args')
         self.parser=parser
 
         try:
@@ -30,7 +31,18 @@ class Nof1Args(object):
         except Exception, e:
             print 'caught "%s" on attempt to call %s' % (e, name)
 
-        self.args=parser.parse_args()
+        ns=parser.parse_args()
+
+        # check to see if args in a file are included:
+        try:
+            args_file='@'+ns.more_args
+            parser.parse_args([args_file], namespace=ns)
+        except AttributeError:
+            pass                # no ns.more_args
+        except TypeError:       # ns.more_args==None
+            pass
+        self.args=ns
+
 
     def conf_val(self, section, key):
         sec=section if section else 'DEFAULT'
@@ -146,10 +158,15 @@ class Nof1Args(object):
         parser.add_argument('--line_counter', default=250000)
         parser.add_argument('--progress', action='store_true')
 
+    def variant_concat(self, parser):
+#        parser.add_argument('--out_fn')
+        parser.add_argument('--variant_dir')
+
 
     def run_main(self, parser):
-        parser.add_argument('variants_fn')
-        parser.add_argument('data_basename')
+        parser.add_argument('--variants_fn')
+        parser.add_argument('--data_basename')
+        parser.add_argument('--variants_dir')
         parser.add_argument('--cmd')
 
         parser.add_argument('--working_dir', default='.')

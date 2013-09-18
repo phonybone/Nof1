@@ -1,0 +1,6 @@
+--variants_fn
+data/trip_neg_Vic/triple_negativ_mut_seq
+--data_basename
+data/rawdata/1047-COPD
+--variants_dir
+data/var2reads

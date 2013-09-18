@@ -115,7 +115,7 @@ class VariantCounter(object):
 
         # print stats
         for k,v in self.stats.items():
-            f.write('# %s: %d\n' % (k,v))
+            f.write('# %s: %s\n' % (k,v))
 
         if self.args.out_fn:
             f.close()

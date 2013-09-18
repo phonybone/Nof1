@@ -9,7 +9,8 @@ from Pipeline.exceptions import *
 
 class Nof1Pipeline(Pipeline):
     log=logging.getLogger('Pipeline')
-    def __init__(self, host, working_dir, data_basename, ref_index, variants_fn, 
+    def __init__(self, host, working_dir, 
+                 data_basename, ref_index, variants_fn, variants_dir,
                  dry_run=False, output_dir=None, echo=False, skip_if_current=False):
         super(Nof1Pipeline, self).__init__('Nof1', host, working_dir, 
                                            output_dir=output_dir, dry_run=dry_run, echo=echo, 
@@ -17,8 +18,13 @@ class Nof1Pipeline(Pipeline):
         self.data_basename=data_basename
         self.ref_index=ref_index
         self.variants_fn=variants_fn
+        if variants_dir:
+            self.variants_dir=variants_dir
+        else:
+            self.variants_dir=os.path.join(working_dir, 'var2reads')
         
-        self.add_pipeline(RnaseqBranch(host, working_dir, data_basename, ref_index, variants_fn,
+        self.add_pipeline(RnaseqBranch(host, working_dir, 
+                                       data_basename, ref_index, variants_fn, self.variants_dir,
                                        dry_run=dry_run, output_dir=output_dir, echo=echo,
                                        skip_if_current=skip_if_current))
 
