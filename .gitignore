@@ -22,3 +22,4 @@ bin/variant_effect_predictor/*
 output
 logs
 *.combined
+*.fastq
