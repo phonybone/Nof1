@@ -1,4 +1,4 @@
-import unittest, sys, os, argparse
+import unittest, sys, os, argparse, logging
 root_dir=os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.append(os.path.join(root_dir, 'lib'))
 
@@ -10,6 +10,14 @@ from Pipeline.exceptions import *
 
 def main(args):
     if args.v: print args
+
+    try:
+        log=logging.getLogger('Pipeline')
+        level=getattr(logging, args.loglevel.upper())
+        log.setLevel(level)
+    except AttributeError:
+        pass
+
 
     host_conf=os.path.join(root_dir, 'config', 'hosts.conf')
     host=Host(host_conf)

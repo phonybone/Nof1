@@ -33,7 +33,7 @@ class RnaseqBranch(Pipeline):
 
         self.add_cmd(RunVariantSplitter(self, data_basename, variant_fn, variants_dir, skip_if_current))
         self.add_cmd(RunVariantConcat(self, variants_dir, variant_fn, skip_if_current))
-        self.add_cmd(RunVariantCount(self, data_basename, self.variant_concat.outputs()[0], skip_if_current))
+        self.add_cmd(RunVariantCount(self, self.variant_concat.outputs()[0], variant_fn, skip_if_current))
 
     def run(self):
         self._run_cmds()

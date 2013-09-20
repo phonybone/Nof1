@@ -39,12 +39,22 @@ def main(args):
     rnaseq=get_rnaseq(args, babel_client)
     auto=get_auto(args, babel_client)
     polyphen_sift=get_polyphen_sift(args, babel_client)
+
+
     
     # return intersection(union(auto, poly_sift), rnaseq)
     genes=(auto | polyphen_sift) & rnaseq # set ops, wheeee!
+    if args.v: 
+        print '%d rnaseq genes' % len(rnaseq)
+        print '%d auto genes' % len(auto)
+        print '%d polyphen_sift genes' % len(polyphen_sift)
+        print '%d genes in combined set' % len(genes)
+        
+
     with open(args.out_fn, 'w') as f:
         for g in genes:
-            print g
+            f.write('%s\n' % str(g))
+
     if args.v: 
         print '%s written' % args.out_fn
         for k in sorted(stats.keys()):
@@ -57,7 +67,7 @@ def main(args):
 def get_rnaseq(args, babel_client):
     rnaseq=set()
     with open(args.gene_counts_fn) as f:
-        reader=csv.reader(f, delimiter=':')
+        reader=csv.reader(f, delimiter='\t')
         for row in reader:
             rnaseq.add(row[0])
     return rnaseq

@@ -42,7 +42,11 @@ class VariantPositions(dict):
             reader=csv.reader(vf, delimiter='\t')
             for line in reader:
                 if line[0].startswith('#'): continue
-                (symbol, entrez, center, build, chrom, start, stop, strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2)=line[:13]
+                try:
+                    (symbol, entrez, center, build, chrom, start, stop, strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2)=line[:13]
+                except ValueError:
+                    print 'bad line: %s' % '\t'.join(line)
+                    continue
 
                 try:
                     variant=Variant(symbol, entrez, center, build, chrom, start, stop, strand, var_class, var_type, ref_allele, tum_seq1, tum_seq2)

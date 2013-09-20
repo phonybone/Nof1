@@ -1,4 +1,4 @@
-data
+ata
 *.pyc
 *.zip
 out*
@@ -23,3 +23,5 @@ output
 logs
 *.combined
 *.fastq
+*.report
+data

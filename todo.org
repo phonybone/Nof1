@@ -23,5 +23,12 @@ something like this:
 -- Anything else?  Can't check that every output is consumed as an input, because there are "spinoffs";
    Can't check that every input is consumed
 -- Possible to check that the run commands actually create what the say they're going to create,
-   other than actually running the pipeline?
+   other than actually running the pipeline?  Not really.  The scripts themselves are not aware of the
+   pipeline, so the pipeline software can't really query the scripts for info, especially the ones 
+   written out of house.  So we have to manually check everything, for the moment, anyway.
+
+* up-to-date: 
+This can be fooled if an earlier run of a pipeline created an output file with the same name/path
+
+  
 

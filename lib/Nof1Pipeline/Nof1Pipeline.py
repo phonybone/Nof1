@@ -5,6 +5,7 @@ from Pipeline.Pipeline import Pipeline
 from .VEPBranch import VEPBranch
 from .RnaseqBranch import RnaseqBranch
 from .run_combine import RunCombine
+from .run_report import RunReport
 from Pipeline.exceptions import *
 
 class Nof1Pipeline(Pipeline):
@@ -39,6 +40,8 @@ class Nof1Pipeline(Pipeline):
                                 skip_if_current=skip_if_current,
                                 ))
 
+        self.add_cmd(RunReport(self, self.combine_rnaseq_vep.outputs()[0], 'nof1.report'))
+
 
     def run(self):
         self.check_continuity()
@@ -48,10 +51,9 @@ class Nof1Pipeline(Pipeline):
         os.chdir(self.working_dir)
         self._create_output_dir()
 
-
         self.RnaseqBranch.run()
         self.VepBranch.run()
-        self._run_cmds(self.combine_rnaseq_vep)
+        self._run_cmds(self.combine_rnaseq_vep, self.report)
 
         self.log.info('ended: %s' % str(datetime.now()))
 

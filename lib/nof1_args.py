@@ -22,8 +22,9 @@ class Nof1Args(object):
                             default=conf.get('DEFAULT', 'db_name'))
         parser.add_argument('-v', action='store_true', help='verbose')
         parser.add_argument('-d', action='store_true', help='debugging flag')
-        parser.add_argument('--log', default='INFO', help='log level')
+        parser.add_argument('--loglevel', default='INFO', help='log level')
         parser.add_argument('--more_args')
+
         self.parser=parser
 
         try:
@@ -161,6 +162,10 @@ class Nof1Args(object):
     def variant_concat(self, parser):
 #        parser.add_argument('--out_fn')
         parser.add_argument('--variant_dir')
+
+
+    def report(self, parser):
+        parser.add_argument('genes_fn')
 
 
     def run_main(self, parser):
